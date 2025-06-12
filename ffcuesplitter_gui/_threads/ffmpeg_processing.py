@@ -88,7 +88,9 @@ class Processing(Thread):
                          msg='',
                          end='',
                          )
-            if not platform.system() == 'Windows':
+            if platform.system() == 'Windows':
+                cmdargs = recipes[0]
+            else:
                 cmdargs = shlex.split(recipes[0])
 
             with open(self.logname, "w", encoding='utf-8') as log:
