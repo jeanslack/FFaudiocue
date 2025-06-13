@@ -9,8 +9,6 @@
 - Make localization guidelines
 - Make tests cases.
 - Complete the README.md.
-- Make setup.py .
-- Check MANIFEST.in.
 - Make debian dir.
 - Write INSTALL basic for installations.
 

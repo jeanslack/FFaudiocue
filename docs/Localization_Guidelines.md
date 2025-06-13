@@ -8,16 +8,16 @@ Help to translate FFcuesplitter-GUI to other languages
 
 #### Requirements:
 - [GNU gettext](https://www.gnu.org/software/gettext), to build `.mo` file.
-- [poEdit](https://poedit.net/), to do the actual translation I recommend poEdit, 
-it allows you to create or update a translation catalog, for instance, a `.po` file from 
+- [poEdit](https://poedit.net/), to do the actual translation I recommend poEdit,
+it allows you to create or update a translation catalog, for instance, a `.po` file from
 a `.pot` file.
 
-> There is a bit of difference between [.po file format (portable object)](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html) 
-> and [.pot file format (portable object template)](https://help.phrase.com/help/gettext-template-pot-files). 
-> Specifically, the [ffcuesplitter-gui.pot](https://github.com/jeanslack/FFcuesplitter-GUI/blob/main/ffcuesplitter_gui/locale/ffcuesplitter-gui.pot) 
-> file is just a template that contains the new strings not yet translated and should 
-> never be modified directly. The [ffcuesplitter-gui.po](https://github.com/jeanslack/FFcuesplitter-GUI/blob/main/ffcuesplitter_gui/locale/it_IT/LC_MESSAGES/ffcuesplitter-gui.po) 
-> file can instead be edited for translation and updated with the latest strings 
+> There is a bit of difference between [.po file format (portable object)](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html)
+> and [.pot file format (portable object template)](https://help.phrase.com/help/gettext-template-pot-files).
+> Specifically, the [ffcuesplitter-gui.pot](https://github.com/jeanslack/FFcuesplitter-GUI/blob/main/ffcuesplitter_gui/locale/ffcuesplitter-gui.pot)
+> file is just a template that contains the new strings not yet translated and should
+> never be modified directly. The [ffcuesplitter-gui.po](https://github.com/jeanslack/FFcuesplitter-GUI/blob/main/ffcuesplitter_gui/locale/it_IT/LC_MESSAGES/ffcuesplitter-gui.po)
+> file can instead be edited for translation and updated with the latest strings
 > not yet translated, see below.
 
 - Download [latest source](https://github.com/jeanslack/FFcuesplitter-GUI/archive/refs/heads/main.zip) of FFcuesplitter-GUI
@@ -36,29 +36,29 @@ a `.pot` file.
                 |__ LC_MESSAGES
                     |__ ffcuesplitter-gui.po
 ```
-- Open the `ffcuesplitter-gui.po` file with [poEdit](https://poedit.net/) 
+- Open the `ffcuesplitter-gui.po` file with [poEdit](https://poedit.net/)
 
-- Click on [poEdit](https://poedit.net/) menu bar *-> Catalog -> Update from POT file...*, then 
-import the `ffcuesplitter-gui.pot` file template sited on `locale` folder. This is **important** as it 
+- Click on [poEdit](https://poedit.net/) menu bar *-> Catalog -> Update from POT file...*, then
+import the `ffcuesplitter-gui.pot` file template sited on `locale` folder. This is **important** as it
 ensures that the `ffcuesplitter-gui.po` file is fully updated with the latest translation strings.
 
 - Also, check the catalog property data on menu bar *> Catalog > Property...*
 and make sure it contains at least some updated information you could provide.
 
-- Now, you are ready to start your translation. When you're done save your work; 
+- Now, you are ready to start your translation. When you're done save your work;
 you can always resume your work from where you left off.
 
-- Before running FFcuesplitter-GUI to test your updated translation, Make sure that 
-[Python3](https://www.python.org/), [wxPython](https://www.wxpython.org/), 
+- Before running FFcuesplitter-GUI to test your updated translation, Make sure that
+[Python3](https://www.python.org/), [wxPython](https://www.wxpython.org/),
 [PyPubSub](https://pypubsub.readthedocs.io/en/v4.0.3/), [ffcuesplitter](https://pypi.org/project/ffcuesplitter/).
 are installed.
 
-- Try your new tranlation by open a terminal window, `cd` on the `FFcuespitter-GUI` 
-sources folder and type: `python3 launcher`. 
+- Try your new tranlation by open a terminal window, `cd` on the `FFcuespitter-GUI`
+sources folder and type: `python3 launcher`.
 
-When you have completed your translation with 'PoEdit', please [Create a new pull 
-request](https://github.com/jeanslack/FFcuesplitter-GUI/pulls) or send me your 
-`ffcuesplitter-gui.po` file at: <jeanlucperni@gmail.com>   
+When you have completed your translation with 'PoEdit', please [Create a new pull
+request](https://github.com/jeanslack/FFcuesplitter-GUI/pulls) or send me your
+`ffcuesplitter-gui.po` file at: <jeanlucperni@gmail.com>
 
 I will be grateful!!
 
@@ -69,28 +69,28 @@ At your disposal for clarification.
 ## Start with a new translation
 {: .bg-green-300}
 
-If you are not familiar with the command line and some applications described below, STOP! 
-Contact me and describe me in which language you want to translate FFcuespitter-GUI. I will provide 
-everything you need, so that you can only open [poEdit][poEdit](https://poedit.net/) 
-and start your new translation. 
+If you are not familiar with the command line and some applications described below, STOP!
+Contact me and describe me in which language you want to translate FFcuespitter-GUI. I will provide
+everything you need, so that you can only open [poEdit][poEdit](https://poedit.net/)
+and start your new translation.
 
 #### Requirements
-- [GNU gettext](https://www.gnu.org/software/gettext) (To build `.pot` and the 
+- [GNU gettext](https://www.gnu.org/software/gettext) (To build `.pot` and the
 `.mo` files)
-- [poEdit](https://poedit.net/), to do the actual translation I recommend poEdit, 
-it allows you to create or update a translation catalog, for instance, a `.po` file from 
+- [poEdit](https://poedit.net/), to do the actual translation I recommend poEdit,
+it allows you to create or update a translation catalog, for instance, a `.po` file from
 a `.pot` file.
 - Some kind of text editor to edit some code (notepad++, nano, Mousepad etc are sufficient)
 
 > Note: The instructions below assume basic knowledge of the command line (OS independent)
 {: .fs-4 .text-grey-dk-100}
 
-- To start a new translation, download [here](https://github.com/jeanslack/FFcuesplitter-GUI/archive/refs/heads/main.zip) 
+- To start a new translation, download [here](https://github.com/jeanslack/FFcuesplitter-GUI/archive/refs/heads/main.zip)
 latest FFcuespitter-GUI snapshot, then unzip the archive.
 
-- In this example we assume that the new language to be translated is **German**. 
+- In this example we assume that the new language to be translated is **German**.
 
-- Then, browse the new FFcuespitter-GUI folder and create two new folders: `de_DE` folder 
+- Then, browse the new FFcuespitter-GUI folder and create two new folders: `de_DE` folder
 and within which a `LC_MESSAGES` folder, like following tree:
 
 ```text
@@ -100,26 +100,26 @@ and within which a `LC_MESSAGES` folder, like following tree:
             |__ de_DE
                 |__ LC_MESSAGES
 ```
-                
-- Copy the `ffcuesplitter-gui.pot` file translation template located in the `/locale` 
+
+- Copy the `ffcuesplitter-gui.pot` file translation template located in the `/locale`
 folder, and paste into the `LC_MESSAGES` folder.
 
-- Rename it to change extension name to `ffcuesplitter-gui.po` . 
+- Rename it to change extension name to `ffcuesplitter-gui.po` .
 
-- Now open the `ffcuesplitter-gui.po` with [poEdit](https://poedit.net/), check the catalog 
-property data on menu bar *> Catalog > Property...* and make sure it contains at least 
+- Now open the `ffcuesplitter-gui.po` with [poEdit](https://poedit.net/), check the catalog
+property data on menu bar *> Catalog > Property...* and make sure it contains at least
 some updated information you could provide.
 
-- Now, you are ready to start your new translation. When you're done save your work; 
-you can always resume your work from where you left off. This generates (compile) a file called 
+- Now, you are ready to start your new translation. When you're done save your work;
+you can always resume your work from where you left off. This generates (compile) a file called
 `ffcuesplitter-gui.mo` with your new native language tanslation.
 
-- Before running FFcuespitter-GUI to test your new translation, Make sure that 
-[Python3](https://www.python.org/), [wxPython](https://www.wxpython.org/), 
+- Before running FFcuespitter-GUI to test your new translation, Make sure that
+[Python3](https://www.python.org/), [wxPython](https://www.wxpython.org/),
 [PyPubSub](https://pypubsub.readthedocs.io/en/v4.0.3/), [ffcuesplitter](https://pypi.org/project/ffcuesplitter/)
 are installed.
 
-- Open the `FFcuespitter-GUI/ffcuesplitter_gui/_sys/app_const.py` file with your favorite 
+- Open the `FFcuespitter-GUI/ffcuesplitter_gui/ffc_sys/app_const.py` file with your favorite
 text-editor and append the newly translated language line, for example:
 
 ```python
@@ -135,16 +135,16 @@ to:
                }
 ```
 
-- For a list of the supported languages to append on `app_const.py`, please see 
+- For a list of the supported languages to append on `app_const.py`, please see
 [wx.Language](https://wxpython.org/Phoenix/docs/html/wx.Language.enumeration.html#wx-language)
 
 - When finish save `app_const.py` .
 
-- Try your new tranlation by open a terminal window, `cd` on the `FFcuespitter-GUI` 
+- Try your new tranlation by open a terminal window, `cd` on the `FFcuespitter-GUI`
 sources folder and type: `python3 launcher`
 
-When you have completed your new translation, please [Create a new pull 
-request](https://github.com/jeanslack/FFcuesplitter-GUI/pulls) or send me your 
-`ffcuesplitter-gui.po` file at: <jeanlucperni@gmail.com> 
+When you have completed your new translation, please [Create a new pull
+request](https://github.com/jeanslack/FFcuesplitter-GUI/pulls) or send me your
+`ffcuesplitter-gui.po` file at: <jeanlucperni@gmail.com>
 
 I will be grateful!!

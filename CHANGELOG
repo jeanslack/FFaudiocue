@@ -7,6 +7,16 @@ License: GPL3
 Change Log:
 
 +------------------------------------+
+Fri, 13 June 2025 V.1.0.10
+
+- Replaces `setup.py` with `pyproject.toml` using `hatchling` as the default
+  build backend which replaces `setuptools`.
+- Fix #11 thanks to @Velisarius .
+- Improved setting manager during application bootstrap.
+- Code refactoring.
+
+
++------------------------------------+
 Thu, 11 Aug 2023 V.1.0.5 (unreleased)
 
 - Removed `wx.lib.mixins.listctrl` (with checkbox functionality)

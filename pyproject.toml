@@ -1,0 +1,133 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ffcuesplitter-gui"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  {name = "Gianluca Pernigotto", email = "jeanlucperni@gmail.com"}
+]
+maintainers = [
+  {name = "Gianluca Pernigotto", email = "jeanlucperni@gmail.com"}
+]
+description = "FFcuesplitter-GUI is a simple graphical user interface to extracts audio tracks from audio CD images supplied with a CUE sheet."
+license =  {text = "GNU General Public License v3 (GPLv3)"}
+keywords = [
+    "ffcuesplitter",
+    "ffcuesplitter-gui",
+    "converter",
+    "wxpython",
+    "ffmpeg"]
+classifiers = [
+    "Environment :: X11 Applications :: GTK",
+    "Development Status :: 4 - Beta",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: Arabic",
+    "Natural Language :: Chinese (Simplified)",
+    "Natural Language :: Czech",
+    "Natural Language :: Dutch",
+    "Natural Language :: English",
+    "Natural Language :: French",
+    "Natural Language :: German",
+    "Natural Language :: Hungarian",
+    "Natural Language :: Italian",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Natural Language :: Russian",
+    "Natural Language :: Spanish",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Conversion"
+]
+dependencies = [
+    "ffcuesplitter",
+    "wxpython>=4.0.7",
+    "pypubsub>=4.0.3",
+    "requests>=2.31.0"
+]
+build = [
+    "build",
+    "hatchling",
+    "pip",
+    "six",
+    "wheel",
+    "setuptools",
+    "babel",
+]
+pyinstaller = [
+    "pyinstaller",
+]
+
+[tool.hatch.build.hooks.custom]  # see hatch_build.py file
+# https://github.com/pypa/hatch/discussions/1047
+dependencies = [
+    "babel"
+]
+
+[tool.hatch.version]
+path = "ffcuesplitter_gui/ffc_sys/about_app.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "ffcuesplitter_gui",
+    #"debian",
+    #"docs/man",
+    "develop",
+    #"tests",
+    "AUTHORS",
+    "BUGS",
+    "CHANGELOG",
+    "INSTALL",
+    "LICENSE",
+    "README.md",  # already included as readme
+    "TODO",
+    "launcher",
+    "requirements",
+    "xdg",
+    ".gitignore",  # already included by default, needed for auto-excludes
+    ".flake8",
+    ".pylintrc",
+]
+exclude = [
+    "ffcuesplitter_gui/data/icons/ffcuesplittergui.icns",
+    "ffcuesplitter_gui/data/icons/ffcuesplittergui.ico",
+    "ffcuesplitter_gui/data/locale/ffcuesplittergui.pot",
+    "ffcuesplitter_gui/data/locale/README",
+    "ffcuesplitter_gui/data/FFMPEG",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["ffcuesplitter_gui"]
+artifacts = [
+    # https://hatch.pypa.io/latest/config/build/#artifacts
+    "*.mo",
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"docs/man/ffcuesplitter-gui.1.gz" = "share/man/man1/ffcuesplittergui.1.gz"
+"xdg/io.github.jeanslack.ffcuesplitter-gui.appdata.xml" = "share/metainfo/io.github.jeanslack.ffcuesplittergui.appdata.xml"
+"xdg/io.github.jeanslack.ffcuesplittergui.desktop" = "share/applications/io.github.jeanslack.ffcuesplittergui.desktop"
+"ffcuesplitter_gui/data/icons/ffcuesplittergui.png" = "share/pixmaps/ffcuesplittergui.png"
+"ffcuesplitter_gui/data/hicolor/48x48/apps/ffcuesplittergui.xpm" = "share/icons/hicolor/48x48/apps/ffcuesplittergui.xpm"
+"ffcuesplitter_gui/data/hicolor/48x48/apps/ffcuesplittergui.png" = "share/icons/hicolor/48x48/apps/ffcuesplittergui.png"
+"ffcuesplitter_gui/data/hicolor/256x256/apps/ffcuesplittergui.png" = "share/icons/hicolor/256x256/apps/ffcuesplittergui.png"
+"ffcuesplitter_gui/data/hicolor/scalable/apps/ffcuesplittergui.svg" = "share/icons/hicolor/scalable/apps/ffcuesplittergui.svg"
+
+[project.gui-scripts]
+ffcsgui = "ffcuesplitter_gui_app:main"
+
+[project.urls]
+Homepage = "https://github.com/jeanslack/FFcuesplitter-GUI"
+Documentation = "https://github.com/jeanslack/FFcuesplitter-GUI/wiki"
+Wiki = "https://github.com/jeanslack/FFcuesplitter-GUI/wiki"
+Repository = "https://github.com/jeanslack/FFcuesplitter-GUI"
+Issues = "https://github.com/jeanslack/FFcuesplitter-GUI/issues"

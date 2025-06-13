@@ -6,7 +6,7 @@ Compatibility: Python3, wxPython Phoenix
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: Feb.04.2022
+Rev: June.13.2025
 Code checker: flake8, pylint
 
 This file is part of FFcuesplitter-GUI.
@@ -33,10 +33,10 @@ try:
     from wx.svg import SVGimage
 except ModuleNotFoundError:
     pass
-from ffcuesplitter_gui._sys.argparser import args
-from ffcuesplitter_gui._sys import settings_manager
-from ffcuesplitter_gui._sys import app_const as appC
-from ffcuesplitter_gui._utils.utils import del_filecontents
+from ffcuesplitter_gui.ffc_sys.argparser import arguments
+from ffcuesplitter_gui.ffc_sys.settings_manager import DataSource  # data
+from ffcuesplitter_gui.ffc_sys import app_const as appC
+from ffcuesplitter_gui.ffc_utils.utils import del_filecontents
 
 # add translation macro to builtin similar to what gettext does
 builtins.__dict__['_'] = wx.GetTranslation
@@ -49,7 +49,7 @@ class CuesplitterGUI(wx.App):
 
     """
 
-    def __init__(self, redirect=True, filename=None):
+    def __init__(self, redirect=True, filename=None, **kwargs):
         """
         - redirect=False will send print statements to a console
           window (in use)
@@ -69,8 +69,8 @@ class CuesplitterGUI(wx.App):
                        'SUPP_LANGs': ['it_IT', 'en_EN', 'ru_RU'],
                        # supported help langs
                        }
-        self.data = settings_manager.DataSource()  # instance data
-        self.appset.update(self.data.get_fileconf())  # data system
+        self.data = DataSource(kwargs)  # instance data
+        self.appset.update(self.data.get_configuration())  # data system
         self.iconset = None
 
         wx.App.__init__(self, redirect, filename)  # constructor
@@ -81,7 +81,7 @@ class CuesplitterGUI(wx.App):
         """Bootstrap interface."""
 
         if self.appset.get('ERROR'):
-            wx.MessageBox(f"FATAL: {self.appset['ERROR']}\n\nSorry, cannot "
+            wx.MessageBox(f"FATAL: {self.appset['ERROR']}\n\nSorry, unable to "
                           f"continue..", 'FFcuesplitter-GUI - ERROR',
                           wx.ICON_STOP)
             return False
@@ -91,21 +91,13 @@ class CuesplitterGUI(wx.App):
 
         # locale
         wx.Locale.AddCatalogLookupPathPrefix(self.appset['localepath'])
-        self.update_language()
-        self.appset['GETLANG'] = self.locale.GetName()
+        self.update_language(self.appset['locale_name'])
 
-        if not os.path.exists(self.appset['logdir']):
-            try:  # make log folder
-                os.makedirs(self.appset['logdir'], mode=0o777)
-            except OSError as err:
-                wx.MessageBox(f'{err}', 'FFcuesplitter-GUI', wx.ICON_STOP)
-                return False
-
-        if self.check_ffmpeg() is True:
+        if self.check_ffmpeg():
             self.wizard(self.iconset['ffcuesplittergui'])
             return True
 
-        from ffcuesplitter_gui._main.main_frame import MainFrame
+        from ffcuesplitter_gui.ffc_main.main_frame import MainFrame
         main_frame = MainFrame()
         main_frame.Show()
         self.SetTopWindow(main_frame)
@@ -114,46 +106,22 @@ class CuesplitterGUI(wx.App):
 
     def check_ffmpeg(self):
         """
-        Get the FFmpeg's executables. On Unix/Unix-like systems
-        perform a check for permissions.
+        Check the FFmpeg's executables (ffmpeg, ffprobe).
+        Returns True if one of the executables is missing or if
+        one of the executables doesn't have execute permission.
+        Returns None otherwise.
         """
-        for link in [self.appset['ffmpeg_cmd'],
-                     self.appset['ffprobe_cmd'],
-                     ]:
-            if self.appset['ostype'] == 'Windows':  # check for exe
-                # HACK use even for unix, if not permission is equal
-                # to not binaries
-                if not which(link, mode=os.F_OK | os.X_OK, path=None):
-                    return True
-            else:
-                if not os.path.isfile(f"{link}"):
-                    return True
-
-        if not self.appset['ostype'] == 'Windows':
-            # check for permissions when linked locally
-            for link in [self.appset['ffmpeg_cmd'],
-                         self.appset['ffprobe_cmd'],
-                         ]:
-                if which(link, mode=os.F_OK | os.X_OK, path=None):
-                    permissions = True
-                else:
-                    wx.MessageBox(_('Permission denied: {}\n\n'
-                                    'Check execution permissions.').format
-                                  (link), 'FFcuesplitter-GUI', wx.ICON_STOP)
-                    permissions = False
-                    break
-
-            return False if not permissions else None
+        for link in [self.appset['ffmpeg_cmd'], self.appset['ffprobe_cmd']]:
+            if not which(link, mode=os.F_OK | os.X_OK, path=None):
+                return True
         return None
     # -------------------------------------------------------------------
 
     def wizard(self, wizardicon):
         """
-        Show an initial dialog to setup the application
-        during the first start-up.
-
+        Shows dialog to setup the application on initial start-up.
         """
-        from ffcuesplitter_gui._dialogs.wizard_dlg import Wizard
+        from ffcuesplitter_gui.ffc_dlg.wizard_dlg import Wizard
         main_frame = Wizard(wizardicon)
         main_frame.Show()
         self.SetTopWindow(main_frame)
@@ -172,22 +140,22 @@ class CuesplitterGUI(wx.App):
         :param string `lang`: one of the supported language codes
 
         """
-        # if an unsupported language is requested default to English
-        if lang in appC.supLang:
-            selectlang = appC.supLang[lang]
-        else:
-            selectlang = wx.LANGUAGE_DEFAULT
+        # if an unsupported language is requested, default to English
+        selectlang = appC.supLang.get(lang, wx.LANGUAGE_ENGLISH)
 
         if self.locale:
             assert sys.getrefcount(self.locale) <= 2
             del self.locale
 
         # create a locale object for this language
-        self.locale = wx.Locale(selectlang)
+        self.locale = wx.Locale(selectlang[0])
+
         if self.locale.IsOk():
             self.locale.AddCatalog(appC.langDomain)
+            self.appset['GETLANG'] = self.locale.GetName()
         else:
             self.locale = None
+            self.appset['GETLANG'] = "en_US"
     # -------------------------------------------------------------------
 
     def OnExit(self):
@@ -211,8 +179,37 @@ class CuesplitterGUI(wx.App):
                                             "{0}").format(err),
                                           'FFcuesplitter-GUI', wx.ICON_STOP)
                             return False
+
+        if self.appset['auto-restart-app']:
+            auto_restart(self.appset['app'], self.appset['make_portable'])
+            return True
+
         return True
     # -------------------------------------------------------------------
+
+
+def auto_restart(apptype, portmode):
+    """
+    This function spawn the same executable again, automatically
+    restarting this application if required, for example after
+    the wizard dialog ends or after applying settings that require
+    the application to be restarted. Note that this behavior
+    it is disabled using the Python interpreter (interactive
+    mode).
+    """
+    if not ''.join(sys.argv) or sys.argv[0].startswith('-'):
+        sys.exit()
+
+    if apptype == 'pyinstaller':
+        wx.Execute(f'{sys.executable}', flags=wx.EXEC_SYNC)
+    else:
+        makeportable = '' if not portmode else fr'--make-portable "{portmode}"'
+
+        if os.path.basename(sys.argv[0]) == 'launcher':
+            cmdargs = f'{sys.executable} {sys.argv[0]} {makeportable}'
+        else:
+            cmdargs = f'{sys.argv[0]} {makeportable}'
+        wx.Execute(f'{cmdargs}', flags=wx.EXEC_SYNC)
 
 
 def main():
@@ -221,9 +218,9 @@ def main():
     instead to print output to console.
     """
     if not sys.argv[1:]:
-        app = CuesplitterGUI(redirect=False)
-        app.MainLoop()
-
+        kwargs = {'make_portable': None}
     else:
-        args()
-        sys.exit(0)
+        kwargs = arguments()
+
+    app = CuesplitterGUI(redirect=False, **kwargs)
+    app.MainLoop()

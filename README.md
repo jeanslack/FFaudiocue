@@ -1,7 +1,7 @@
-[![Image](https://img.shields.io/static/v1?label=python&logo=python&message=3.7%20|%203.8%20|%203.9%20|%203.10|%203.11&color=blue)](https://www.python.org/downloads/)
+# **FFcuesplitter-GUI
+[![Image](https://img.shields.io/static/v1?label=python&logo=python&message=3.9%20|%203.10%20|%203.11%20|%203.12&color=blue)](https://www.python.org/downloads/)
 [![Image](https://img.shields.io/badge/license-GPLv3-orange)](https://github.com/jeanslack/FFcuesplitter-GUI/blob/main/LICENSE)
-
-# FFcuesplitter-GUI 
+[![Python application](https://github.com/jeanslack/FFcuesplitter-GUI/actions/workflows/tests.yml/badge.svg)](https://github.com/jeanslack/FFcuesplitter-GUI/actions/workflows/tests.yml)
 
 A simple graphical user interface to extracts audio tracks from audio CD images 
 supplied with a CUE sheet.
@@ -18,10 +18,11 @@ WAV, FLAC, MP3, OGG, OPUS output formats, audio compression selectors and the
 ability to copy audio codec without re-encoding.
 
 ## Requirements
-- **[Python >= 3.7.0](https://www.python.org/)**
+- **[Python >= 3.9](https://www.python.org/)**
 - **[wxPython-Phoenix >= 4.0.7](https://wxpython.org/)**
 - **[PyPubSub >= 4.0.3](https://pypi.org/project/PyPubSub/)**
-- **[ffcuesplitter >= 1.0.22](https://pypi.org/project/ffcuesplitter/)**
+- **[ffcuesplitter >= 1.0.23](https://pypi.org/project/ffcuesplitter/)**
+- **[requests >=  2.28.1](https://pypi.org/project/requests/)**
 - **[ffmpeg >=4.3](https://ffmpeg.org/)**
 - **[ffprobe >=4.3](https://ffmpeg.org/ffprobe.html)**
 
