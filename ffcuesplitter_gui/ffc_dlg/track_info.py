@@ -70,7 +70,7 @@ class TrackInfo(wx.Dialog):
         size_line1 = wx.BoxSizer(wx.HORIZONTAL)
         size_base.Add(size_line1, 0, wx.ALL | wx.EXPAND, 0)
         box_title = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY,
-                                                   _("Track Title")),
+                                                   _("Title")),
                                       wx.VERTICAL
                                       )
         size_line1.Add(box_title, 1, wx.ALL | wx.EXPAND, 5)

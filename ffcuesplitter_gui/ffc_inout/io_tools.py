@@ -50,7 +50,7 @@ def get_github_releases(url, keyname):
 
     """
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=20)
         not_found = None, None
     except Exception as err:
         not_found = 'request error:', err

@@ -180,8 +180,8 @@ class MainFrame(wx.Frame):
                  _("Open a new CUE file"))
         fold_cue = file_button.Append(wx.ID_FILE, dscrp[0], dscrp[1])
 
-        dscrp = (_("Open output directory\tCtrl+A"),
-                 _("Open the current audio dirctory"))
+        dscrp = (_("Open output folder\tCtrl+A"),
+                 _("Open the current audio folder"))
         fold_convers = file_button.Append(wx.ID_OPEN, dscrp[0], dscrp[1])
 
         file_button.AppendSeparator()
@@ -250,7 +250,7 @@ class MainFrame(wx.Frame):
         Open the conversions folder with file manager
 
         """
-        io_tools.openpath(self.appdata['outputfile'])
+        io_tools.openpath(self.appdata['destination'])
     # -------------------------------------------------------------------#
 
     def opencue(self, event):
@@ -377,6 +377,34 @@ class MainFrame(wx.Frame):
 
     # -----------------  BUILD THE TOOL BAR  --------------------###
 
+    def get_toolbar_pos(self):
+        """
+        Get toolbar position properties according to
+        the user preferences.
+        """
+        if self.appdata['toolbarpos'] == 0:  # on top
+            if self.appdata['toolbartext'] is True:  # show text
+                return wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_HORIZONTAL
+            return wx.TB_DEFAULT_STYLE
+
+        if self.appdata['toolbarpos'] == 1:  # on bottom
+            if self.appdata['toolbartext'] is True:  # show text
+                return wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_BOTTOM
+            return wx.TB_DEFAULT_STYLE | wx.TB_BOTTOM
+
+        if self.appdata['toolbarpos'] == 2:  # on right
+            if self.appdata['toolbartext'] is True:  # show text
+                return wx.TB_TEXT | wx.TB_RIGHT
+            return wx.TB_DEFAULT_STYLE | wx.TB_RIGHT
+
+        if self.appdata['toolbarpos'] == 3:
+            if self.appdata['toolbartext'] is True:  # show text
+                return wx.TB_TEXT | wx.TB_LEFT
+            return wx.TB_DEFAULT_STYLE | wx.TB_LEFT
+
+        return None
+    # ------------------------------------------------------------------#
+
     def frame_tool_bar(self):
         """
         Makes and attaches the toolsBtn bar.
@@ -386,30 +414,7 @@ class MainFrame(wx.Frame):
             self.toolbar.SetWindowStyleFlag(wx.TB_NODIVIDER | wx.TB_FLAT)
 
         """
-        if self.appdata['toolbarpos'] == 0:  # on top
-            if self.appdata['toolbartext'] is True:  # show text
-                style = wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_HORIZONTAL
-            else:
-                style = wx.TB_DEFAULT_STYLE
-
-        elif self.appdata['toolbarpos'] == 1:  # on bottom
-            if self.appdata['toolbartext'] is True:  # show text
-                style = wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_BOTTOM
-            else:
-                style = wx.TB_DEFAULT_STYLE | wx.TB_BOTTOM
-
-        elif self.appdata['toolbarpos'] == 2:  # on right
-            if self.appdata['toolbartext'] is True:  # show text
-                style = wx.TB_TEXT | wx.TB_RIGHT
-            else:
-                style = wx.TB_DEFAULT_STYLE | wx.TB_RIGHT
-
-        elif self.appdata['toolbarpos'] == 3:
-            if self.appdata['toolbartext'] is True:  # show text
-                style = wx.TB_TEXT | wx.TB_LEFT
-            else:
-                style = wx.TB_DEFAULT_STYLE | wx.TB_LEFT
-
+        style = self.get_toolbar_pos()
         self.toolbar = self.CreateToolBar(style=style)
 
         bmp_size = (int(self.appdata['toolbarsize']),
@@ -417,7 +422,6 @@ class MainFrame(wx.Frame):
         self.toolbar.SetToolBitmapSize(bmp_size)
 
         if 'wx.svg' in sys.modules:  # available only in wx version 4.1 to up
-
             bmplog = get_bmp(self.icons['log'], bmp_size)
             bmpsetup = get_bmp(self.icons['setup'], bmp_size)
             bmpcdinfo = get_bmp(self.icons['CDinfo'], bmp_size)
@@ -555,7 +559,7 @@ class MainFrame(wx.Frame):
                 newdata = set_up.getvalue()
                 self.appdata = {**self.appdata, **newdata}
                 self.gui_panel.appdata = self.appdata
-                self.gui_panel.txt_out.SetValue(self.appdata['outputfile'])
+                self.gui_panel.txt_out.SetValue(self.appdata['destination'])
     # -------------------------------------------------------------------#
 
     def on_log(self, event):

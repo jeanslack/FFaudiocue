@@ -118,7 +118,7 @@ class CheckNewVersion(wx.Dialog):
             page = ('https://github.com/jeanslack/FFcuesplitter-GUI'
                     '/releases/latest/')
 
-        webbrowser.open(page)
+            webbrowser.open(page)
     # ------------------------------------------------------------------#
 
     def on_ok(self, event):

@@ -17,3 +17,9 @@
   among those available (wav, opus, mp3, ogg)
 - Make GitHub workflow to test multiple Python version.
 - Fix button spaces as like confirmation buttons.
+
+- open only one dialog windows a time (use pubsub)
+- make auto-exit/auto-restart application
+- make sub-directory for languages i18n
+- Implementare dizionario per salvare da preferenze senza riavviare
+- Aggiorna ffcuesplitter (API)

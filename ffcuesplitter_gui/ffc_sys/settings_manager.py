@@ -51,9 +51,10 @@ class ConfigManager:
         >>> confmng.write_options(**settings)
     ------------------------------------------------------
     """
-    VERSION = 4.1
+    VERSION = 4.2
     DEFAULT_OPTIONS = {"confversion": VERSION,
-                       "outputfile": f"{os.path.expanduser('~')}",
+                       "locale_name": "Default",
+                       "destination": f"{os.path.expanduser('~')}",
                        "ffmpeg_cmd": "",
                        "ffmpeg_islocal": False,
                        "ffmpegloglev": "info",
@@ -81,7 +82,7 @@ class ConfigManager:
         if makeportable:
             trscodepath = os.path.join(makeportable, "Albums")
             trscodedir = os.path.relpath(trscodepath)
-            ConfigManager.DEFAULT_OPTIONS['outputfile'] = trscodedir
+            ConfigManager.DEFAULT_OPTIONS['destination'] = trscodedir
 
     def write_options(self, **options):
         """
@@ -124,8 +125,8 @@ class ConfigManager:
         filesystem paths (such as pendrives, hard-drives, etc.).
         Returns a dictionary object.
         """
-        if not os.path.exists(options['outputfile']):
-            options['outputfile'] = f"{os.path.expanduser('~')}"
+        if not os.path.exists(options['destination']):
+            options['destination'] = f"{os.path.expanduser('~')}"
 
         return options
 
@@ -399,7 +400,6 @@ class DataSource():
         return ({'ostype': platform.system(),
                  'srcpath': _relativize(self.dataloc['srcdata']),
                  'localepath': _relativize(self.dataloc['localepath']),
-                 'locale_name': 'Default',
                  'fileconfpath': _relativize(self.dataloc['conffile']),
                  'confdir': _relativize(self.dataloc['confdir']),
                  'logdir': _relativize(self.dataloc['logdir']),

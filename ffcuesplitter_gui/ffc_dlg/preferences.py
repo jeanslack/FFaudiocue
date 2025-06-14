@@ -30,6 +30,8 @@ import sys
 import wx
 from ffcuesplitter_gui.ffc_utils.utils import detect_binaries
 from ffcuesplitter_gui.ffc_sys.settings_manager import ConfigManager
+from videomass.vdms_sys.app_const import supLang
+from ffcuesplitter_gui.ffc_inout import io_tools
 
 
 class SetUp(wx.Dialog):
@@ -104,9 +106,9 @@ class SetUp(wx.Dialog):
                                       style=wx.TE_READONLY
                                       )
         sizeffdirdest.Add(self.txt_outdir, 1, wx.ALL, 5)
-        self.txt_outdir.AppendText(self.appdata['outputfile'])
+        self.txt_outdir.AppendText(self.appdata['destination'])
 
-        self.btn_outdir = wx.Button(tab_two, wx.ID_ANY, _("Browse.."))
+        self.btn_outdir = wx.Button(tab_two, wx.ID_ANY, _("Change"))
         sizeffdirdest.Add(self.btn_outdir, 0, wx.RIGHT
                           | wx.ALIGN_CENTER_VERTICAL
                           | wx.ALIGN_CENTER_HORIZONTAL, 5
@@ -124,9 +126,9 @@ class SetUp(wx.Dialog):
         sizer_ffmpeg.Add(lab_ffexec, 0, wx.ALL | wx.EXPAND, 5)
         # ----
         self.ckbx_exe_ffmpeg = wx.CheckBox(tab_three, wx.ID_ANY,
-                                           (_("Enable another location to run "
+                                           (_("Enable a custom location to run "
                                               "FFmpeg")))
-        self.btn_loc_ffmpeg = wx.Button(tab_three, wx.ID_ANY, _("Browse.."))
+        self.btn_loc_ffmpeg = wx.Button(tab_three, wx.ID_ANY, _("Change"))
         self.txtctrl_ffmpeg = wx.TextCtrl(tab_three, wx.ID_ANY, "",
                                           style=wx.TE_READONLY
                                           )
@@ -137,9 +139,9 @@ class SetUp(wx.Dialog):
         grid_ffmpeg.Add(self.btn_loc_ffmpeg, 0, wx.RIGHT | wx.CENTER, 5)
         # ----
         self.ckbx_exe_ffprobe = wx.CheckBox(tab_three, wx.ID_ANY,
-                                            (_("Enable another location to "
+                                            (_("Enable a custom location to "
                                                "run FFprobe")))
-        self.btn_loc_ffprobe = wx.Button(tab_three, wx.ID_ANY, _("Browse.."))
+        self.btn_loc_ffprobe = wx.Button(tab_three, wx.ID_ANY, _("Change"))
         self.txtctrl_ffprobe = wx.TextCtrl(tab_three, wx.ID_ANY, "",
                                            style=wx.TE_READONLY
                                            )
@@ -155,9 +157,14 @@ class SetUp(wx.Dialog):
         # -----tab 4
         tab_four = wx.Panel(notebook, wx.ID_ANY)
         sizer_appearance = wx.BoxSizer(wx.VERTICAL)
-        sizer_appearance.Add((0, 15))
-        lab_theme = wx.StaticText(tab_four, wx.ID_ANY, _('Icon themes'))
-        sizer_appearance.Add(lab_theme, 0, wx.ALL | wx.EXPAND, 5)
+        sizer_appearance.Add((0, 10))
+        msg = _('Look and Feel (requires application restart)')
+        lablook = wx.StaticText(tab_four, wx.ID_ANY, msg)
+        sizer_appearance.Add(lablook, 0, wx.ALL | wx.EXPAND, 5)
+        sizer_appearance.Add((0, 10))
+        sizericon = wx.BoxSizer(wx.HORIZONTAL)
+        labTheme = wx.StaticText(tab_four, wx.ID_ANY, _('Icon themes'))
+        sizericon.Add(labTheme, 0, wx.LEFT | wx.TOP, 5)
         self.cmbx_icons = wx.ComboBox(tab_four, wx.ID_ANY,
                                       choices=[("Light"),
                                                ("Dark"),
@@ -166,13 +173,8 @@ class SetUp(wx.Dialog):
                                       size=(200, -1),
                                       style=wx.CB_DROPDOWN | wx.CB_READONLY
                                       )
-        sizer_appearance.Add(self.cmbx_icons, 0,
-                             wx.ALL
-                             | wx.ALIGN_CENTER_HORIZONTAL, 5)
-        sizer_appearance.Add((0, 15))
-        lab_tbar = wx.StaticText(tab_four, wx.ID_ANY,
-                                 _("Toolbar customization"))
-        sizer_appearance.Add(lab_tbar, 0, wx.ALL | wx.EXPAND, 5)
+        sizericon.Add(self.cmbx_icons, 0, wx.LEFT, 5)
+        sizer_appearance.Add(sizericon, 0, wx.ALL, 5)
         tbchoice = [_('At the top of window (default)'),
                     _('At the bottom of window'),
                     _('At the right of window'),
@@ -206,19 +208,37 @@ class SetUp(wx.Dialog):
                                            (_("Show text on toolbar buttons")))
         sizer_appearance.Add(self.ckbx_tb_showtxt, 0, wx.ALL, 5)
 
+
+
+        sizer_appearance.Add((0, 10))
+        msg = _('Application Language (requires application restart)')
+        lablang = wx.StaticText(tab_four, wx.ID_ANY, msg)
+        sizer_appearance.Add(lablang, 0, wx.ALL | wx.EXPAND, 5)
+        sizer_appearance.Add((0, 10))
+        langs = [lang[1] for lang in supLang.values()]
+        self.cmbx_lang = wx.ComboBox(tab_four, wx.ID_ANY,
+                                     choices=langs,
+                                     size=(-1, -1),
+                                     style=wx.CB_DROPDOWN | wx.CB_READONLY
+                                     )
+        sizer_appearance.Add(self.cmbx_lang, 0, wx.ALL, 5)
+        sizer_appearance.Add((0, 20))
+
+
         tab_four.SetSizer(sizer_appearance)  # aggiungo il sizer su tab 4
-        notebook.AddPage(tab_four, _("Appearance"))
+        notebook.AddPage(tab_four, _("Look and Language"))
 
         # -----tab 5
         tab_five = wx.Panel(notebook, wx.ID_ANY)
         sizer_log = wx.BoxSizer(wx.VERTICAL)
         sizer_log.Add((0, 15))
-
-        msglog = _("The following settings affect output messages and\n"
+        msglog = _("The following settings affect output messages and "
                    "the log messages during transcoding processes.\n"
-                   "Change only if you know what you are doing.\n")
+                   "Be careful, by changing these settings some functions "
+                   "of the application may not work correctly,\n"
+                   "change only if you know what you are doing.\n")
         lab_log = wx.StaticText(tab_five, wx.ID_ANY, (msglog))
-        sizer_log.Add(lab_log, 0, wx.ALL | wx.CENTRE, 5)
+        sizer_log.Add(lab_log, 0, wx.ALL, 5)
         self.rdbx_log_ffmpeg = wx.RadioBox(tab_five, wx.ID_ANY,
                                            ("Set logging level flags used "
                                             "by FFmpeg"),
@@ -229,6 +249,45 @@ class SetUp(wx.Dialog):
         sizer_log.Add(self.rdbx_log_ffmpeg, 0, wx.ALL | wx.EXPAND, 5)
         tab_five.SetSizer(sizer_log)
         notebook.AddPage(tab_five, _("Logging levels"))
+
+        # -----tab 6
+        tabSix = wx.Panel(notebook, wx.ID_ANY)
+        sizeradv = wx.BoxSizer(wx.VERTICAL)
+        sizeradv.Add((0, 10))
+        msg = _("Default application directories")
+        labdirtitle = wx.StaticText(tabSix, wx.ID_ANY, msg)
+        sizeradv.Add(labdirtitle, 0, wx.ALL | wx.EXPAND, 5)
+        sizeradv.Add((0, 20))
+        labconf = wx.StaticText(tabSix, wx.ID_ANY,
+                                _('Configuration directory'))
+        self.btn_conf = wx.Button(tabSix, wx.ID_ANY, "...", size=(35, -1),
+                                  name='config dir')
+        self.txtctrl_conf = wx.TextCtrl(tabSix, wx.ID_ANY,
+                                        self.appdata['confdir'],
+                                        size=(500, -1),
+                                        style=wx.TE_READONLY,
+                                        )
+        griddefdirs = wx.FlexGridSizer(2, 3, 5, 0)
+        griddefdirs.Add(labconf, 0, wx.LEFT | wx.TOP, 5)
+        griddefdirs.Add(self.txtctrl_conf, 1, wx.RIGHT
+                        | wx.TOP | wx.LEFT | wx.EXPAND, 5)
+        griddefdirs.Add(self.btn_conf, 0, wx.RIGHT | wx.TOP, 5)
+        lablog = wx.StaticText(tabSix, wx.ID_ANY, _('Log directory'))
+        self.btn_log = wx.Button(tabSix, wx.ID_ANY, "...", size=(35, -1),
+                                 name='log dir')
+        self.txtctrl_log = wx.TextCtrl(tabSix, wx.ID_ANY,
+                                       self.appdata['logdir'],
+                                       size=(500, -1),
+                                       style=wx.TE_READONLY,
+                                       )
+        griddefdirs.Add(lablog, 0, wx.LEFT | wx.TOP, 5)
+        griddefdirs.Add(self.txtctrl_log, 1, wx.RIGHT
+                        | wx.TOP | wx.LEFT | wx.EXPAND, 5)
+        griddefdirs.Add(self.btn_log, 0, wx.RIGHT | wx.TOP, 5)
+        sizeradv.Add(griddefdirs, 0, wx.LEFT | wx.EXPAND, 5)
+        tabSix.SetSizer(sizeradv)
+        notebook.AddPage(tabSix, _("Advanced"))
+
         # ------ btns bottom
         grd_btns = wx.GridSizer(1, 2, 0, 0)
         grdhelp = wx.GridSizer(1, 1, 0, 0)
@@ -247,6 +306,7 @@ class SetUp(wx.Dialog):
                      )
         sizer_base.Add(grd_btns, 0, wx.EXPAND)
         # ------ set sizer
+        self.SetMinSize((650, 550))
         self.SetSizer(sizer_base)
         sizer_base.Fit(self)
         self.Layout()
@@ -255,20 +315,25 @@ class SetUp(wx.Dialog):
         self.SetTitle(_("Settings"))
         # set font
         if self.appdata['ostype'] == 'Darwin':
-            labfile.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            labcache.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            lab_ffexec.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            lab_theme.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            lab_tbar.SetFont(wx.Font(12, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            lablang.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            labfile.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            labcache.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            lab_ffexec.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            lablook.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            labdirtitle.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lab_log.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.NORMAL))
         else:
-            labfile.SetFont(wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            lab_ffexec.SetFont(wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            lab_theme.SetFont(wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            lab_tbar.SetFont(wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            lablang.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            labfile.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            lab_ffexec.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            lablook.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
+            labdirtitle.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lab_log.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL))
 
         # ----------------------Binding (EVT)----------------------#
+        self.Bind(wx.EVT_COMBOBOX, self.on_set_lang, self.cmbx_lang)
+        self.Bind(wx.EVT_BUTTON, self.opendir, self.btn_conf)
+        self.Bind(wx.EVT_BUTTON, self.opendir, self.btn_log)
         self.Bind(wx.EVT_CHECKBOX, self.exit_warn, self.ckbx_exit)
         self.Bind(wx.EVT_CHECKBOX, self.clear_logs, self.ckbx_logclear)
         self.Bind(wx.EVT_CHECKBOX, self.show_hiden_menu, self.ckbx_mnhiden)
@@ -298,6 +363,12 @@ class SetUp(wx.Dialog):
         Setting enable/disable in according to the configuration file
 
         """
+        if self.appdata['locale_name'] in supLang:
+            lang = supLang[self.appdata['locale_name']][1]
+        else:
+            lang = supLang["en_US"][1]
+        self.cmbx_lang.SetValue(lang)
+
         self.cmbx_icons.SetValue(str(self.appdata['icontheme']))
         self.cmbx_icon_size.SetValue(str(self.appdata['toolbarsize']))
         self.rdbx_tb_pos.SetSelection(int(self.appdata['toolbarpos']))
@@ -331,6 +402,17 @@ class SetUp(wx.Dialog):
         self.ckbx_mnhiden.SetValue(self.appdata['showhidenmenu'])
     # --------------------------------------------------------------------#
 
+    def opendir(self, event):
+        """
+        Open the configuration folder with file manager
+        """
+        name = event.GetEventObject().GetName()
+        if name == 'config dir':
+            io_tools.openpath(self.appdata['confdir'])
+        elif name == 'log dir':
+            io_tools.openpath(self.appdata['logdir'])
+    # -------------------------------------------------------------------#
+
     def on_output_path(self, event):
         """set up a custom user path for file export"""
 
@@ -341,7 +423,7 @@ class SetUp(wx.Dialog):
             self.txt_outdir.Clear()
             getpath = self.appdata['getpath'](dlg.GetPath())
             self.txt_outdir.AppendText(getpath)
-            self.settings['outputfile'] = getpath
+            self.settings['destination'] = getpath
             dlg.Destroy()
     # --------------------------------------------------------------------#
 
@@ -462,6 +544,15 @@ class SetUp(wx.Dialog):
             self.settings['toolbartext'] = True
         else:
             self.settings['toolbartext'] = False
+    # --------------------------------------------------------------------#
+
+    def on_set_lang(self, event):
+        """set application language"""
+        lang = 'Default'
+        for key, val in supLang.items():
+            if val[1] == self.cmbx_lang.GetValue():
+                lang = key
+        self.settings['locale_name'] = lang
     # --------------------------------------------------------------------#
 
     def exit_warn(self, event):

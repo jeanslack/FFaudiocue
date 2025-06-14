@@ -67,6 +67,8 @@ class Processing(Thread):
         self.stop_work_thread = False  # if True the process terminates
         self.args = args  # list of commands/aguments
         self.logname = logname  # path name of file log
+        with open(self.logname, "w", encoding='utf-8') as log:
+            log.write('\nFFcuesplitter-GUI: Log file creation\n\n')
         self.count = 0  # count for loop
         self.countmax = len(args['recipes'])  # length list
 
@@ -93,7 +95,7 @@ class Processing(Thread):
             else:
                 cmdargs = shlex.split(recipes[0])
 
-            with open(self.logname, "w", encoding='utf-8') as log:
+            with open(self.logname, "a", encoding='utf-8') as log:
                 log.write(f'\nCOMMAND: {cmdargs}')
 
                 try:
