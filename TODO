@@ -1,12 +1,12 @@
 
 
 - [DONE] check code with a linter (flake8/pylint)
-- Make io.github.jeanslack.ffaudiocue.desktop.
+- [DONE] Make io.github.jeanslack.ffaudiocue.desktop.
 - Make ffaudiocue.icns (MacOs)
 - Make ffaudiocue.ico (Windows)
 
 - Complete the Italian translation.
-- Make localization guidelines
+- Update localization guidelines
 - Make tests cases.
 - Complete the README.md.
 - Make debian dir.
@@ -16,10 +16,9 @@
 - [DONE] The codec/output format is always flac even if you choose another format
   among those available (wav, opus, mp3, ogg)
 - Make GitHub workflow to test multiple Python version.
-- Fix button spaces as like confirmation buttons.
+- [DONE] Fix button spaces as like confirmation buttons.
 
 - [DONE] open only one dialog windows a time (use pubsub)
 - [DONE] make auto-exit/auto-restart application
-- make sub-directory for languages i18n
+- [DONE] make sub-directory for languages i18n
 - [DONE] Save some preferences without re-start application
-- Aggiorna ffcuesplitter (API)

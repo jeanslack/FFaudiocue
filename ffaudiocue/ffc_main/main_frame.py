@@ -248,20 +248,6 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.reminder, notepad)
         self.Bind(wx.EVT_MENU, self.on_close, exititem)
 
-        # ------------------ Go menu
-        if self.appdata['showhidenmenu'] is True:
-            go_button = wx.Menu()
-            dscrp = (_("Configuration Directory"),
-                     _("Opens the FFaudiocue configuration directory"))
-            openconfdir = go_button.Append(wx.ID_ANY, dscrp[0], dscrp[1])
-            dscrp = (_("Logs Directory"),
-                     _("Opens the logs directory, if exists"))
-            openlogdir = go_button.Append(wx.ID_ANY, dscrp[0], dscrp[1])
-            self.menu_bar.Append(go_button, _("Goto"))
-
-            self.Bind(wx.EVT_MENU, self.open_log_dir, openlogdir)
-            self.Bind(wx.EVT_MENU, self.openconf, openconfdir)
-
         # ------------------ help menu
         help_button = wx.Menu()
         helpitem = help_button.Append(wx.ID_HELP, _("User Guide"), "")
@@ -331,27 +317,6 @@ class MainFrame(wx.Frame):
             else:
                 io_tools.openpath(fname)
     # ------------------------------------------------------------------#
-    # --------- Menu  Go  ###
-
-    def open_log_dir(self, event):
-        """
-        Open the log directory with file manager
-
-        """
-        if not os.path.exists(self.appdata['logdir']):
-            wx.MessageBox(_("There are no logs to show."),
-                          "FFaudiocue", wx.ICON_INFORMATION, self)
-            return
-        io_tools.openpath(self.appdata['logdir'])
-    # ------------------------------------------------------------------#
-
-    def openconf(self, event):
-        """
-        Open the configuration folder with file manager
-
-        """
-        io_tools.openpath(self.appdata['confdir'])
-    # -------------------------------------------------------------------#
     # --------- Menu Help  ###
 
     def help_me(self, event):
@@ -391,12 +356,19 @@ class MainFrame(wx.Frame):
         this = VERSION  # this version
         url = ("https://api.github.com/repos/jeanslack/"
                "FFaudiocue/releases/latest")
-        vers = io_tools.get_github_releases(url, "tag_name")
 
+        vers = io_tools.get_github_releases(url, "tag_name")
         if vers[0] in ['request error:', 'response error:']:
-            wx.MessageBox(f"{vers[0]} {vers[1]}", f"{vers[0]}",
-                          wx.ICON_ERROR, self)
-            return
+            if str(vers[1]) == "'tag_name'":
+                msg = _('No publications found!\nERROR: tag_name')
+                dlg = check_new_version.CheckNewVersion(self, msg, VERSION,
+                                                        VERSION)
+                dlg.ShowModal()
+                return
+            else:
+                wx.MessageBox(f"{vers[0]} {vers[1]}", f"{vers[0]}",
+                              wx.ICON_ERROR, self)
+                return
 
         vers = vers[0].split('v')[1]
         newmajor, newminor, newmicro = vers.split('.')
@@ -413,7 +385,6 @@ class MainFrame(wx.Frame):
         else:
             msg = _('Congratulation! You are already '
                     'using the latest version.\n')
-
         dlg = check_new_version.CheckNewVersion(self, msg, vers, this)
         dlg.ShowModal()
     # -------------------------------------------------------------------#

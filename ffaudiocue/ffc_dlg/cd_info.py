@@ -58,6 +58,8 @@ class CdInfo(wx.Dialog):
                                  # | wx.TE_RICH2
                                  )
         size_base.Add(self.tinfo, 1, wx.ALL | wx.EXPAND, 5)
+
+        # bottom btns
         gridbtn = wx.GridSizer(1, 1, 0, 0)
         size_base.Add(gridbtn, flag=wx.ALIGN_RIGHT | wx.RIGHT, border=0)
         self.button_close = wx.Button(self, wx.ID_CLOSE, "")

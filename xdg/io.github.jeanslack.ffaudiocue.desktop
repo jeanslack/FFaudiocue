@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=FFaudiocue
+Comment=Extracts audio tracks from an audio CD image using supplied with a CUE sheet using FFmpeg.
+Categories=AudioVideo;
+Icon=ffaudiocue
+StartupNotify=true
+StartupWMClass=ffaudiocue
+Exec=ffaudiocue
+Terminal=false

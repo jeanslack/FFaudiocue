@@ -73,9 +73,9 @@ class CheckNewVersion(wx.Dialog):
         sizer.Add(self.tctrl, 0, wx.ALL | wx.EXPAND, 5)
 
         btngrid = wx.FlexGridSizer(1, 2, 0, 0)
-        btngrid.Add(btn_get, 0, wx.ALL, 5)
-        btngrid.Add(btn_ok, 0, wx.ALL, 5)
-        sizer.Add(btngrid, flag=wx.ALL | wx.ALIGN_RIGHT | wx.RIGHT, border=0)
+        btngrid.Add(btn_get, 0)
+        btngrid.Add(btn_ok, 0, wx.LEFT, 5)
+        sizer.Add(btngrid, flag=wx.ALL | wx.ALIGN_RIGHT | wx.RIGHT, border=5)
         self.SetSizer(sizer)
         sizer.Fit(self)
         self.Layout()

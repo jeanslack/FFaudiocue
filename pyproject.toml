@@ -49,7 +49,7 @@ classifiers = [
     "Topic :: Multimedia :: Sound/Audio :: Conversion"
 ]
 dependencies = [
-    "ffcuesplitter",
+    "ffcuesplitter>=1.0.28",
     "wxpython>=4.0.7",
     "pypubsub>=4.0.3",
     "requests>=2.31.0"
@@ -79,10 +79,10 @@ path = "ffaudiocue/ffc_sys/about_app.py"
 [tool.hatch.build.targets.sdist]
 include = [
     "ffaudiocue",
-    #"debian",
-    #"docs/man",
+    "debian",
+    "docs/man",
     "develop",
-    #"tests",
+    "tests",
     "AUTHORS",
     "BUGS",
     "CHANGELOG",

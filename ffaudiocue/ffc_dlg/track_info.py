@@ -115,20 +115,21 @@ class TrackInfo(wx.Dialog):
                                        )
         box_comment.Add(self.txt_comment, 1, wx.ALL | wx.EXPAND, 5)
 
+        # ----- confirm buttons section
         grdbtn = wx.GridSizer(1, 2, 0, 0)
         grdhelp = wx.GridSizer(1, 1, 0, 0)
         btn_help = wx.Button(self, wx.ID_HELP, "")
         grdhelp.Add(btn_help, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
-
         grdbtn.Add(grdhelp)
         grdexit = wx.BoxSizer(wx.HORIZONTAL)
         btn_cancel = wx.Button(self, wx.ID_CANCEL, "")
-        grdexit.Add(btn_cancel, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+        grdexit.Add(btn_cancel, 0, wx.ALIGN_CENTER_VERTICAL)
         self.btn_save = wx.Button(self, wx.ID_OK, _("Apply"))
-        grdexit.Add(self.btn_save, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+        grdexit.Add(self.btn_save, 0, wx.LEFT | wx.ALIGN_CENTER_VERTICAL, 5)
         self.btn_save.Disable()
-        grdbtn.Add(grdexit, 0, wx.ALL | wx.ALIGN_RIGHT | wx.RIGHT, 0)
+        grdbtn.Add(grdexit, flag=wx.ALL | wx.ALIGN_RIGHT | wx.RIGHT, border=5)
         size_base.Add(grdbtn, 0, wx.EXPAND)
+
         # ------ set sizer
         self.SetMinSize((500, 450))
         self.SetSizer(size_base)

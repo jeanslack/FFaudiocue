@@ -23,6 +23,8 @@ Sat, 15 June 2025 V.1.0.10
 - Improved portable app output dir for file destination (see setting_manager)
 - Auto-exit/auto-restart application if required.
 - Fix problem with opening the same dialog multiple times.
+- Fix button spaces as like confirmation buttons.
+- Added some languages to translation catalog.
 
 +------------------------------------+
 Thu, 11 Aug 2023 V.1.0.5 (unreleased)

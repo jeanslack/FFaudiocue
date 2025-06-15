@@ -77,31 +77,30 @@ class SetUp(wx.Dialog):
         # -----tab 1
         tab_one = wx.Panel(notebook, wx.ID_ANY)
         sizer_gen = wx.BoxSizer(wx.VERTICAL)
-        sizer_gen.Add((0, 15))
-        self.ckbx_logclear = wx.CheckBox(tab_one, wx.ID_ANY,
-                                         (_("Delete the contents of the log "
-                                            "files\nwhen exiting the "
-                                            "application")))
-        sizer_gen.Add(self.ckbx_logclear, 0, wx.ALL, 5)
-        sizer_gen.Add((0, 15))
-        self.ckbx_exit = wx.CheckBox(tab_one, wx.ID_ANY, (_("Warn on exit")))
+
+        sizer_gen.Add((0, 10))
+        msg = _('Upon exiting the application')
+        labexitopt = wx.StaticText(tab_one, wx.ID_ANY, msg)
+        sizer_gen.Add(labexitopt, 0, wx.ALL | wx.EXPAND, 5)
+        sizer_gen.Add((0, 10))
+        self.ckbx_exit = wx.CheckBox(tab_one, wx.ID_ANY,
+                                     (_("Always ask me to confirm")))
         sizer_gen.Add(self.ckbx_exit, 0, wx.ALL, 5)
-
-        sizer_gen.Add((0, 15))
-        self.ckbx_mnhiden = wx.CheckBox(tab_one, wx.ID_ANY,
-                                        (_("Show hidden menu items")))
-        sizer_gen.Add(self.ckbx_mnhiden, 0, wx.ALL, 5)
-
+        sizer_gen.Add((0, 10))
+        self.ckbx_logclear = wx.CheckBox(tab_one, wx.ID_ANY,
+                                         (_("Clean the log files")))
+        sizer_gen.Add(self.ckbx_logclear, 0, wx.ALL, 5)
         tab_one.SetSizer(sizer_gen)
         notebook.AddPage(tab_one, _("General"))
 
         # -----tab 2
         tab_two = wx.Panel(notebook, wx.ID_ANY)
         sizer_files = wx.BoxSizer(wx.VERTICAL)
-        sizer_files.Add((0, 15))
+        sizer_files.Add((0, 10))
         msg = _("Where do you prefer to save your files?")
         labfile = wx.StaticText(tab_two, wx.ID_ANY, msg)
         sizer_files.Add(labfile, 0, wx.ALL | wx.EXPAND, 5)
+        sizer_files.Add((0, 10))
         sizeffdirdest = wx.BoxSizer(wx.HORIZONTAL)
         sizer_files.Add(sizeffdirdest, 0, wx.EXPAND)
         self.txt_outdir = wx.TextCtrl(tab_two, wx.ID_ANY, "",
@@ -122,11 +121,12 @@ class SetUp(wx.Dialog):
         # -----tab 3
         tab_three = wx.Panel(notebook, wx.ID_ANY)
         sizer_ffmpeg = wx.BoxSizer(wx.VERTICAL)
-        sizer_ffmpeg.Add((0, 15))
+        sizer_ffmpeg.Add((0, 10))
         lab_ffexec = wx.StaticText(tab_three, wx.ID_ANY,
-                                   _('Path to the executables'))
+                                   _('Location of executables'))
         sizer_ffmpeg.Add(lab_ffexec, 0, wx.ALL | wx.EXPAND, 5)
         # ----
+        sizer_ffmpeg.Add((0, 10))
         msg = _("Enable a custom location to run FFmpeg")
         self.ckbx_exe_ffmpeg = wx.CheckBox(tab_three, wx.ID_ANY, (msg))
         self.btn_loc_ffmpeg = wx.Button(tab_three, wx.ID_ANY, _("Change"))
@@ -139,6 +139,7 @@ class SetUp(wx.Dialog):
         grid_ffmpeg.Add(self.txtctrl_ffmpeg, 1, wx.ALL, 5)
         grid_ffmpeg.Add(self.btn_loc_ffmpeg, 0, wx.RIGHT | wx.CENTER, 5)
         # ----
+        sizer_ffmpeg.Add((0, 10))
         self.ckbx_exe_ffprobe = wx.CheckBox(tab_three, wx.ID_ANY,
                                             (_("Enable a custom location to "
                                                "run FFprobe")))
@@ -285,23 +286,20 @@ class SetUp(wx.Dialog):
         tabSix.SetSizer(sizeradv)
         notebook.AddPage(tabSix, _("Advanced"))
 
-        # ------ btns bottom
-        grd_btns = wx.GridSizer(1, 2, 0, 0)
+        # ----- confirm buttons section
+        grdBtn = wx.GridSizer(1, 2, 0, 0)
         grdhelp = wx.GridSizer(1, 1, 0, 0)
         btn_help = wx.Button(self, wx.ID_HELP, "")
         grdhelp.Add(btn_help, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
-        grd_btns.Add(grdhelp)
+        grdBtn.Add(grdhelp)
         grdexit = wx.BoxSizer(wx.HORIZONTAL)
         btn_cancel = wx.Button(self, wx.ID_CANCEL, "")
-        grdexit.Add(btn_cancel, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+        grdexit.Add(btn_cancel, 0, wx.ALIGN_CENTER_VERTICAL)
         btn_ok = wx.Button(self, wx.ID_OK, "")
-        grdexit.Add(btn_ok, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
-        grd_btns.Add(grdexit, flag=wx.ALL
-                     | wx.ALIGN_RIGHT
-                     | wx.RIGHT,
-                     border=0
-                     )
-        sizer_base.Add(grd_btns, 0, wx.EXPAND)
+        grdexit.Add(btn_ok, 0, wx.LEFT | wx.ALIGN_CENTER_VERTICAL, 5)
+        grdBtn.Add(grdexit, flag=wx.ALL | wx.ALIGN_RIGHT | wx.RIGHT, border=5)
+        sizer_base.Add(grdBtn, 0, wx.EXPAND)
+
         # ------ set sizer
         self.SetMinSize((650, 550))
         self.SetSizer(sizer_base)
@@ -312,6 +310,7 @@ class SetUp(wx.Dialog):
         self.SetTitle(_("Settings"))
         # set font
         if self.appdata['ostype'] == 'Darwin':
+            labexitopt.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lablang.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             labfile.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lab_ffexec.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
@@ -319,6 +318,7 @@ class SetUp(wx.Dialog):
             labdirtitle.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lab_log.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.NORMAL))
         else:
+            labexitopt.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lablang.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             labfile.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lab_ffexec.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.BOLD))
@@ -332,7 +332,6 @@ class SetUp(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.opendir, self.btn_log)
         self.Bind(wx.EVT_CHECKBOX, self.exit_warn, self.ckbx_exit)
         self.Bind(wx.EVT_CHECKBOX, self.clear_logs, self.ckbx_logclear)
-        self.Bind(wx.EVT_CHECKBOX, self.show_hiden_menu, self.ckbx_mnhiden)
 
         self.Bind(wx.EVT_BUTTON, self.on_output_path, self.btn_outdir)
 
@@ -395,7 +394,7 @@ class SetUp(wx.Dialog):
         self.ckbx_tb_showtxt.SetValue(self.appdata['toolbartext'])
         self.ckbx_logclear.SetValue(self.appdata['clearlogfiles'])
         self.ckbx_exit.SetValue(self.appdata['warnexiting'])
-        self.ckbx_mnhiden.SetValue(self.appdata['showhidenmenu'])
+        # self.ckbx_mnhiden.SetValue(self.appdata['showhidenmenu'])
     # --------------------------------------------------------------------#
 
     def opendir(self, event):
@@ -572,17 +571,6 @@ class SetUp(wx.Dialog):
             self.settings['clearlogfiles'] = False
     # --------------------------------------------------------------------#
 
-    def show_hiden_menu(self, event):
-        """
-        if checked, show items menu to open log
-        directory and file configuration directory
-        """
-        if self.ckbx_mnhiden.IsChecked():
-            self.settings['showhidenmenu'] = True
-        else:
-            self.settings['showhidenmenu'] = False
-    # --------------------------------------------------------------------#
-
     def on_help(self, event):
         """
         Open default web browser via Python Web-browser controller.
@@ -618,7 +606,7 @@ class SetUp(wx.Dialog):
             self.settings['toolbarsize'] == self.appdata['toolbarsize'],
             self.settings['toolbarpos'] == self.appdata['toolbarpos'],
             self.settings['toolbartext'] == self.appdata['toolbartext'],
-            self.settings['showhidenmenu'] == self.appdata['showhidenmenu'])
+            )
 
         self.confmanager.write_options(**self.settings)
         self.appdata.update(self.settings)
