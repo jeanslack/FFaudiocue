@@ -1,11 +1,14 @@
 Important Notes:
 ----------------
+
+pip install git+https://github.com/jeanslack/FFaudiocue.git@main
+
 The instructions provided on this file assume you have Python installed and
 configured on your operating system.
 
 Currently FFaudiocue is still under development and no pre-compiled packages
-have been distributed, but since it comes with a `setup.py` file, you can build it
-and install it very easily into your operating system as a Python wheel.
+have been distributed, but since it comes with a `pyproject.toml` file, you can
+build it and install it very easily into your operating system as a Python wheel.
 
 However, to achieve this a virtual python environment is recommended, for
 example using tools like `python3-venv` or `virtualenv`, which once activated,

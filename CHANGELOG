@@ -25,6 +25,7 @@ Sat, 15 June 2025 V.1.0.10
 - Fix problem with opening the same dialog multiple times.
 - Fix button spaces as like confirmation buttons.
 - Added some languages to translation catalog.
+- Added requests dependency for all OS.
 
 +------------------------------------+
 Thu, 11 Aug 2023 V.1.0.5 (unreleased)
