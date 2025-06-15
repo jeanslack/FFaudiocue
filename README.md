@@ -1,4 +1,4 @@
-# **FFaudiocue
+# FFaudiocue
 [![Image](https://img.shields.io/static/v1?label=python&logo=python&message=3.9%20|%203.10%20|%203.11%20|%203.12&color=blue)](https://www.python.org/downloads/)
 [![Image](https://img.shields.io/badge/license-GPLv3-orange)](https://github.com/jeanslack/FFaudiocue/blob/main/LICENSE)
 [![Python application](https://github.com/jeanslack/FFaudiocue/actions/workflows/tests.yml/badge.svg)](https://github.com/jeanslack/FFaudiocue/actions/workflows/tests.yml)
@@ -6,7 +6,7 @@
 A simple graphical user interface to extracts audio tracks from audio CD images
 supplied with a CUE sheet.
 
-![preview](./docs/screenshot.png)
+![preview](./docs/Screenshot.png)
 
 ## Description
 
