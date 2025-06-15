@@ -123,7 +123,7 @@ artifacts = [
 "ffaudiocue/data/hicolor/scalable/apps/ffaudiocue.svg" = "share/icons/hicolor/scalable/apps/ffaudiocue.svg"
 
 [project.gui-scripts]
-ffaudiocue = "ffaudiocue_app:main"
+ffaudiocue = "ffaudiocue.gui_app:main"
 
 [project.urls]
 Homepage = "https://github.com/jeanslack/FFaudiocue"
