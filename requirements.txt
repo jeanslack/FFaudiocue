@@ -3,3 +3,20 @@ ffcuesplitter>=1.0.28
 requests>=2.28.1
 
 wxpython>=4.0.7; platform_system == "Windows" or platform_system == "Darwin"
+
+git+https://github.com/jeanslack/FFaudiocue.git@main
+
+# For Linux/FreeBsd Users:
+# This requirements.txt file should prevent the automatic installation of
+# wxPython. Please install wxPython from your package manager.
+
+# For ALL Users:
+# This assumes installation in a virtual environment using python3-venv module
+# with `--system-site-package` option, for example:
+#
+#   ~$ python3 -m venv --system-site-packages --upgrade-deps VENV
+#   ~$ source VENV/bin/activate
+#   ~$ python3 -m pip install ffaudiocue -r requirements.txt
+#
+#    OR (alternatively), install it from github:
+#    ~$ python3 -m pip install git+https://github.com/jeanslack/FFaudiocue.git@main
