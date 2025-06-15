@@ -18,8 +18,8 @@
 - Make GitHub workflow to test multiple Python version.
 - Fix button spaces as like confirmation buttons.
 
-- open only one dialog windows a time (use pubsub)
-- make auto-exit/auto-restart application
+- [DONE] open only one dialog windows a time (use pubsub)
+- [DONE] make auto-exit/auto-restart application
 - make sub-directory for languages i18n
-- Implementare dizionario per salvare da preferenze senza riavviare
+- [DONE] Save some preferences without re-start application
 - Aggiorna ffcuesplitter (API)

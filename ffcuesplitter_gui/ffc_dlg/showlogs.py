@@ -6,7 +6,7 @@ Compatibility: Python3, wxPython Phoenix
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: Feb.04.2022
+Rev: June.15.2025
 Code checker flake8, pylint
 #########################################################
 
@@ -27,6 +27,7 @@ This file is part of FFcuesplitter-GUI.
 """
 import os
 import wx
+from pubsub import pub
 
 
 class ShowLogs(wx.Dialog):
@@ -43,15 +44,19 @@ class ShowLogs(wx.Dialog):
         self.dirlog > log location directory (depends from OS)
         self.logdata > dict object {KEY=file name.log: VAL=log data, ...}
         self.selected > None if item on listctrl is not selected
+        file > log file name to view
 
         """
         self.dirlog = dirlog
         self.logdata = {}
         self.selected = None
         get = wx.GetApp()  # get data from bootstrap
+        vidicon = get.iconset['ffcuesplittergui']
 
         wx.Dialog.__init__(self, None,
-                           style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER
+                           style=wx.DEFAULT_DIALOG_STYLE
+                           | wx.RESIZE_BORDER
+                           | wx.DIALOG_NO_PARENT
                            )
         # ----------------------Layout----------------------#
         sizer_base = wx.BoxSizer(wx.VERTICAL)
@@ -101,8 +106,11 @@ class ShowLogs(wx.Dialog):
                      )
         sizer_base.Add(grd_btns, 0, wx.ALL | wx.EXPAND, 0)
         # set caption and min size
-        self.SetTitle(_('Showing log messages'))
+        self.SetTitle(_('Showing last log messages'))
         self.SetMinSize((700, 500))
+        icon = wx.Icon()
+        icon.CopyFromBitmap(wx.Bitmap(vidicon, wx.BITMAP_TYPE_ANY))
+        self.SetIcon(icon)
         # ------ set sizer
         self.SetSizer(sizer_base)
         self.Fit()
@@ -195,4 +203,4 @@ class ShowLogs(wx.Dialog):
         """
         Destroy this dialog
         """
-        self.Destroy()
+        pub.sendMessage("DESTROY_ORPHANED_WINDOWS", msg='ShowLogs')

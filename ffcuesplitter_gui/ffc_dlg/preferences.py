@@ -6,7 +6,7 @@ Compatibility: Python3, wxPython Phoenix
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: June 13 2025
+Rev: June.15.2025
 Code checker: flake8, pylint
 ########################################################
 
@@ -28,9 +28,9 @@ This file is part of FFcuesplitter-GUI.
 import os
 import sys
 import wx
+from ffcuesplitter_gui.ffc_sys.app_const import supLang
 from ffcuesplitter_gui.ffc_utils.utils import detect_binaries
 from ffcuesplitter_gui.ffc_sys.settings_manager import ConfigManager
-from videomass.vdms_sys.app_const import supLang
 from ffcuesplitter_gui.ffc_inout import io_tools
 
 
@@ -48,15 +48,17 @@ class SetUp(wx.Dialog):
                      )
     # -----------------------------------------------------------------
 
-    def __init__(self, parent, appdata):
+    def __init__(self, parent):
         """
         self.appdata: (dict) settings already loaded from main_frame .
         self.confmanager: instance to ConfigManager class
         self.settings: (dict) current user settings from file conf.
         """
-        self.appdata = appdata
+        get = wx.GetApp()
+        self.appdata = get.appset
         self.confmanager = ConfigManager(self.appdata['fileconfpath'])
         self.settings = self.confmanager.read_options()
+        self.retcode = None
 
         if self.appdata['ostype'] == 'Windows':
             self.ffmpeg = 'ffmpeg.exe'
@@ -91,7 +93,7 @@ class SetUp(wx.Dialog):
         sizer_gen.Add(self.ckbx_mnhiden, 0, wx.ALL, 5)
 
         tab_one.SetSizer(sizer_gen)
-        notebook.AddPage(tab_one, _("Miscellanea"))
+        notebook.AddPage(tab_one, _("General"))
 
         # -----tab 2
         tab_two = wx.Panel(notebook, wx.ID_ANY)
@@ -125,9 +127,8 @@ class SetUp(wx.Dialog):
                                    _('Path to the executables'))
         sizer_ffmpeg.Add(lab_ffexec, 0, wx.ALL | wx.EXPAND, 5)
         # ----
-        self.ckbx_exe_ffmpeg = wx.CheckBox(tab_three, wx.ID_ANY,
-                                           (_("Enable a custom location to run "
-                                              "FFmpeg")))
+        msg = _("Enable a custom location to run FFmpeg")
+        self.ckbx_exe_ffmpeg = wx.CheckBox(tab_three, wx.ID_ANY, (msg))
         self.btn_loc_ffmpeg = wx.Button(tab_three, wx.ID_ANY, _("Change"))
         self.txtctrl_ffmpeg = wx.TextCtrl(tab_three, wx.ID_ANY, "",
                                           style=wx.TE_READONLY
@@ -207,9 +208,6 @@ class SetUp(wx.Dialog):
         self.ckbx_tb_showtxt = wx.CheckBox(tab_four, wx.ID_ANY,
                                            (_("Show text on toolbar buttons")))
         sizer_appearance.Add(self.ckbx_tb_showtxt, 0, wx.ALL, 5)
-
-
-
         sizer_appearance.Add((0, 10))
         msg = _('Application Language (requires application restart)')
         lablang = wx.StaticText(tab_four, wx.ID_ANY, msg)
@@ -223,7 +221,6 @@ class SetUp(wx.Dialog):
                                      )
         sizer_appearance.Add(self.cmbx_lang, 0, wx.ALL, 5)
         sizer_appearance.Add((0, 20))
-
 
         tab_four.SetSizer(sizer_appearance)  # aggiungo il sizer su tab 4
         notebook.AddPage(tab_four, _("Look and Language"))
@@ -317,7 +314,6 @@ class SetUp(wx.Dialog):
         if self.appdata['ostype'] == 'Darwin':
             lablang.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             labfile.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
-            labcache.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lab_ffexec.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             lablook.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
             labdirtitle.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
@@ -601,11 +597,7 @@ class SetUp(wx.Dialog):
         Retrives data from here before destroyng this dialog.
         See main_frame --> on_setup method
         """
-        wx.MessageBox(_("Some changes will take effect once the program is "
-                        "restarted."), _('Settings'),
-                      wx.ICON_INFORMATION, self)
-
-        return self.settings
+        return self.retcode
     # --------------------------------------------------------------------#
 
     def on_cancel(self, event):
@@ -620,6 +612,15 @@ class SetUp(wx.Dialog):
         Applies all changes writing the new entries on
         `settings.json` file aka file configuration.
         """
+        self.retcode = (
+            self.settings['locale_name'] == self.appdata['locale_name'],
+            self.settings['icontheme'] == self.appdata['icontheme'],
+            self.settings['toolbarsize'] == self.appdata['toolbarsize'],
+            self.settings['toolbarpos'] == self.appdata['toolbarpos'],
+            self.settings['toolbartext'] == self.appdata['toolbartext'],
+            self.settings['showhidenmenu'] == self.appdata['showhidenmenu'])
+
         self.confmanager.write_options(**self.settings)
+        self.appdata.update(self.settings)
 
         event.Skip()

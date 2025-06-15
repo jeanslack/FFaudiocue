@@ -6,7 +6,7 @@ Compatibility: Python3, wxPython Phoenix
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: Feb.08.2022
+Rev: June.15.2025
 Code checher: flake8, pylint
 ########################################################
 
@@ -43,7 +43,7 @@ class TrackInfo(wx.Dialog):
         self.appdata = get.appset
         self.metadata = metadata
         self.trackindex = trackindex
-        title = _("Track ({}) Audio Tag").format(self.trackindex)
+        title = _("Track ({}) Audio Tag").format(self.trackindex + 1)
 
         wx.Dialog.__init__(self, parent, -1, title,
                            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)

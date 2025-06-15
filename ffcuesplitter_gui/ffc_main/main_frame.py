@@ -6,7 +6,7 @@ Compatibility: Python3, wxPython Phoenix
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: Feb.04.2022
+Rev: June.15.2025
 Code checker: flake8, pylint
 ########################################################
 
@@ -29,6 +29,7 @@ import os
 import sys
 import webbrowser
 import wx
+from pubsub import pub
 from ffcuesplitter_gui.ffc_utils.get_bmpfromsvg import get_bmp
 from ffcuesplitter_gui.ffc_dlg import preferences
 from ffcuesplitter_gui.ffc_dlg import infoprg
@@ -55,6 +56,9 @@ class MainFrame(wx.Frame):
         self.appdata = get.appset
         self.icons = get.iconset
         # -------------------------------#
+        self.showlogs = False
+        self.cdinfo = False
+
         wx.Frame.__init__(self, None, -1, style=wx.DEFAULT_FRAME_STYLE)
 
         # ---------- others panel instances:
@@ -73,6 +77,8 @@ class MainFrame(wx.Frame):
         # self.CentreOnScreen()  # se lo usi, usa CentreOnScreen anziche Centre
         self.SetSizer(self.main_sizer)
         self.Fit()
+        self.SetSize(tuple(self.appdata['main_window_size']))
+        self.Move(tuple(self.appdata['main_window_pos']))
 
         # menu bar
         self.frame_menu_bar()
@@ -82,8 +88,10 @@ class MainFrame(wx.Frame):
         self.sbar = self.CreateStatusBar(1)
         self.statusbar_msg(_('Ready'))
         self.Layout()
-        # ---------------------- Binding (EVT) ----------------------#
-        self.Bind(wx.EVT_CLOSE, self.on_exit)  # controlla la chiusura (x)
+        # ---------------------- Binding (EVT) -----------------------
+        self.Bind(wx.EVT_CLOSE, self.on_close)
+        # ------------------------------------------------------------
+        pub.subscribe(self.check_modeless_window, "DESTROY_ORPHANED_WINDOWS")
 
     # -------------------Status bar settings--------------------#
 
@@ -113,52 +121,93 @@ class MainFrame(wx.Frame):
 
         self.sbar.SetStatusText(msg)
         self.sbar.Refresh()
-    # ---------------------- Event handler (callback) ------------------#
-
-    def on_exit(self, event):
-        """
-        destroy the cuesplittergui app.;
-        `thread_type` is the current thread, None otherwise.
-
-        """
-        def _setsize():
-            """
-            Write last panel size for next start if changed
-            """
-            if tuple(self.appdata['panel_size']) != self.GetSize():
-                confmanager = ConfigManager(self.appdata['fileconfpath'])
-                sett = confmanager.read_options()
-                sett['panel_size'] = list(self.GetSize())
-                confmanager.write_options(**sett)
-
-        if self.gui_panel.thread_type is not None:
-            if wx.MessageBox(_('There are still processes running.. if you '
-                               'want to stop them, use the "Abort" button.\n\n'
-                               'Do you still want to kill the application?'),
-                             _('Please confirm'),
-                             wx.ICON_QUESTION | wx.YES_NO, self) == wx.NO:
-                return
-
-            self.on_kill()
-            return
-
-        if self.appdata['warnexiting'] is True:
-            if wx.MessageBox(_('Confirm to exit the application.'),
-                             _('Exit'), wx.ICON_QUESTION
-                             | wx.YES_NO, self) == wx.YES:
-                _setsize()
-                self.Destroy()
-        else:
-            _setsize()
-            self.Destroy()
     # ------------------------------------------------------------------#
 
-    def on_kill(self):
+    def check_modeless_window(self, msg=None):
         """
-        In some cases you need to exit the application
-        without any confirm dialog.
+        Receives a message from a modeless window close event.
+        This method is called using pub/sub protocol subscribing
+        "DESTROY_ORPHANED_WINDOWS".
+        """
+        if msg == 'ShowLogs':
+            self.showlogs.Destroy()
+            self.showlogs = False
+        elif msg == 'CdInfo':
+            self.cdinfo.Destroy()
+            self.cdinfo = False
+    # ------------------------------------------------------------------#
+
+    def destroy_orphaned_window(self):
+        """
+        Destroys all orphaned modeless windows, ie. on
+        application exit or on opening or deleting files.
+        """
+        if self.showlogs:
+            self.showlogs.Destroy()
+            self.showlogs = False
+        if self.cdinfo:
+            self.cdinfo.Destroy()
+            self.cdinfo = False
+    # ---------------------- Event handler (callback) ------------------#
+
+    def write_option_before_exit(self):
+        """
+        Write user settings to the configuration file
+        before exit the application.
+        """
+        confmanager = ConfigManager(self.appdata['fileconfpath'])
+        sett = confmanager.read_options()
+        sett['main_window_size'] = list(self.GetSize())
+        sett['main_window_pos'] = list(self.GetPosition())
+        confmanager.write_options(**sett)
+    # ------------------------------------------------------------------#
+
+    def destroy_application(self):
+        """
+        Permanent exit from the application.
+        Do not use this method directly.
         """
         self.Destroy()
+    # ------------------------------------------------------------------#
+
+    def on_Kill(self):
+        """
+        This method is called after from the `main_setup_dlg()` method.
+        """
+        if self.gui_panel.thread_type is not None:
+            wx.MessageBox(_("There are still active windows with running "
+                            "processes, make sure you finish your work "
+                            "before exit."),
+                          _('FFaudiosplit - Warning!'), wx.ICON_WARNING, self)
+            self.appdata['auto-restart-app'] = False
+            return
+
+        self.destroy_orphaned_window()
+        self.destroy_application()
+    # ------------------------------------------------------------------#
+
+    def on_close(self, event):
+        """
+        Application exit request given by the user.
+        """
+        if self.gui_panel.thread_type is not None:
+            wx.MessageBox(_("There are still active windows with running "
+                            "processes, make sure you finish your work "
+                            "before exit."),
+                          _('FFaudiosplit - Warning!'), wx.ICON_WARNING, self)
+            return
+
+        if self.appdata['warnexiting']:
+            if wx.MessageBox(_('Are you sure you want to exit '
+                               'the application?'),
+                             _('Exit'), wx.ICON_QUESTION | wx.CANCEL
+                             | wx.YES_NO, self) != wx.YES:
+                return
+
+        self.write_option_before_exit()
+        self.destroy_orphaned_window()
+        self.destroy_application()
+    # ------------------------------------------------------------------#
 
     # -------------   BUILD THE MENU BAR  ----------------###
 
@@ -176,8 +225,8 @@ class MainFrame(wx.Frame):
 
         # ----------------------- file menu
         file_button = wx.Menu()
-        dscrp = (_("Open a CUE sheet...\tCtrl+C"),
-                 _("Open a new CUE file"))
+        dscrp = (_("Open CUE sheet...\tCtrl+C"),
+                 _("Open a new CUE sheet file"))
         fold_cue = file_button.Append(wx.ID_FILE, dscrp[0], dscrp[1])
 
         dscrp = (_("Open output folder\tCtrl+A"),
@@ -197,7 +246,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.opencue, fold_cue)
         self.Bind(wx.EVT_MENU, self.open_myfiles, fold_convers)
         self.Bind(wx.EVT_MENU, self.reminder, notepad)
-        self.Bind(wx.EVT_MENU, self.on_exit, exititem)
+        self.Bind(wx.EVT_MENU, self.on_close, exititem)
 
         # ------------------ Go menu
         if self.appdata['showhidenmenu'] is True:
@@ -524,13 +573,17 @@ class MainFrame(wx.Frame):
         """
         Call CdInfo class dialog
         """
-        cdinfo = CdInfo(self,
-                        self.gui_panel.data.cue.meta.data,
-                        self.gui_panel.data.probedata,
-                        self.gui_panel.txt_path_cue.GetValue(),
-                        self.gui_panel.data.cue_encoding
-                        )
-        cdinfo.Show()
+        if self.cdinfo:
+            self.cdinfo.Raise()
+            return
+
+        self.cdinfo = CdInfo(self,
+                             self.gui_panel.data.cue.meta.data,
+                             self.gui_panel.data.probedata,
+                             self.gui_panel.txt_path_cue.GetValue(),
+                             self.gui_panel.data.cue_encoding
+                             )
+        self.cdinfo.Show()
     # ------------------------------------------------------------------#
 
     def on_track_info(self, event):
@@ -552,24 +605,34 @@ class MainFrame(wx.Frame):
 
     def on_setup(self, event):
         """
-        Calls user settings dialog.
+        Calls user settings dialog. Note, this dialog is
+        handle like filters dialogs on FFaudiosplit, being need
+        to get the return code from getvalue interface.
         """
-        with preferences.SetUp(self, self.appdata) as set_up:
+        msg = _("Some changes require restarting the application.")
+        with preferences.SetUp(self) as set_up:
             if set_up.ShowModal() == wx.ID_OK:
-                newdata = set_up.getvalue()
-                self.appdata = {**self.appdata, **newdata}
-                self.gui_panel.appdata = self.appdata
+                changes = set_up.getvalue()
                 self.gui_panel.txt_out.SetValue(self.appdata['destination'])
+                if [x for x in changes if x is False]:
+                    if wx.MessageBox(_("{0}\n\nDo you want to restart "
+                                       "the application now?").format(msg),
+                                     _('Restart FFaudiosplit?'),
+                                     wx.ICON_QUESTION
+                                     | wx.CANCEL
+                                     | wx.YES_NO, self) == wx.YES:
+                        self.appdata['auto-restart-app'] = True
+                        self.on_Kill()
     # -------------------------------------------------------------------#
 
     def on_log(self, event):
         """
-        Show miniframe to view log files
+        Show log files dialog
         """
-        if not os.path.exists(self.appdata['logdir']):
-            wx.MessageBox(_("There are no logs to show."),
-                          "FFcuesplitter-GUI", wx.ICON_INFORMATION, self)
-        else:
-            logdlg = ShowLogs(self, self.appdata['logdir'])
-            logdlg.Show()
+        if self.showlogs:
+            self.showlogs.Raise()
+            return
+
+        self.showlogs = ShowLogs(self, self.appdata['logdir'])
+        self.showlogs.Show()
     # ------------------------------------------------------------------#

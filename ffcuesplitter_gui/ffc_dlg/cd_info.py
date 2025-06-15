@@ -6,7 +6,7 @@ Compatibility: Python3, wxPython Phoenix
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: Feb.08.2022
+Rev: June.15.2025
 Code checher: flake8, pylint
 ########################################################
 
@@ -29,6 +29,7 @@ import os
 import datetime
 # import webbrowser
 import wx
+from pubsub import pub
 
 
 class CdInfo(wx.Dialog):
@@ -41,9 +42,13 @@ class CdInfo(wx.Dialog):
         """
         get = wx.GetApp()
         appdata = get.appset
+        vidicon = get.iconset['ffcuesplittergui']
 
-        wx.Dialog.__init__(self, parent, -1, 'CD Audio',
-                           style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+        wx.Dialog.__init__(self, None,
+                           style=wx.DEFAULT_DIALOG_STYLE
+                           | wx.RESIZE_BORDER
+                           | wx.DIALOG_NO_PARENT
+                           )
 
         size_base = wx.BoxSizer(wx.VERTICAL)
         self.tinfo = wx.TextCtrl(self, wx.ID_ANY, "",
@@ -58,7 +63,11 @@ class CdInfo(wx.Dialog):
         self.button_close = wx.Button(self, wx.ID_CLOSE, "")
         gridbtn.Add(self.button_close, 1, wx.ALL, 5)
         # ------ set sizer
+        self.SetTitle(_('Audio CD Informations'))
         self.SetMinSize((600, 400))
+        icon = wx.Icon()
+        icon.CopyFromBitmap(wx.Bitmap(vidicon, wx.BITMAP_TYPE_ANY))
+        self.SetIcon(icon)
         self.SetSizer(size_base)
         self.Fit()
         self.Layout()
@@ -124,4 +133,4 @@ class CdInfo(wx.Dialog):
         """
         destroy dialog by button and the X
         """
-        self.Destroy()
+        pub.sendMessage("DESTROY_ORPHANED_WINDOWS", msg='CdInfo')

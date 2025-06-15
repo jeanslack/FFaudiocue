@@ -6,7 +6,7 @@ Compatibility: Python3
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: June.13.2025
+Rev: June.15.2025
 Code checker: flake8, pylint .
 
  This file is part of FFcuesplitter-GUI.
@@ -51,10 +51,10 @@ class ConfigManager:
         >>> confmng.write_options(**settings)
     ------------------------------------------------------
     """
-    VERSION = 4.2
+    VERSION = 4.4
     DEFAULT_OPTIONS = {"confversion": VERSION,
                        "locale_name": "Default",
-                       "destination": f"{os.path.expanduser('~')}",
+                       "destination": "",
                        "ffmpeg_cmd": "",
                        "ffmpeg_islocal": False,
                        "ffmpegloglev": "info",
@@ -67,22 +67,27 @@ class ConfigManager:
                        "toolbarpos": 2,
                        "toolbartext": True,
                        "showhidenmenu": False,
-                       "panel_size": [890, 670]
+                       "main_window_size": [890, 670],
+                       "main_window_pos": [0, 0],
                        }
 
-    def __init__(self, filename, makeportable=None):
+    def __init__(self, fileconf, makeportable=None):
         """
         Expects an existing `filename` on the file system paths
         suffixed by `.json`. If `makeportable` is `True`, some
         paths on the `DEFAULT_OPTIONS` class attribute will be
         set as relative paths.
         """
-        self.filename = filename
+        self.fileconf = fileconf
+        self.makeportable = makeportable
 
-        if makeportable:
-            trscodepath = os.path.join(makeportable, "Albums")
+        if self.makeportable:
+            trscodepath = os.path.join(makeportable, "Album Collection")
             trscodedir = os.path.relpath(trscodepath)
             ConfigManager.DEFAULT_OPTIONS['destination'] = trscodedir
+            self.destination = trscodedir
+        else:
+            self.destination = os.path.expanduser('~')
 
     def write_options(self, **options):
         """
@@ -95,7 +100,7 @@ class ConfigManager:
         else:
             set_options = ConfigManager.DEFAULT_OPTIONS
 
-        with open(self.filename, "w", encoding='utf-8') as settings_file:
+        with open(self.fileconf, "w", encoding='utf-8') as settings_file:
 
             json.dump(set_options,
                       settings_file,
@@ -109,7 +114,7 @@ class ConfigManager:
         Returns: current options, `None` otherwise.
         Raise: json.JSONDecodeError
         """
-        with open(self.filename, 'r', encoding='utf-8') as settings_file:
+        with open(self.fileconf, 'r', encoding='utf-8') as settings_file:
             try:
                 options = json.load(settings_file)
             except json.JSONDecodeError:
@@ -119,14 +124,18 @@ class ConfigManager:
 
     def default_outputdirs(self, **options):
         """
-        Restores default output paths.
-        This method is needed to set the values of the `outputdir`
-        and `ydlp-outputdir` keys set to physically non-existent
-        filesystem paths (such as pendrives, hard-drives, etc.).
-        Returns a dictionary object.
+        This method is useful for restoring a consistent output
+        directory for file destinations, in case they were previously
+        set to physically non-existent file system paths (such as
+        pendrives, hard drives, etc.) or to deleted directories.
+        Returns a dict object.
         """
-        if not os.path.exists(options['destination']):
-            options['destination'] = f"{os.path.expanduser('~')}"
+        path = options['destination']
+        if not os.path.exists(path) and not os.path.isdir(path):
+            if self.makeportable:
+                options['destination'] = self.destination
+            else:
+                options['destination'] = f"{os.path.expanduser('~')}"
 
         return options
 
@@ -166,50 +175,9 @@ def get_options(fileconf, makeportable):
         data = {'R': conf.read_options()}
 
     return data
-
-
-# def get_options(dirconf, file_path):
-#     """
-#     Check the application options. Reads the `settings.json`
-#     file; if it does not exist or is unreadable try to restore
-#     it. If `dirconf` does not exist try to restore both `dirconf`
-#     and `settings.json`. If VERSION is not the same as the version
-#     read, it adds new missing items while preserving the old ones
-#     with the same values.
-#
-#     Return dict key == 'R', else return a dict key == ERROR
-#     """
-#     conf = ConfigManager(file_path)
-#     version = ConfigManager.VERSION
-#
-#     if os.path.exists(dirconf):
-#         if os.path.isfile(file_path):
-#             data = {'R': conf.read_options()}
-#             if not data['R']:
-#                 conf.write_options()
-#                 data = {'R': conf.read_options()}
-#             if float(data['R']['confversion']) != version:  # conf version
-#                 data['R']['confversion'] = version
-#                 new = ConfigManager.DEFAULT_OPTIONS  # model
-#                 data = {'R': {**new, **data['R']}}
-#                 conf.write_options(**data['R'])
-#         else:
-#             conf.write_options()
-#             data = {'R': conf.read_options()}
-#
-#     else:  # try to restore entire configuration directory
-#         try:  # make conf folder
-#             os.mkdir(dirconf, mode=0o777)
-#         except (OSError, TypeError) as err:
-#             data = {'ERROR': err}
-#         else:
-#             conf.write_options()
-#             data = {'R': conf.read_options()}
-#
-#     return data
-
-
 # --------------------------------------------------------------------------
+
+
 def msg(arg):
     """
     print logging messages during startup
@@ -251,7 +219,7 @@ def restore_dirconf(dirconf, srcdata, portable):
             return {'ERROR': err}
 
     if portable:
-        albcoll = os.path.join(dirconf, "Albums")
+        albcoll = os.path.join(dirconf, "Album Collection")
         try:
             if not os.path.exists(albcoll):
                 os.makedirs(albcoll, mode=0o777)
@@ -270,22 +238,22 @@ def conventional_paths():
     user = os.path.expanduser('~')
 
     if platform.system() == 'Windows':
-        fpath = "\\AppData\\Roaming\\ffcuesplitter_gui\\settings.json"
+        fpath = "\\AppData\\Roaming\\ffcuesplitter-gui\\settings.json"
         file_conf = os.path.join(user + fpath)
-        dir_conf = os.path.join(user + "\\AppData\\Roaming\\ffcuesplitter_gui")
+        dir_conf = os.path.join(user + "\\AppData\\Roaming\\ffcuesplitter-gui")
         log_dir = os.path.join(dir_conf, 'log')  # logs
 
     elif platform.system() == "Darwin":
-        fpath = "Library/Application Support/ffcuesplitter_gui/settings.json"
+        fpath = "Library/Application Support/ffcuesplitter-gui/settings.json"
         file_conf = os.path.join(user, fpath)
         dir_conf = os.path.join(user, os.path.dirname(fpath))
-        log_dir = os.path.join(user, "Library/Logs/ffcuesplitter_gui")
+        log_dir = os.path.join(user, "Library/Logs/ffcuesplitter-gui")
 
     else:  # Linux, FreeBsd, etc.
-        fpath = ".config/ffcuesplitter_gui/settings.json"
+        fpath = ".config/ffcuesplitter-gui/settings.json"
         file_conf = os.path.join(user, fpath)
-        dir_conf = os.path.join(user, ".config/ffcuesplitter_gui")
-        log_dir = os.path.join(user, ".local/share/ffcuesplitter_gui/log")
+        dir_conf = os.path.join(user, ".config/ffcuesplitter-gui")
+        log_dir = os.path.join(user, ".local/share/ffcuesplitter-gui/log")
 
     return file_conf, dir_conf, log_dir
 
@@ -398,7 +366,7 @@ class DataSource():
                 return path
 
         return ({'ostype': platform.system(),
-                 'srcpath': _relativize(self.dataloc['srcdata']),
+                 'srcdata': _relativize(self.dataloc['srcdata']),
                  'localepath': _relativize(self.dataloc['localepath']),
                  'fileconfpath': _relativize(self.dataloc['conffile']),
                  'confdir': _relativize(self.dataloc['confdir']),

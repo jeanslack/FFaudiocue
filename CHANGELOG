@@ -7,7 +7,7 @@ License: GPL3
 Change Log:
 
 +------------------------------------+
-Sat, 14 June 2025 V.1.0.10
+Sat, 15 June 2025 V.1.0.10
 
 - Replaces `setup.py` with `pyproject.toml` using `hatchling` as the default
   build backend which replaces `setuptools`.
@@ -19,7 +19,10 @@ Sat, 14 June 2025 V.1.0.10
 - Added the ability to save file destinations to the same folder as the source.
 - Added the ability to remove source files after successful file writing.
 - Improved options dialog.
-
+- Improved log file.
+- Improved portable app output dir for file destination (see setting_manager)
+- Auto-exit/auto-restart application if required.
+- Fix problem with opening the same dialog multiple times.
 
 +------------------------------------+
 Thu, 11 Aug 2023 V.1.0.5 (unreleased)
