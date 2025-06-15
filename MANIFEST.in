@@ -1,6 +1,0 @@
-include launcher README.md AUTHORS BUGS CHANGELOG INSTALL LICENSE TODO
-recursive-include develop *
-recursive-include docs *
-recursive-include ffcuesplitter_gui/art *
-recursive-include ffcuesplitter_gui/locale *
-recursive-include ffcuesplitter_gui/FFMPEG *

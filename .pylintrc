@@ -87,8 +87,13 @@ disable=raw-checker-failed,
         deprecated-pragma,
         use-symbolic-message-instead,
         E0602,
+        E1101,
+        C0415,
+        E0401,
+        C0103,
         W0613,
-        
+        W0106
+
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -217,7 +222,7 @@ ignored-classes=optparse.Values,thread._local,_thread._local
 # (useful for modules/projects where namespaces are manipulated during runtime
 # and thus existing member attributes cannot be deduced by static analysis). It
 # supports qualified module names, as well as Unix pattern matching.
-ignored-modules=wx
+ignored-modules=
 
 # Show a hint with possible names when a member name was not found. The aspect
 # of finding the hint is based on edit distance.

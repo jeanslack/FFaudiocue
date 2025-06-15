@@ -1,14 +1,12 @@
-#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 """
-Name: launcher.py
-Porpose: main launch script of ffaudiocue
-Compatibility: Python3
+Name: get_bmpfromSvg.py
+Porpose: return bmp image from a scalable vector graphic format (svg)
+Compatibility: Python3, wxPython Phoenix
 Author: Gianluca Pernigotto <jeanlucperni@gmail.com>
 Copyright: 2023 Gianluca Pernigotto <jeanlucperni@gmail.com>
 license: GPL3
-Rev: Jan.26.2022
-Code checker: flake8, pylint
+Rev: Jan.31.2022
 ########################################################
 
 This file is part of FFaudiocue.
@@ -26,8 +24,18 @@ This file is part of FFaudiocue.
    You should have received a copy of the GNU General Public License
    along with FFaudiocue.  If not, see <http://www.gnu.org/licenses/>.
 """
+try:
+    from wx.svg import SVGimage
+except ModuleNotFoundError:
+    pass
 
 
-if __name__ == '__main__':
-    from ffaudiocue import gui_app
-    gui_app.main()
+def get_bmp(imgfile, size):
+    """
+    Given a file and a size, converts to bmp
+    """
+
+    img = SVGimage.CreateFromFile(imgfile)
+    bmp = img.ConvertToScaledBitmap(size)
+
+    return bmp

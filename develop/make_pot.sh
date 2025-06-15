@@ -5,15 +5,15 @@
 # license: GPL3
 # Rev: Nov.18.2021
 #
-# Make a new `ffcuesplitter-gui.po` file on '../../ffcuesplitter-gui/locale'.
-# The previus ffcuesplitter-gui.po file will be overwrite with new one
+# Make a new `ffaudiocue.po` file on '../../ffaudiocue/locale'.
+# The previus ffaudiocue.po file will be overwrite with new one
 # incoming which will update latest strings for traslation .
 
 PLATFORM=$(uname)  # command to show platform
 self="$(readlink -f -- $0)"  # this file
 here="${self%/*}"  # dirname of this file
 rootdir=$(dirname $here)  # base sources directory
-target="$rootdir/ffcuesplitter_gui/locale"  # location to store new incoming
+target="$rootdir/ffaudiocue/locale"  # location to store new incoming
 
 cd $target
 
@@ -26,7 +26,7 @@ elif [ "$PLATFORM" = "Linux" ]; then
     XGETTEXT="xgettext"
 fi
 
-$XGETTEXT -d ffcuesplitter-gui "../gui_app.py" \
+$XGETTEXT -d ffaudiocue "../gui_app.py" \
 "../_dialogs/cd_info.py" \
 "../_dialogs/check_new_version.py" \
 "../_dialogs/infoprg.py" \
@@ -41,7 +41,7 @@ $XGETTEXT -d ffcuesplitter-gui "../gui_app.py" \
 if [ $? != 0 ]; then
     echo 'Failed!'
 else
-    mv ffcuesplitter-gui.po ffcuesplitter-gui.pot
+    mv ffaudiocue.po ffaudiocue.pot
     echo "Done!"
-    echo "'ffcuesplitter-gui.pot' was created on: '${target}'"
+    echo "'ffaudiocue.pot' was created on: '${target}'"
 fi

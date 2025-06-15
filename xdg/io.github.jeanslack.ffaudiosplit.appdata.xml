@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.jeanslack.ffaudiocue</id>
+
+  <name>FFaudiocue</name>
+  <summary>
+  A simple graphical user interface to extracts audio tracks from audio CD
+  images supplied with a CUE sheet.
+  </summary>
+
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>AGPL-3.0-only</project_license>
+
+  <description>
+    <p>
+      FFaudiocue is a cross-platform GUI written in wxPython Phoenix.
+      It is based on the FFcuesplitter library, which is based on FFmpeg for
+      audio track extraction and encoding processes.
+    </p>
+    <p>
+      It features editable tags per track, an audio CD properties viewer,
+      support for WAV, FLAC, MP3, OGG, OPUS output formats, audio compression
+      selectors and the ability to copy audio codec without re-encoding.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">io.github.jeanslack.ffaudiocue.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/jeanslack/FFaudiocue/blob/main/docs/Screenshot_0.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://github.com/jeanslack/FFaudiocue/</url>
+  <url type="bugtracker">https://github.com/jeanslack/FFaudiocue/issues</url>
+  <url type="translate">https://github.com/jeanslack/FFaudiocue/blob/main/docs/Localization_Guidelines.md</url>
+
+  <provides>
+    <binary>ffaudiocue</binary>
+  </provides>
+</component>

@@ -1,0 +1,133 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ffaudiocue"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  {name = "Gianluca Pernigotto", email = "jeanlucperni@gmail.com"}
+]
+maintainers = [
+  {name = "Gianluca Pernigotto", email = "jeanlucperni@gmail.com"}
+]
+description = "FFaudiocue is a simple graphical user interface to extracts audio tracks from audio CD images supplied with a CUE sheet."
+license =  {text = "GNU General Public License v3 (GPLv3)"}
+keywords = [
+    "ffcuesplitter",
+    "ffaudiocue",
+    "converter",
+    "wxpython",
+    "ffmpeg"]
+classifiers = [
+    "Environment :: X11 Applications :: GTK",
+    "Development Status :: 4 - Beta",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: Arabic",
+    "Natural Language :: Chinese (Simplified)",
+    "Natural Language :: Czech",
+    "Natural Language :: Dutch",
+    "Natural Language :: English",
+    "Natural Language :: French",
+    "Natural Language :: German",
+    "Natural Language :: Hungarian",
+    "Natural Language :: Italian",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Natural Language :: Russian",
+    "Natural Language :: Spanish",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Conversion"
+]
+dependencies = [
+    "ffcuesplitter",
+    "wxpython>=4.0.7",
+    "pypubsub>=4.0.3",
+    "requests>=2.31.0"
+]
+build = [
+    "build",
+    "hatchling",
+    "pip",
+    "six",
+    "wheel",
+    "setuptools",
+    "babel",
+]
+pyinstaller = [
+    "pyinstaller",
+]
+
+[tool.hatch.build.hooks.custom]  # see hatch_build.py file
+# https://github.com/pypa/hatch/discussions/1047
+dependencies = [
+    "babel"
+]
+
+[tool.hatch.version]
+path = "ffaudiocue/ffc_sys/about_app.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "ffaudiocue",
+    #"debian",
+    #"docs/man",
+    "develop",
+    #"tests",
+    "AUTHORS",
+    "BUGS",
+    "CHANGELOG",
+    "INSTALL",
+    "LICENSE",
+    "README.md",  # already included as readme
+    "TODO",
+    "launcher",
+    "requirements",
+    "xdg",
+    ".gitignore",  # already included by default, needed for auto-excludes
+    ".flake8",
+    ".pylintrc",
+]
+exclude = [
+    "ffaudiocue/data/icons/ffaudiocue.icns",
+    "ffaudiocue/data/icons/ffaudiocue.ico",
+    "ffaudiocue/data/locale/ffaudiocue.pot",
+    "ffaudiocue/data/locale/README",
+    "ffaudiocue/data/FFMPEG",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["ffaudiocue"]
+artifacts = [
+    # https://hatch.pypa.io/latest/config/build/#artifacts
+    "*.mo",
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"docs/man/ffaudiocue.1.gz" = "share/man/man1/ffaudiocue.1.gz"
+"xdg/io.github.jeanslack.ffaudiocue.appdata.xml" = "share/metainfo/io.github.jeanslack.ffaudiocue.appdata.xml"
+"xdg/io.github.jeanslack.ffaudiocue.desktop" = "share/applications/io.github.jeanslack.ffaudiocue.desktop"
+"ffaudiocue/data/icons/ffaudiocue.png" = "share/pixmaps/ffaudiocue.png"
+"ffaudiocue/data/hicolor/48x48/apps/ffaudiocue.xpm" = "share/icons/hicolor/48x48/apps/ffaudiocue.xpm"
+"ffaudiocue/data/hicolor/48x48/apps/ffaudiocue.png" = "share/icons/hicolor/48x48/apps/ffaudiocue.png"
+"ffaudiocue/data/hicolor/256x256/apps/ffaudiocue.png" = "share/icons/hicolor/256x256/apps/ffaudiocue.png"
+"ffaudiocue/data/hicolor/scalable/apps/ffaudiocue.svg" = "share/icons/hicolor/scalable/apps/ffaudiocue.svg"
+
+[project.gui-scripts]
+ffaudiocue = "ffaudiocue_app:main"
+
+[project.urls]
+Homepage = "https://github.com/jeanslack/FFaudiocue"
+Documentation = "https://github.com/jeanslack/FFaudiocue/wiki"
+Wiki = "https://github.com/jeanslack/FFaudiocue/wiki"
+Repository = "https://github.com/jeanslack/FFaudiocue"
+Issues = "https://github.com/jeanslack/FFaudiocue/issues"
