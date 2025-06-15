@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ffcuesplitter-gui"
+name = "ffaudiosplit"
 dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.9"
@@ -13,11 +13,11 @@ authors = [
 maintainers = [
   {name = "Gianluca Pernigotto", email = "jeanlucperni@gmail.com"}
 ]
-description = "FFcuesplitter-GUI is a simple graphical user interface to extracts audio tracks from audio CD images supplied with a CUE sheet."
+description = "FFaudiosplit is a simple graphical user interface to extracts audio tracks from audio CD images supplied with a CUE sheet."
 license =  {text = "GNU General Public License v3 (GPLv3)"}
 keywords = [
     "ffcuesplitter",
-    "ffcuesplitter-gui",
+    "ffaudiosplit",
     "converter",
     "wxpython",
     "ffmpeg"]
@@ -74,11 +74,11 @@ dependencies = [
 ]
 
 [tool.hatch.version]
-path = "ffcuesplitter_gui/ffc_sys/about_app.py"
+path = "ffaudiosplit/ffc_sys/about_app.py"
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "ffcuesplitter_gui",
+    "ffaudiosplit",
     #"debian",
     #"docs/man",
     "develop",
@@ -98,36 +98,36 @@ include = [
     ".pylintrc",
 ]
 exclude = [
-    "ffcuesplitter_gui/data/icons/ffcuesplittergui.icns",
-    "ffcuesplitter_gui/data/icons/ffcuesplittergui.ico",
-    "ffcuesplitter_gui/data/locale/ffcuesplittergui.pot",
-    "ffcuesplitter_gui/data/locale/README",
-    "ffcuesplitter_gui/data/FFMPEG",
+    "ffaudiosplit/data/icons/ffaudiosplit.icns",
+    "ffaudiosplit/data/icons/ffaudiosplit.ico",
+    "ffaudiosplit/data/locale/ffaudiosplit.pot",
+    "ffaudiosplit/data/locale/README",
+    "ffaudiosplit/data/FFMPEG",
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["ffcuesplitter_gui"]
+packages = ["ffaudiosplit"]
 artifacts = [
     # https://hatch.pypa.io/latest/config/build/#artifacts
     "*.mo",
 ]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"docs/man/ffcuesplitter-gui.1.gz" = "share/man/man1/ffcuesplittergui.1.gz"
-"xdg/io.github.jeanslack.ffcuesplitter-gui.appdata.xml" = "share/metainfo/io.github.jeanslack.ffcuesplittergui.appdata.xml"
-"xdg/io.github.jeanslack.ffcuesplittergui.desktop" = "share/applications/io.github.jeanslack.ffcuesplittergui.desktop"
-"ffcuesplitter_gui/data/icons/ffcuesplittergui.png" = "share/pixmaps/ffcuesplittergui.png"
-"ffcuesplitter_gui/data/hicolor/48x48/apps/ffcuesplittergui.xpm" = "share/icons/hicolor/48x48/apps/ffcuesplittergui.xpm"
-"ffcuesplitter_gui/data/hicolor/48x48/apps/ffcuesplittergui.png" = "share/icons/hicolor/48x48/apps/ffcuesplittergui.png"
-"ffcuesplitter_gui/data/hicolor/256x256/apps/ffcuesplittergui.png" = "share/icons/hicolor/256x256/apps/ffcuesplittergui.png"
-"ffcuesplitter_gui/data/hicolor/scalable/apps/ffcuesplittergui.svg" = "share/icons/hicolor/scalable/apps/ffcuesplittergui.svg"
+"docs/man/ffaudiosplit.1.gz" = "share/man/man1/ffaudiosplit.1.gz"
+"xdg/io.github.jeanslack.ffaudiosplit.appdata.xml" = "share/metainfo/io.github.jeanslack.ffaudiosplit.appdata.xml"
+"xdg/io.github.jeanslack.ffaudiosplit.desktop" = "share/applications/io.github.jeanslack.ffaudiosplit.desktop"
+"ffaudiosplit/data/icons/ffaudiosplit.png" = "share/pixmaps/ffaudiosplit.png"
+"ffaudiosplit/data/hicolor/48x48/apps/ffaudiosplit.xpm" = "share/icons/hicolor/48x48/apps/ffaudiosplit.xpm"
+"ffaudiosplit/data/hicolor/48x48/apps/ffaudiosplit.png" = "share/icons/hicolor/48x48/apps/ffaudiosplit.png"
+"ffaudiosplit/data/hicolor/256x256/apps/ffaudiosplit.png" = "share/icons/hicolor/256x256/apps/ffaudiosplit.png"
+"ffaudiosplit/data/hicolor/scalable/apps/ffaudiosplit.svg" = "share/icons/hicolor/scalable/apps/ffaudiosplit.svg"
 
 [project.gui-scripts]
-ffcsgui = "ffcuesplitter_gui_app:main"
+ffaudiosplit = "ffaudiosplit_app:main"
 
 [project.urls]
-Homepage = "https://github.com/jeanslack/FFcuesplitter-GUI"
-Documentation = "https://github.com/jeanslack/FFcuesplitter-GUI/wiki"
-Wiki = "https://github.com/jeanslack/FFcuesplitter-GUI/wiki"
-Repository = "https://github.com/jeanslack/FFcuesplitter-GUI"
-Issues = "https://github.com/jeanslack/FFcuesplitter-GUI/issues"
+Homepage = "https://github.com/jeanslack/FFaudiosplit"
+Documentation = "https://github.com/jeanslack/FFaudiosplit/wiki"
+Wiki = "https://github.com/jeanslack/FFaudiosplit/wiki"
+Repository = "https://github.com/jeanslack/FFaudiosplit"
+Issues = "https://github.com/jeanslack/FFaudiosplit/issues"

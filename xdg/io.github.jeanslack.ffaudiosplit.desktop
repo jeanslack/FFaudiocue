@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=FFaudiosplit
+Comment=Extracts audio tracks from an audio CD image using FFmpeg.
+Categories=AudioVideo;AudioVideoEditing;
+
+Icon=ffaudiosplit
+Exec=ffaudiosplit
+Terminal=false

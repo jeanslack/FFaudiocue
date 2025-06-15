@@ -11,20 +11,20 @@ license: GPL3
 Rev: July.22.2024
 Code checker: flake8, pylint
 
-This file is part of FFcuesplitter-GUI.
+This file is part of FFaudiosplit.
 
-   FFcuesplitter-GUI is free software: you can redistribute it and/or modify
+   FFaudiosplit is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
-   FFcuesplitter-GUI is distributed in the hope that it will be useful,
+   FFaudiosplit is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with FFcuesplitter-GUI.  If not, see <http://www.gnu.org/licenses/>.
+   along with FFaudiosplit.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from hatchling.builders.hooks.plugin.interface import BuildHookInterface
@@ -45,8 +45,8 @@ class FFcuesplitterGUILanguageBuildHook(BuildHookInterface):
         """
         if self.target_name == "wheel":
             cmd = compile_catalog()
-            cmd.directory = "ffcuesplitter_gui/data/locale/"
-            cmd.domain = "ffcuesplittergui"
+            cmd.directory = "ffaudiosplit/data/locale/"
+            cmd.domain = "ffaudiosplit"
             cmd.statistics = True
             cmd.finalize_options()
             cmd.run()

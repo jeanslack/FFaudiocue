@@ -6,9 +6,9 @@
 *.mbtree
 dist
 build
-ffcuesplitter_gui.egg-info
+ffaudiosplit.egg-info
 deb_dist
-ffcuesplitter_gui.spec
+ffaudiosplit.spec
 FFcuesplitter_gui.spec
 *.tar.gz
 ENV

@@ -1,7 +1,7 @@
 
 # Localization Guidelines
 
-Help to translate FFcuesplitter-GUI to other languages
+Help to translate FFaudiodplit to other languages
 -----------------
 
 ## Updates an existing translation
@@ -14,33 +14,33 @@ a `.pot` file.
 
 > There is a bit of difference between [.po file format (portable object)](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html)
 > and [.pot file format (portable object template)](https://help.phrase.com/help/gettext-template-pot-files).
-> Specifically, the [ffcuesplitter-gui.pot](https://github.com/jeanslack/FFcuesplitter-GUI/blob/main/ffcuesplitter_gui/locale/ffcuesplitter-gui.pot)
+> Specifically, the [ffaudiosplit.pot](https://github.com/jeanslack/FFaudiodplit/blob/main/ffaudiosplit/locale/ffaudiosplit.pot)
 > file is just a template that contains the new strings not yet translated and should
-> never be modified directly. The [ffcuesplitter-gui.po](https://github.com/jeanslack/FFcuesplitter-GUI/blob/main/ffcuesplitter_gui/locale/it_IT/LC_MESSAGES/ffcuesplitter-gui.po)
+> never be modified directly. The [ffaudiosplit.po](https://github.com/jeanslack/FFaudiodplit/blob/main/ffaudiosplit/locale/it_IT/LC_MESSAGES/ffaudiosplit.po)
 > file can instead be edited for translation and updated with the latest strings
 > not yet translated, see below.
 
-- Download [latest source](https://github.com/jeanslack/FFcuesplitter-GUI/archive/refs/heads/main.zip) of FFcuesplitter-GUI
+- Download [latest source](https://github.com/jeanslack/FFaudiodplit/archive/refs/heads/main.zip) of FFaudiodplit
 
 - Extract the archive and navigate inside the obtained folder.
 
-- Browse into the `ffcuesplitter_gui/locale` folder, then choose the language folder to translate.
+- Browse into the `ffaudiosplit/locale` folder, then choose the language folder to translate.
 
-- Locate `ffcuesplitter-gui.po` file related to your language, example:
+- Locate `ffaudiosplit.po` file related to your language, example:
 
 ``` text
-    FFcuesplitter-GUI (rootdir)
-    |__ ffcuesplitter_gui
+    FFaudiodplit (rootdir)
+    |__ ffaudiosplit
         |__ locale
             |__ it_IT
                 |__ LC_MESSAGES
-                    |__ ffcuesplitter-gui.po
+                    |__ ffaudiosplit.po
 ```
-- Open the `ffcuesplitter-gui.po` file with [poEdit](https://poedit.net/)
+- Open the `ffaudiosplit.po` file with [poEdit](https://poedit.net/)
 
 - Click on [poEdit](https://poedit.net/) menu bar *-> Catalog -> Update from POT file...*, then
-import the `ffcuesplitter-gui.pot` file template sited on `locale` folder. This is **important** as it
-ensures that the `ffcuesplitter-gui.po` file is fully updated with the latest translation strings.
+import the `ffaudiosplit.pot` file template sited on `locale` folder. This is **important** as it
+ensures that the `ffaudiosplit.po` file is fully updated with the latest translation strings.
 
 - Also, check the catalog property data on menu bar *> Catalog > Property...*
 and make sure it contains at least some updated information you could provide.
@@ -48,7 +48,7 @@ and make sure it contains at least some updated information you could provide.
 - Now, you are ready to start your translation. When you're done save your work;
 you can always resume your work from where you left off.
 
-- Before running FFcuesplitter-GUI to test your updated translation, Make sure that
+- Before running FFaudiodplit to test your updated translation, Make sure that
 [Python3](https://www.python.org/), [wxPython](https://www.wxpython.org/),
 [PyPubSub](https://pypubsub.readthedocs.io/en/v4.0.3/), [ffcuesplitter](https://pypi.org/project/ffcuesplitter/).
 are installed.
@@ -57,8 +57,8 @@ are installed.
 sources folder and type: `python3 launcher`.
 
 When you have completed your translation with 'PoEdit', please [Create a new pull
-request](https://github.com/jeanslack/FFcuesplitter-GUI/pulls) or send me your
-`ffcuesplitter-gui.po` file at: <jeanlucperni@gmail.com>
+request](https://github.com/jeanslack/FFaudiodplit/pulls) or send me your
+`ffaudiosplit.po` file at: <jeanlucperni@gmail.com>
 
 I will be grateful!!
 
@@ -85,7 +85,7 @@ a `.pot` file.
 > Note: The instructions below assume basic knowledge of the command line (OS independent)
 {: .fs-4 .text-grey-dk-100}
 
-- To start a new translation, download [here](https://github.com/jeanslack/FFcuesplitter-GUI/archive/refs/heads/main.zip)
+- To start a new translation, download [here](https://github.com/jeanslack/FFaudiodplit/archive/refs/heads/main.zip)
 latest FFcuespitter-GUI snapshot, then unzip the archive.
 
 - In this example we assume that the new language to be translated is **German**.
@@ -95,31 +95,31 @@ and within which a `LC_MESSAGES` folder, like following tree:
 
 ```text
     FFcuespitter-GUI (rootdir)
-    |__ ffcuesplitter_gui
+    |__ ffaudiosplit
         |__ locale
             |__ de_DE
                 |__ LC_MESSAGES
 ```
 
-- Copy the `ffcuesplitter-gui.pot` file translation template located in the `/locale`
+- Copy the `ffaudiosplit.pot` file translation template located in the `/locale`
 folder, and paste into the `LC_MESSAGES` folder.
 
-- Rename it to change extension name to `ffcuesplitter-gui.po` .
+- Rename it to change extension name to `ffaudiosplit.po` .
 
-- Now open the `ffcuesplitter-gui.po` with [poEdit](https://poedit.net/), check the catalog
+- Now open the `ffaudiosplit.po` with [poEdit](https://poedit.net/), check the catalog
 property data on menu bar *> Catalog > Property...* and make sure it contains at least
 some updated information you could provide.
 
 - Now, you are ready to start your new translation. When you're done save your work;
 you can always resume your work from where you left off. This generates (compile) a file called
-`ffcuesplitter-gui.mo` with your new native language tanslation.
+`ffaudiosplit.mo` with your new native language tanslation.
 
 - Before running FFcuespitter-GUI to test your new translation, Make sure that
 [Python3](https://www.python.org/), [wxPython](https://www.wxpython.org/),
 [PyPubSub](https://pypubsub.readthedocs.io/en/v4.0.3/), [ffcuesplitter](https://pypi.org/project/ffcuesplitter/)
 are installed.
 
-- Open the `FFcuespitter-GUI/ffcuesplitter_gui/ffc_sys/app_const.py` file with your favorite
+- Open the `FFcuespitter-GUI/ffaudiosplit/ffc_sys/app_const.py` file with your favorite
 text-editor and append the newly translated language line, for example:
 
 ```python
@@ -144,7 +144,7 @@ to:
 sources folder and type: `python3 launcher`
 
 When you have completed your new translation, please [Create a new pull
-request](https://github.com/jeanslack/FFcuesplitter-GUI/pulls) or send me your
-`ffcuesplitter-gui.po` file at: <jeanlucperni@gmail.com>
+request](https://github.com/jeanslack/FFaudiodplit/pulls) or send me your
+`ffaudiosplit.po` file at: <jeanlucperni@gmail.com>
 
 I will be grateful!!
