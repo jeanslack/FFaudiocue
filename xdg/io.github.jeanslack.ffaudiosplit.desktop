@@ -2,10 +2,10 @@
 Version=1.0
 Type=Application
 
-Name=FFaudiosplit
+Name=FFaudiocue
 Comment=Extracts audio tracks from an audio CD image using FFmpeg.
 Categories=AudioVideo;AudioVideoEditing;
 
-Icon=ffaudiosplit
-Exec=ffaudiosplit
+Icon=ffaudiocue
+Exec=ffaudiocue
 Terminal=false

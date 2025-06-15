@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ffaudiosplit"
+name = "ffaudiocue"
 dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.9"
@@ -13,11 +13,11 @@ authors = [
 maintainers = [
   {name = "Gianluca Pernigotto", email = "jeanlucperni@gmail.com"}
 ]
-description = "FFaudiosplit is a simple graphical user interface to extracts audio tracks from audio CD images supplied with a CUE sheet."
+description = "FFaudiocue is a simple graphical user interface to extracts audio tracks from audio CD images supplied with a CUE sheet."
 license =  {text = "GNU General Public License v3 (GPLv3)"}
 keywords = [
     "ffcuesplitter",
-    "ffaudiosplit",
+    "ffaudiocue",
     "converter",
     "wxpython",
     "ffmpeg"]
@@ -74,11 +74,11 @@ dependencies = [
 ]
 
 [tool.hatch.version]
-path = "ffaudiosplit/ffc_sys/about_app.py"
+path = "ffaudiocue/ffc_sys/about_app.py"
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "ffaudiosplit",
+    "ffaudiocue",
     #"debian",
     #"docs/man",
     "develop",
@@ -98,36 +98,36 @@ include = [
     ".pylintrc",
 ]
 exclude = [
-    "ffaudiosplit/data/icons/ffaudiosplit.icns",
-    "ffaudiosplit/data/icons/ffaudiosplit.ico",
-    "ffaudiosplit/data/locale/ffaudiosplit.pot",
-    "ffaudiosplit/data/locale/README",
-    "ffaudiosplit/data/FFMPEG",
+    "ffaudiocue/data/icons/ffaudiocue.icns",
+    "ffaudiocue/data/icons/ffaudiocue.ico",
+    "ffaudiocue/data/locale/ffaudiocue.pot",
+    "ffaudiocue/data/locale/README",
+    "ffaudiocue/data/FFMPEG",
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["ffaudiosplit"]
+packages = ["ffaudiocue"]
 artifacts = [
     # https://hatch.pypa.io/latest/config/build/#artifacts
     "*.mo",
 ]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"docs/man/ffaudiosplit.1.gz" = "share/man/man1/ffaudiosplit.1.gz"
-"xdg/io.github.jeanslack.ffaudiosplit.appdata.xml" = "share/metainfo/io.github.jeanslack.ffaudiosplit.appdata.xml"
-"xdg/io.github.jeanslack.ffaudiosplit.desktop" = "share/applications/io.github.jeanslack.ffaudiosplit.desktop"
-"ffaudiosplit/data/icons/ffaudiosplit.png" = "share/pixmaps/ffaudiosplit.png"
-"ffaudiosplit/data/hicolor/48x48/apps/ffaudiosplit.xpm" = "share/icons/hicolor/48x48/apps/ffaudiosplit.xpm"
-"ffaudiosplit/data/hicolor/48x48/apps/ffaudiosplit.png" = "share/icons/hicolor/48x48/apps/ffaudiosplit.png"
-"ffaudiosplit/data/hicolor/256x256/apps/ffaudiosplit.png" = "share/icons/hicolor/256x256/apps/ffaudiosplit.png"
-"ffaudiosplit/data/hicolor/scalable/apps/ffaudiosplit.svg" = "share/icons/hicolor/scalable/apps/ffaudiosplit.svg"
+"docs/man/ffaudiocue.1.gz" = "share/man/man1/ffaudiocue.1.gz"
+"xdg/io.github.jeanslack.ffaudiocue.appdata.xml" = "share/metainfo/io.github.jeanslack.ffaudiocue.appdata.xml"
+"xdg/io.github.jeanslack.ffaudiocue.desktop" = "share/applications/io.github.jeanslack.ffaudiocue.desktop"
+"ffaudiocue/data/icons/ffaudiocue.png" = "share/pixmaps/ffaudiocue.png"
+"ffaudiocue/data/hicolor/48x48/apps/ffaudiocue.xpm" = "share/icons/hicolor/48x48/apps/ffaudiocue.xpm"
+"ffaudiocue/data/hicolor/48x48/apps/ffaudiocue.png" = "share/icons/hicolor/48x48/apps/ffaudiocue.png"
+"ffaudiocue/data/hicolor/256x256/apps/ffaudiocue.png" = "share/icons/hicolor/256x256/apps/ffaudiocue.png"
+"ffaudiocue/data/hicolor/scalable/apps/ffaudiocue.svg" = "share/icons/hicolor/scalable/apps/ffaudiocue.svg"
 
 [project.gui-scripts]
-ffaudiosplit = "ffaudiosplit_app:main"
+ffaudiocue = "ffaudiocue_app:main"
 
 [project.urls]
-Homepage = "https://github.com/jeanslack/FFaudiosplit"
-Documentation = "https://github.com/jeanslack/FFaudiosplit/wiki"
-Wiki = "https://github.com/jeanslack/FFaudiosplit/wiki"
-Repository = "https://github.com/jeanslack/FFaudiosplit"
-Issues = "https://github.com/jeanslack/FFaudiosplit/issues"
+Homepage = "https://github.com/jeanslack/FFaudiocue"
+Documentation = "https://github.com/jeanslack/FFaudiocue/wiki"
+Wiki = "https://github.com/jeanslack/FFaudiocue/wiki"
+Repository = "https://github.com/jeanslack/FFaudiocue"
+Issues = "https://github.com/jeanslack/FFaudiocue/issues"

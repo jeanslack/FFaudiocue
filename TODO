@@ -1,9 +1,9 @@
 
 
 - [DONE] check code with a linter (flake8/pylint)
-- Make io.github.jeanslack.ffaudiosplit.desktop.
-- Make ffaudiosplit.icns (MacOs)
-- Make ffaudiosplit.ico (Windows)
+- Make io.github.jeanslack.ffaudiocue.desktop.
+- Make ffaudiocue.icns (MacOs)
+- Make ffaudiocue.ico (Windows)
 
 - Complete the Italian translation.
 - Make localization guidelines

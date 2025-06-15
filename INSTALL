@@ -3,14 +3,14 @@ Important Notes:
 The instructions provided on this file assume you have Python installed and
 configured on your operating system.
 
-Currently FFaudiosplit is still under development and no pre-compiled packages
+Currently FFaudiocue is still under development and no pre-compiled packages
 have been distributed, but since it comes with a `setup.py` file, you can build it
 and install it very easily into your operating system as a Python wheel.
 
 However, to achieve this a virtual python environment is recommended, for
 example using tools like `python3-venv` or `virtualenv`, which once activated,
 you can install packages in the virtual environment using pip and then installing
-FFaudiosplit into it. At present, other installation methods that use
+FFaudiocue into it. At present, other installation methods that use
 administrative privileges such as superuser or root are strongly discouraged.
 
 Documentation:
@@ -32,11 +32,11 @@ Aldo make sure you have `ffmpeg` and `ffprobe` already installed.
 Activate your virtual Python directory:
 $ source 'path_to_environment_directory/bin/activate'
 
-To install FFaudiosplit, open a terminal window and type:
-$ python3 -m pip install https://github.com/jeanslack/FFaudiosplit/tarball/main
+To install FFaudiocue, open a terminal window and type:
+$ python3 -m pip install https://github.com/jeanslack/FFaudiocue/tarball/main
 
 To run the program type:
-$ ffaudiosplit
+$ ffaudiocue
 
 -------
 Windows
@@ -45,13 +45,13 @@ Windows
 Activate your virtual Python directory:
 .\path_to_environment_directory\Scripts\activate
 
-To install FFaudiosplit type:
-python -m pip install https://github.com/jeanslack/FFaudiosplit/tarball/main
+To install FFaudiocue type:
+python -m pip install https://github.com/jeanslack/FFaudiocue/tarball/main
 
 Make sure you have ffmpeg and ffprobe available somewhere on your system, as
-these dependencies are not provided automatically by FFaudiosplit.
+these dependencies are not provided automatically by FFaudiocue.
 
-Once you have ffmpeg and ffprobe, start FFaudiosplit (just type ffaudiosplit
+Once you have ffmpeg and ffprobe, start FFaudiocue (just type ffaudiocue
 in your command prompt window), click the Setup button, go to the FFmpeg tab and
 provide the location on your file system.
 
@@ -62,8 +62,8 @@ MacOS
 Activate your virtual Python directory:
 $ source 'path_to_environment_directory/bin/activate'
 
-To install FFaudiosplit type:
-$ python3 -m pip install https://github.com/jeanslack/FFaudiosplit/tarball/main
+To install FFaudiocue type:
+$ python3 -m pip install https://github.com/jeanslack/FFaudiocue/tarball/main
 
 To run the program type:
-$ ffaudiosplit
+$ ffaudiocue

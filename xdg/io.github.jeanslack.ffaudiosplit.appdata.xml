@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.jeanslack.ffaudiosplit</id>
+  <id>io.github.jeanslack.ffaudiocue</id>
 
-  <name>FFaudiosplit</name>
+  <name>FFaudiocue</name>
   <summary>
   A simple graphical user interface to extracts audio tracks from audio CD
   images supplied with a CUE sheet.
@@ -13,7 +13,7 @@
 
   <description>
     <p>
-      FFaudiosplit is a cross-platform GUI written in wxPython Phoenix.
+      FFaudiocue is a cross-platform GUI written in wxPython Phoenix.
       It is based on the FFcuesplitter library, which is based on FFmpeg for
       audio track extraction and encoding processes.
     </p>
@@ -24,18 +24,18 @@
     </p>
   </description>
 
-  <launchable type="desktop-id">io.github.jeanslack.ffaudiosplit.desktop</launchable>
+  <launchable type="desktop-id">io.github.jeanslack.ffaudiocue.desktop</launchable>
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/jeanslack/FFaudiosplit/blob/main/docs/Screenshot_0.png</image>
+      <image>https://github.com/jeanslack/FFaudiocue/blob/main/docs/Screenshot_0.png</image>
     </screenshot>
   </screenshots>
 
-  <url type="homepage">https://github.com/jeanslack/FFaudiosplit/</url>
-  <url type="bugtracker">https://github.com/jeanslack/FFaudiosplit/issues</url>
-  <url type="translate">https://github.com/jeanslack/FFaudiosplit/blob/main/docs/Localization_Guidelines.md</url>
+  <url type="homepage">https://github.com/jeanslack/FFaudiocue/</url>
+  <url type="bugtracker">https://github.com/jeanslack/FFaudiocue/issues</url>
+  <url type="translate">https://github.com/jeanslack/FFaudiocue/blob/main/docs/Localization_Guidelines.md</url>
 
   <provides>
-    <binary>ffaudiosplit</binary>
+    <binary>ffaudiocue</binary>
   </provides>
 </component>
