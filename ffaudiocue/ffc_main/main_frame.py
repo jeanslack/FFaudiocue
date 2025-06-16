@@ -397,14 +397,13 @@ class MainFrame(wx.Frame):
     # -------------------------------------------------------------------#
 
     def sponsor_this_project(self, event):
-        """wiki page """
-
+        """Go to sponsor page"""
         page = 'https://github.com/sponsors/jeanslack'
         webbrowser.open(page)
     # ------------------------------------------------------------------#
 
     def donate_to_dev(self, event):
-        """Display issues page on github"""
+        """Go to donation page"""
         page = 'https://www.paypal.me/GPernigotto'
         webbrowser.open(page)
     # ------------------------------------------------------------------#

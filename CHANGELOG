@@ -9,71 +9,71 @@ Change Log:
 +------------------------------------+
 Sat, 15 June 2025 V.1.0.10
 
-- Replaces `setup.py` with `pyproject.toml` using `hatchling` as the default
-  build backend which replaces `setuptools`.
-- Fix #11 thanks to @Velisarius .
-- Improved setting manager during application bootstrap.
-- Code refactoring.
-- Added ability to auto-make collection folder for file destination
-  (Artist/Album).
-- Added the ability to save file destinations to the same folder as the source.
-- Added the ability to remove source files after successful file writing.
-- Improved options dialog.
-- Improved log file.
-- Improved portable app output dir for file destination (see setting_manager)
-- Auto-exit/auto-restart application if required.
-- Fix problem with opening the same dialog multiple times.
-- Fix button spaces as like confirmation buttons.
-- Added some languages to translation catalog.
-- Added requests dependency for all OS.
-- Ability to build a standalone executable (OS dependent) using py_installer.py
-  script.
-- Revert to stable release.
+  * Replaces `setup.py` with `pyproject.toml` using `hatchling` as the default
+    build backend which replaces `setuptools`.
+  * Fix #11 thanks to @Velisarius .
+  * Improved setting manager during application bootstrap.
+  * Code refactoring.
+  * Added ability to auto-make collection folder for file destination
+    (Artist/Album).
+  * Added the ability to save file destinations to the same folder as the source.
+  * Added the ability to remove source files after successful file writing.
+  * Improved options dialog.
+  * Improved log file.
+  * Improved portable app output dir for file destination (see setting_manager)
+  * Auto-exit/auto-restart application if required.
+  * Fix problem with opening the same dialog multiple times.
+  * Fix button spaces as like confirmation buttons.
+  * Added some languages to translation catalog.
+  * Added requests dependency for all OS.
+  * Ability to build a standalone executable (OS dependent) using py_installer.py
+    script.
+  * Revert to stable release.
 
 +------------------------------------+
 Thu, 11 Aug 2023 V.1.0.5 (unreleased)
 
-- Removed `wx.lib.mixins.listctrl` (with checkbox functionality)
-- Fixed code to new FFcuesplitter API v1.0.22.
-- Added opus format/codec
-- Fixed: `FFaudiocue/ffaudiocue/_panels/cuesplitter_panel.py:400:
-          DeprecationWarning: an integer is required (got type float).  Implicit
-          conversion to integers using __int__ is deprecated, and may be removed
-          in a future version of Python.
-  self.barprog.SetValue(percent)`
-- Make output directory if doesn't exists (or if it was deleted).
-- Fixed output format issue.
-- Code factorized.
-- Updated README.md file and man page.
-- Updated INSTALL file for installation instructions.
+  * Removed `wx.lib.mixins.listctrl` (with checkbox functionality)
+  * Fixed code to new FFcuesplitter API v1.0.22.
+  * Added opus format/codec
+  * Fixed: `FFaudiocue/ffaudiocue/_panels/cuesplitter_panel.py:400:
+            DeprecationWarning: an integer is required (got type float).  Implicit
+            conversion to integers using __int__ is deprecated, and may be removed
+            in a future version of Python.
+    self.barprog.SetValue(percent)`
+  * Make output directory if doesn't exists (or if it was deleted).
+  * Fixed output format issue.
+  * Code factorized.
+  * Updated README.md file and man page.
+  * Updated INSTALL file for installation instructions.
 
 +------------------------------------+
 Dec 14, 2022 V.1.0.2 (unreleased)
 
-- Fixed `FileNotFoundError` exception if the log directory does not yet exist.
-- fixed kill app during current processing.
-- Added few language supports.
-- Fixed ability to portable app.
-- Fixed relative path for Windows portable app.
-- removed '-embed-' as Python embed is not supported for this App.
-- Improved data handling in the settings dialog to save preferences
-  more consistently.
-- Code refactoring done in the settings dialog.
-- Saves the window size when exiting the application and restores it at startup.
-- Rewritten some doc strings (work in progress).
-- Added show hiden menu items checkbox to preferences.
-- Fixed minor bugs.
-- Italian translation completed.
-- Improved `track_info` layout.
-- Improved text items and related Italian translation.
-- Made setup.py.
-- Fixed *.desktop file entries.
-- Improved no checkbox checked.
-- Russian language added and completed
-- Added `encoding=utf8` argument to subprocesses to avoid errors with filenames
-  having non-latin characters and diacritics.
+  * Fixed `FileNotFoundError` exception if the log directory does not yet exist.
+  * fixed kill app during current processing.
+  * Added few language supports.
+  * Fixed ability to portable app.
+  * Fixed relative path for Windows portable app.
+  * removed '-embed-' as Python embed is not supported for this App.
+  * Improved data handling in the settings dialog to save preferences
+    more consistently.
+  * Code refactoring done in the settings dialog.
+  * Saves the window size when exiting the application and restores it at startup.
+  * Rewritten some doc strings (work in progress).
+  * Added show hiden menu items checkbox to preferences.
+  * Fixed minor bugs.
+  * Italian translation completed.
+  * Improved `track_info` layout.
+  * Improved text items and related Italian translation.
+  * Made setup.py.
+  * Fixed *.desktop file entries.
+  * Improved no checkbox checked.
+  * Russian language added and completed
+  * Added `encoding=utf8` argument to subprocesses to avoid errors with filenames
+    having non-latin characters and diacritics.
 
 +------------------------------------+
 Feb 02, 2022 V.1.0.0 (unreleased)
 
-- First commit.
+  * First commit.
