@@ -8,7 +8,7 @@ git+https://github.com/jeanslack/FFaudiocue.git@main
 
 # For Linux/FreeBsd Users:
 # This requirements.txt file should prevent the automatic installation of
-# wxPython. Please install wxPython from your package manager.
+# wxPython. Please install wxPython using your OS's package manager.
 
 # For ALL Users:
 # This assumes installation in a virtual environment using python3-venv module
@@ -16,7 +16,7 @@ git+https://github.com/jeanslack/FFaudiocue.git@main
 #
 #   ~$ python3 -m venv --system-site-packages --upgrade-deps VENV
 #   ~$ source VENV/bin/activate
-#   ~$ python3 -m pip install ffaudiocue -r requirements.txt
+#   ~$ python3 -m pip install -r requirements.txt
 #
 #    OR (alternatively), install it from github:
 #    ~$ python3 -m pip install git+https://github.com/jeanslack/FFaudiocue.git@main

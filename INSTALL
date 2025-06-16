@@ -38,7 +38,7 @@ To install FFaudiocue, open a terminal window and type:
 python3 -m pip install git+https://github.com/jeanslack/FFaudiocue.git@main
 
 OR (alternatively), use requirements.txt file:
-python3 -m pip install ffaudiocue -r requirements.txt
+python3 -m pip install -r requirements.txt
 
 To run the program type:
 $ ffaudiocue
@@ -54,7 +54,7 @@ To install FFaudiocue type:
 python -m pip install git+https://github.com/jeanslack/FFaudiocue.git@main
 
 OR (alternatively), use requirements.txt file:
-python -m pip install ffaudiocue -r requirements.txt
+python -m pip install -r requirements.txt
 
 Make sure you have ffmpeg and ffprobe available somewhere on your system, as
 these dependencies are not provided automatically by FFaudiocue.
@@ -74,7 +74,7 @@ To install FFaudiocue type:
 python -m pip install git+https://github.com/jeanslack/FFaudiocue.git@main
 
 OR (alternatively), use requirements.txt file:
-python -m pip install ffaudiocue -r requirements.txt
+python -m pip install -r requirements.txt
 
 To run the program type:
 $ ffaudiocue
