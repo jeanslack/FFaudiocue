@@ -4,16 +4,11 @@ Important Notes:
 The instructions provided on this file assume you have Python installed and
 configured on your operating system.
 
-Currently FFaudiocue is still under development in beta status and no
-pre-compiled packages have been distributed, but since it comes with a
-`pyproject.toml` file, you can build it and install it very easily into your
-operating system.
-
-However, to achieve this a virtual python environment is recommended, for
-example using tools like `python3-venv` or `virtualenv`, which once activated,
-you can install packages in the virtual environment using pip and then installing
-FFaudiocue into it. At present, other installation methods that use
-administrative privileges such as superuser or root are strongly discouraged.
+A virtual python environment is recommended, for example using tools like
+`python3-venv` or `virtualenv`, which once activated, you can install Python
+packages and then installing FFaudiocue into it. At present, other installation
+methods that use administrative privileges such as superuser or root are strongly
+discouraged.
 
 Documentation:
 - https://docs.python.org/3/library/venv.html
@@ -22,11 +17,11 @@ Documentation:
 - https://stackoverflow.com/questions/41573587/what-is-the-difference-between-venv-pyvenv-pyenv-virtualenv-virtualenvwrappe
 
 -----
-Linux
+Linux/FreeBSD
 -----
 
-First of all, install the essential packages using the package manager provided
-by your linux distribution, then install wxPython version 4.0.7 or higher.
+Install the essential packages using the package manager provided
+by your OS, then install wxPython version 4.0.7 or higher.
 On debian-based distributions (Ubuntu, Kubuntu, Lubuntu, Mint, MXLinux, etc)
 this package is identified as `python3-wxgtk4.0` .
 Aldo make sure you have `ffmpeg` and `ffprobe` already installed.
@@ -41,7 +36,7 @@ OR (alternatively), use requirements.txt file:
 python3 -m pip install -r requirements.txt
 
 To run the program type:
-$ ffaudiocue
+ffaudiocue
 
 -------
 Windows
@@ -77,4 +72,4 @@ OR (alternatively), use requirements.txt file:
 python -m pip install -r requirements.txt
 
 To run the program type:
-$ ffaudiocue
+ffaudiocue

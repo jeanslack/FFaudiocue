@@ -26,6 +26,9 @@ Sat, 15 June 2025 V.1.0.10
 - Fix button spaces as like confirmation buttons.
 - Added some languages to translation catalog.
 - Added requests dependency for all OS.
+- Ability to build a standalone executable (OS dependent) using py_installer.py
+  script.
+- Revert to stable release.
 
 +------------------------------------+
 Thu, 11 Aug 2023 V.1.0.5 (unreleased)

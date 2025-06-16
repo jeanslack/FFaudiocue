@@ -23,7 +23,7 @@ keywords = [
     "ffmpeg"]
 classifiers = [
     "Environment :: X11 Applications :: GTK",
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
