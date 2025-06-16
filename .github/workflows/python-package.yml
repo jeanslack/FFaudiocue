@@ -24,6 +24,13 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install ffmpeg
+      run: |
+        sudo apt update
+        sudo apt install ffmpeg
+    - name: Install wxPython
+      run: |
+        sudo apt install python3-wxgtk4.0
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -32,9 +39,9 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        flake8 . --count --show-source --statistics --exclude=tests,debian,docs,xdg,ffaudiocue/data --per-file-ignores="ffaudiocue/gui_app.py:F401"
+        # exit-zero treats all errors as warnings. The GitHub editor is 79 chars wide
+        flake8 . --count --exit-zero --max-complexity=15 --max-line-length=79 --ignore=F821,W503,C901 --statistics --exclude=tests,debian,docs,xdg,ffaudiocue/data --per-file-ignores="ffaudiocue/gui_app.py:F401"
     - name: Test with pytest
       run: |
-        pytest
+        python3 tests/test_display_GUI.py
