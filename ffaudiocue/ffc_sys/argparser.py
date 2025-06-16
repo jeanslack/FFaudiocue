@@ -30,9 +30,9 @@ from shutil import which
 import argparse
 import platform
 from ffaudiocue.ffc_sys.about_app import (PRGNAME,
-                                                 VERSION,
-                                                 RELSTATE
-                                                 )
+                                          VERSION,
+                                          RELSTATE
+                                          )
 try:
     import wx
     MSGWX = f"{wx.version()})"

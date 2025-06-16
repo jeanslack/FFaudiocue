@@ -27,13 +27,13 @@ This file is part of FFaudiocue.
 import wx
 import wx.adv
 from ffaudiocue.ffc_sys.about_app import (COPYRIGHT,
-                                                 RELNAME,
-                                                 AUTHOR,
-                                                 WEBSITE,
-                                                 LICENSE,
-                                                 MAIL,
-                                                 VERSION
-                                                 )
+                                          RELNAME,
+                                          AUTHOR,
+                                          WEBSITE,
+                                          LICENSE,
+                                          MAIL,
+                                          VERSION
+                                          )
 
 
 def info_gui(parent, prg_icon):

@@ -605,8 +605,7 @@ class SetUp(wx.Dialog):
             self.settings['icontheme'] == self.appdata['icontheme'],
             self.settings['toolbarsize'] == self.appdata['toolbarsize'],
             self.settings['toolbarpos'] == self.appdata['toolbarpos'],
-            self.settings['toolbartext'] == self.appdata['toolbartext'],
-            )
+            self.settings['toolbartext'] == self.appdata['toolbartext'],)
 
         self.confmanager.write_options(**self.settings)
         self.appdata.update(self.settings)
