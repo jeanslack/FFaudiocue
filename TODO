@@ -6,11 +6,11 @@
 - Make ffaudiocue.ico (Windows)
 
 - Complete the Italian translation.
-- Update localization guidelines
+- [DONE] Update localization guidelines
 - Make tests cases.
 - Complete the README.md.
 - Make debian dir.
-- Write INSTALL basic for installations.
+- [DONE] Write INSTALL basic for installations.
 
 - [DONE] Auto-make output folder if it doesn't exist.
 - [DONE] The codec/output format is always flac even if you choose another format
