@@ -28,7 +28,6 @@ import subprocess
 import platform
 import shutil
 import os
-import wx
 
 
 def open_default_application(pathname):
@@ -61,45 +60,6 @@ def open_default_application(pathname):
 
     return None
 # ------------------------------------------------------------------------
-
-
-def move_files_to_outputdir(outputdir, tmpdir):
-    """
-    All files are processed in a /temp folder. After the split
-    operation is complete, all tracks are moved from /temp folder
-    to output folder. Here evaluates what to do if files already
-    exists on output folder.
-    """
-    ask = True
-    overwrite = True
-
-    for track in os.listdir(tmpdir):
-        fdir = os.path.join(outputdir, track)
-        ftmp = os.path.join(tmpdir, track)
-        if os.path.exists(fdir) and ask is True:
-            dlg = wx.MessageDialog(None, _('File already exists:\n"{}"\n\n'
-                                           'Do you want to overwrite all '
-                                           'files?').format(fdir),
-                                   _("Warning"),
-                                   wx.ICON_WARNING
-                                   | wx.YES_NO
-                                   | wx.CANCEL).ShowModal()
-            if dlg == wx.ID_YES:
-                ask = False
-                overwrite = True
-            elif dlg == wx.ID_NO:
-                overwrite = False
-                continue
-            else:
-                return
-
-        if overwrite is True:
-            try:
-                shutil.move(ftmp, fdir)
-            except Exception as error:
-                wx.MessageBox(f'{error}', "FFaudiocue",
-                              wx.ICON_ERROR, None)
-# ----------------------------------------------------------------#
 
 
 def get_codec_quality_items(_format_):
