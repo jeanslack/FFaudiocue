@@ -263,6 +263,9 @@ class MainFrame(wx.Frame):
                    "<https://github.com/jeanslack/FFaudiocue>"))
         checkitem = help_button.Append(wx.ID_ANY, dscrp[0], dscrp[1])
         help_button.AppendSeparator()
+        spons = help_button.Append(wx.ID_ANY, _("Sponsor this project"), "")
+        donat = help_button.Append(wx.ID_ANY, _("Donate to the developer"), "")
+        help_button.AppendSeparator()
         infoitem = help_button.Append(wx.ID_ABOUT,
                                       _("About FFaudiocue"), "")
         self.menu_bar.Append(help_button, _("Help"))
@@ -272,6 +275,10 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.issues, issueitem)
         self.Bind(wx.EVT_MENU, self.doc_ffmpeg, docffmpeg)
         self.Bind(wx.EVT_MENU, self.check_new_releases, checkitem)
+
+        self.Bind(wx.EVT_MENU, self.sponsor_this_project, spons)
+        self.Bind(wx.EVT_MENU, self.donate_to_dev, donat)
+
         self.Bind(wx.EVT_MENU, self.show_infoprog, infoitem)
 
         # --------------------------- Set items
@@ -388,6 +395,19 @@ class MainFrame(wx.Frame):
         dlg = check_new_version.CheckNewVersion(self, msg, vers, this)
         dlg.ShowModal()
     # -------------------------------------------------------------------#
+
+    def sponsor_this_project(self, event):
+        """wiki page """
+
+        page = 'https://github.com/sponsors/jeanslack'
+        webbrowser.open(page)
+    # ------------------------------------------------------------------#
+
+    def donate_to_dev(self, event):
+        """Display issues page on github"""
+        page = 'https://www.paypal.me/GPernigotto'
+        webbrowser.open(page)
+    # ------------------------------------------------------------------#
 
     def show_infoprog(self, event):
         """
