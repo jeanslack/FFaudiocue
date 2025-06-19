@@ -44,7 +44,7 @@ class CdInfo(wx.Dialog):
         appdata = get.appset
         vidicon = get.iconset['ffaudiocue']
         cd_info = args[0]
-        probedata= args[1]
+        probedata = args[1]
         filecue = args[2]
         cue_enc = args[3]
 
