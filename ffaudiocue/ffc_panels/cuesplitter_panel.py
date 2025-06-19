@@ -433,16 +433,14 @@ class CueGui(wx.Panel):
         self.data.kwargs['ffmpeg_loglevel'] = self.appdata['ffmpegloglev']
 
         msg = (_('Due to a known issue in FFmpeg with cutting FLAC files, '
-                 'the «Copy codec and format» option is temporarily disabled '
-                 'until the issue is fixed.\nThis seems to only affect the '
-                 'FLAC format.\n\nPlease uncheck this option to proceed.'))
-
+                 'Copy Codec and Format may lead to unexpected results.\n'
+                 'This issue appears to only affect the FLAC format.'))
         if self.ckbx_codec_copy.IsChecked():
             src = os.path.splitext(self.data.audiosource)[1]
             if src in ('.flac', '.FLAC'):
                 wx.MessageBox(f'{msg}', "FFaudiocue- Information",
                               wx.ICON_INFORMATION, self)
-                return True
+                #return True
             self.data.kwargs['ffmpeg_add_params'] = "-c copy"
         else:
             self.data.kwargs['outputformat'] = self.cmbx_formats.GetValue()
