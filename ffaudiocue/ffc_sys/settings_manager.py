@@ -65,7 +65,6 @@ class ConfigManager:
                        "icontheme": "Colored",
                        "toolbarsize": 32,
                        "toolbarpos": 2,
-                       "toolbartext": True,
                        "showhidenmenu": False,
                        "main_window_size": [890, 670],
                        "main_window_pos": [0, 0],

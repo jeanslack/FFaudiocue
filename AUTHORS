@@ -2,9 +2,13 @@ FFaudiocue
 Splits the audio CD images supplied with the CUE sheet via FFmpeg.
 
 Author:
-Gianluca (jeanslack) Pernigotto <jeanlucperni@gmail.com>
-Copyright: 2023
+    Gianluca (jeanslack) Pernigotto <jeanlucperni@gmail.com>
+    Copyright: 2023
 
 Translators:
-Gianluca Pernigotto <jeanlucperni@gmail.com> (Italian)
-ChourS <chours2008@yandex.ru> (Russian)
+    Gianluca Pernigotto <jeanlucperni@gmail.com> (Italian)
+    ChourS <chours2008@yandex.ru> (Russian)
+
+Contributors:
+    Justin @Velisarius <https://github.com/Velisarius>
+

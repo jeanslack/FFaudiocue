@@ -22,3 +22,4 @@
 - [DONE] make sub-directory for languages i18n
 - [DONE] Save some preferences without re-start application.
 - [DONE] Make script python for build standalone executable.
+- Review description strings and traslates to Italian languages.

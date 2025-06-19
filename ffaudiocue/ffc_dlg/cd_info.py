@@ -36,13 +36,17 @@ class CdInfo(wx.Dialog):
     """
     Dialog to view CD audio informations and other data.
     """
-    def __init__(self, parent, cd_info, probedata, filecue, cue_enc):
+    def __init__(self, parent, *args):
         """
         constructor
         """
         get = wx.GetApp()
         appdata = get.appset
         vidicon = get.iconset['ffaudiocue']
+        cd_info = args[0]
+        probedata= args[1]
+        filecue = args[2]
+        cue_enc = args[3]
 
         wx.Dialog.__init__(self, None,
                            style=wx.DEFAULT_DIALOG_STYLE
@@ -100,6 +104,7 @@ class CdInfo(wx.Dialog):
                 f"Confidence:  {cue_enc['confidence']}\n"
                 f"Language:  {cue_enc['language']}\n\n"
                 )
+
         self.tinfo.AppendText(text)
         index = 0
         for data in probedata:
@@ -124,10 +129,12 @@ class CdInfo(wx.Dialog):
             self.tinfo.SetFont(wx.Font(12, wx.MODERN, wx.NORMAL, wx.NORMAL))
         else:
             self.tinfo.SetFont(wx.Font(9, wx.MODERN, wx.NORMAL, wx.NORMAL))
-        # ----------------------Binder (EVT)----------------------#
 
+        self.tinfo.SetInsertionPoint(0)  # scroll to top
+
+        # ----------------------Binder (EVT)----------------------#
         self.Bind(wx.EVT_BUTTON, self.on_close, self.button_close)
-        self.Bind(wx.EVT_CLOSE, self.on_close)  # controlla la chiusura (x)
+        self.Bind(wx.EVT_CLOSE, self.on_close)
 
     # ---------------------Callback (event handler)----------------------#
 

@@ -192,6 +192,7 @@ class ShowLogs(wx.Dialog):
         name = self.log_select.GetItemText(index, 0)
         self.selected = name
         self.textdata.AppendText(self.logdata.get(name))
+        self.textdata.SetInsertionPoint(0)  # set cursor to initial point
     # ------------------------------------------------------------------#
 
     def on_close(self, event):

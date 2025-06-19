@@ -33,10 +33,11 @@ import wx
 import wx.lib.scrolledpanel as scrolled
 from pubsub import pub
 from ffcuesplitter.cuesplitter import FFCueSplitter
-from ffcuesplitter.utils import makeoutputdirs, remove_source_file
+from ffcuesplitter.utils import makeoutputdirs, remove_source_file, sanitize
 from ffaudiocue.ffc_utils.utils import get_codec_quality_items
 from ffaudiocue.ffc_threads.ffmpeg_processing import Processing
 from ffaudiocue.ffc_dlg.widget_utils import notification_area
+from ffaudiocue.ffc_dlg.list_warning import ListWarning
 
 
 def move_files_to_outputdir(outputdir, tmpdir):
@@ -46,35 +47,56 @@ def move_files_to_outputdir(outputdir, tmpdir):
     to output folder. Here evaluates what to do if files already
     exists on output folder.
     """
-    ask = True
-    overwrite = True
+    tracklist = []
+    existslist = []
 
     for track in os.listdir(tmpdir):
-        fdir = os.path.join(outputdir, track)
-        ftmp = os.path.join(tmpdir, track)
-        if os.path.exists(fdir) and ask is True:
-            dlg = wx.MessageDialog(None, _('File already exists:\n"{}"\n\n'
-                                           'Do you want to overwrite all '
-                                           'files?').format(fdir),
-                                   _("Warning"),
-                                   wx.ICON_WARNING
-                                   | wx.YES_NO
-                                   | wx.CANCEL).ShowModal()
-            if dlg == wx.ID_YES:
-                ask = False
-                overwrite = True
-            elif dlg == wx.ID_NO:
-                overwrite = False
-                continue
-            else:
-                return
+        tracklist.append(track)
+        fdest = os.path.join(outputdir, track)
+        if os.path.exists(fdest):
+            existslist.append(f'"{fdest}"')
 
-        if overwrite is True:
-            try:
-                shutil.move(ftmp, fdir)
-            except Exception as error:
-                wx.MessageBox(f'{error}', "FFaudiocue",
-                              wx.ICON_ERROR, None)
+    if existslist:
+        msg = _('Files already exist, do you want to overwrite them?')
+        with ListWarning(None,
+                         dict.fromkeys(existslist, ''),
+                         caption=_('Please confirm'),
+                         header=msg,
+                         buttons='CONFIRM',
+                         ) as log:
+            response = log.ShowModal()
+
+            if response == wx.ID_YES:
+                for track in tracklist:
+                    orig = os.path.join(tmpdir, track)
+                    dest = os.path.join(outputdir, track)
+                    try:
+                        shutil.move(orig, dest)
+                    except Exception as error:
+                        return error
+            elif response == wx.ID_NO:
+                for track in tracklist:
+                    orig = os.path.join(tmpdir, track)
+                    dest = os.path.join(outputdir, track)
+                    if not os.path.exists(dest):
+                        try:
+                            shutil.move(orig, dest)
+                        except Exception as error:
+                            return error
+            else:
+                return 'cancelled'
+
+            return None
+
+    for track in tracklist:
+        orig = os.path.join(tmpdir, track)
+        dest = os.path.join(outputdir, track)
+        try:
+            shutil.move(orig, dest)
+        except Exception as error:
+            return error
+
+    return None
 
 
 class CueGui(wx.Panel):
@@ -95,6 +117,8 @@ class CueGui(wx.Panel):
         self.abort = False  # if True set to abort current process
         self.error = False  # if True set to error current process
         self.data = None  # it is the ffcuesplitter instance
+        self.author = None
+        self.album = None
         self.tmpdir = None  # path to tempdir folder
 
         wx.Panel.__init__(self, parent, -1, style=wx.TAB_TRAVERSAL)
@@ -118,7 +142,7 @@ class CueGui(wx.Panel):
         # fgs1.Add((5, 5))
         self.lbl_formats = wx.StaticText(panelscroll,
                                          wx.ID_ANY,
-                                         label=_("Format:")
+                                         label=_("Audio format:")
                                          )
         fgs1.Add(self.lbl_formats, 0, wx.ALL | wx.EXPAND, 5)
         self.cmbx_formats = wx.ComboBox(panelscroll, wx.ID_ANY,
@@ -131,7 +155,7 @@ class CueGui(wx.Panel):
         self.cmbx_formats.SetSelection(1)
         self.lbl_quality = wx.StaticText(panelscroll,
                                          wx.ID_ANY,
-                                         label=_("Compression:")
+                                         label=_("Quality/Bitrate:")
                                          )
         fgs1.Add(self.lbl_quality, 0, wx.ALL | wx.EXPAND, 5)
 
@@ -156,7 +180,7 @@ class CueGui(wx.Panel):
         fgs1.Add(line1, 0, wx.ALL | wx.EXPAND, 10)
         lbl_outdir = wx.StaticText(panelscroll,
                                    wx.ID_ANY,
-                                   label=_("Output Folder:")
+                                   label=_("Audio track destination:")
                                    )
         fgs1.Add(lbl_outdir, 0, wx.ALL | wx.EXPAND, 5)
         self.ckbx_samedest = wx.CheckBox(panelscroll, wx.ID_ANY,
@@ -178,7 +202,7 @@ class CueGui(wx.Panel):
                          )
         self.ckbx_collection = wx.CheckBox(panelscroll, wx.ID_ANY,
                                            (_('Create collection folders\n'
-                                              '(Artist+Album)')))
+                                              '(Author/Album)')))
         fgs1.Add(self.ckbx_collection, 0, wx.ALL, 5)
         line2 = wx.StaticLine(panelscroll, wx.ID_ANY, pos=wx.DefaultPosition,
                               size=wx.DefaultSize, style=wx.LI_HORIZONTAL,
@@ -190,8 +214,8 @@ class CueGui(wx.Panel):
                                  )
         fgs1.Add(lbl_misc, 0, wx.ALL | wx.EXPAND, 5)
         self.ckbx_removesrc = wx.CheckBox(panelscroll, wx.ID_ANY,
-                                          (_('Remove the original files\n'
-                                             'if successful.')))
+                                          (_('Remove original files at '
+                                              'the end\n(after successful)')))
         fgs1.Add(self.ckbx_removesrc, 0, wx.ALL, 5)
         boxoptions.Add(panelscroll, 0, wx.ALL | wx.CENTRE, 0)
 
@@ -205,7 +229,7 @@ class CueGui(wx.Panel):
                                      )
         boxlistctrl.Add(self.tracklist, 1, wx.ALL | wx.EXPAND, 5)
         self.tracklist.InsertColumn(0, (_('Track')), width=60)
-        self.tracklist.InsertColumn(1, (_('Artist')), width=130)
+        self.tracklist.InsertColumn(1, (_('Author')), width=130)
         self.tracklist.InsertColumn(2, (_('Title')), width=130)
         self.tracklist.InsertColumn(3, (_('Length')), width=80)
         self.tracklist.InsertColumn(4, (_('Album')), width=180)
@@ -288,13 +312,17 @@ class CueGui(wx.Panel):
                   'ffprobe_cmd': self.appdata['ffprobe_cmd'],
                   'ffmpeg_cmd': self.appdata['ffmpeg_cmd'],
                   'ffmpeg_loglevel': self.appdata['ffmpegloglev'],
-                  'progress_meter': 'tqdm'
+                  'progress_meter': 'tqdm',
                   }  # instance
         try:
             self.data = FFCueSplitter(**kwargs)
+            self.author = self.data.cue.meta.data['PERFORMER']
+            self.album = self.data.cue.meta.data['ALBUM']
         except Exception as err:
             wx.MessageBox(f'{err}', "ERROR", wx.ICON_ERROR, self)
             return
+
+        self.parent.restoretag.Enable(True)
 
         self.set_data_list_ctrl()
     # -----------------------------------------------------------------#
@@ -303,6 +331,10 @@ class CueGui(wx.Panel):
         """
         Displays dialog for importing CUE files.
         """
+        if loadlast:
+            newincoming = self.txt_path_cue.GetValue()
+            self.load_cuefile(newincoming)
+            return
 
         wildcard = "Source (*.cue;*.CUE)|*.cue;*.CUE|All files (*.*)|*.*"
 
@@ -400,10 +432,11 @@ class CueGui(wx.Panel):
         self.data.kwargs['ffmpeg_cmd'] = self.appdata['ffmpeg_cmd']
         self.data.kwargs['ffmpeg_loglevel'] = self.appdata['ffmpegloglev']
 
-        msg = (_('Due to a known issue in FFmpeg with cutting FLAC files '
-                 'by copying the format and audio codec '
-                 '(without re-encoding), this option has been temporarily '
-                 'disabled for the FLAC format until the bug is fixed.'))
+        msg = (_('Due to a known issue in FFmpeg with cutting FLAC files, '
+                 'the «Copy codec and format» option is temporarily disabled '
+                 'until the issue is fixed.\nThis seems to only affect the '
+                 'FLAC format.\n\nPlease uncheck this option to proceed.'))
+
         if self.ckbx_codec_copy.IsChecked():
             src = os.path.splitext(self.data.audiosource)[1]
             if src in ('.flac', '.FLAC'):
@@ -423,9 +456,13 @@ class CueGui(wx.Panel):
             self.appdata['destination'] = self.txt_out.GetValue()
 
         if self.ckbx_collection.IsChecked() is True:
-            artist = self.data.cue.meta.data.get('PERFORMER', 'Unknown Artist')
-            album = self.data.cue.meta.data.get('ALBUM', 'Unknown Album')
-            coll = os.path.join(self.appdata['destination'], artist, album)
+            unkp, unka = 'Unknown Author', 'Unknown Album'
+            author = unkp if not sanitize(self.author) else self.author
+            album = unka if not sanitize(self.album) else self.album
+            coll = os.path.join(self.appdata['destination'],
+                                sanitize(author),
+                                sanitize(album),
+                                )
             self.appdata['destination'] = coll
             self.data.kwargs['outputdir'] = self.appdata['destination']
         else:
@@ -444,7 +481,7 @@ class CueGui(wx.Panel):
             return
 
         self.tmpdir = tempfile.mkdtemp(suffix=None,
-                                       prefix='FFcuesplitterGUI_',
+                                       prefix='FFaudiocue_',
                                        dir=None)
         self.data.kwargs['tempdir'] = self.tmpdir
         try:
@@ -457,7 +494,7 @@ class CueGui(wx.Panel):
         self.parent.toolbar.EnableTool(12, False)  # start
         self.parent.toolbar.EnableTool(5, False)  # setup
 
-        logfile = os.path.join(self.appdata['logdir'], 'ffmpeg.log')
+        logfile = os.path.join(self.appdata['logdir'], 'ffaudiocue.log')
         self.thread_type = Processing(args, logfile)
     # ----------------------------------------------------------------------
 
@@ -518,25 +555,39 @@ class CueGui(wx.Panel):
             self.parent.statusbar_msg(_("...Interrupted"),
                                       'BLUE VIOLET', 'WHITE')
         elif self.error is True:
-            self.parent.statusbar_msg(_("ERROR: Please open the Logs "
-                                        "window to get more details."),
+            self.parent.statusbar_msg(_("ERROR: See Logs for details"),
                                       'RED', 'WHITE')
             notification_area(_("ERROR!"), _("An error has occurred.\n"
                                              "See Logs for details."),
                               wx.ICON_ERROR)
         else:
             makeoutputdirs(self.data.kwargs['outputdir'])  # if doesn't exists
-            move_files_to_outputdir(self.data.kwargs['outputdir'],
-                                    self.data.kwargs['tempdir'])
-            self.parent.statusbar_msg(_("...Finished!"),
-                                      'DARK GREEN', 'WHITE')
+            ret = move_files_to_outputdir(self.data.kwargs['outputdir'],
+                                          self.data.kwargs['tempdir'])
+            if ret == 'cancelled':
+                self.parent.statusbar_msg(_("FAILED: Operation cancelled"),
+                                          'YELLOW', 'BLACK')
+                notification_area(_('FAILED!'),
+                                  _("Operation canceled by user"),
+                                  wx.ICON_WARNING)
+                self.barprog.SetValue(0)
+                self.reset_gui()
+                return
+
+            if ret:
+                wx.MessageBox(str(ret), "FFaudiocue - Error",
+                              wx.ICON_ERROR, self)
+                self.barprog.SetValue(0)
+                self.reset_gui()
+                self.parent.statusbar_msg(_(f'ERROR: {str(ret)}'),
+                                          'RED', 'WHITE')
+                return
+
             if self.ckbx_removesrc.IsChecked():
                 cuef = self.data.kwargs['filename']
                 audf = self.data.audiosource
                 msg = (_('Do you really want to delete the following '
-                         'source files?\n\n«{1}»\n«{2}»').format(msg,
-                                                                 cuef,
-                                                                 audf))
+                         'source files?\n\n«{0}»\n«{1}»').format(cuef, audf))
                 dlg = wx.MessageDialog(self, msg,
                                        _("'FFcuespitter-GUI - Warning"),
                                        wx.ICON_WARNING
@@ -548,11 +599,20 @@ class CueGui(wx.Panel):
                         msg = _("File deletion failed: Files are missing")
                         wx.MessageBox(msg, "FFaudiocue - Error",
                                       wx.ICON_ERROR, self)
+
+            self.parent.statusbar_msg(_("...Finished!"),
+                                      'DARK GREEN', 'WHITE')
             notification_area(_('Success!'), _("Get your files at the "
-                                               "destination specified"),
+                                               "destination you specified"),
                               wx.ICON_INFORMATION)
             self.barprog.SetValue(0)
+        self.reset_gui()
+    # ----------------------------------------------------------------------
 
+    def reset_gui(self):
+        """
+        Reset gui after exit status
+        """
         self.parent.toolbar.EnableTool(13, False)  # stop
         self.parent.toolbar.EnableTool(12, True)  # start
         self.parent.toolbar.EnableTool(5, True)  # setup

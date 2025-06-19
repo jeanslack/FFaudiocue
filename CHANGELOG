@@ -7,27 +7,36 @@ License: GPL3
 Change Log:
 
 +------------------------------------+
-Sat, 15 June 2025 V.1.0.10
+Tue, 19 June 2025 V.1.0.10
 
   * Replaces `setup.py` with `pyproject.toml` using `hatchling` as the default
     build backend which replaces `setuptools`.
-  * Fix #11 thanks to @Velisarius .
+  * Fixed #11 thanks to @Velisarius .
   * Improved setting manager during application bootstrap.
   * Code refactoring.
   * Added ability to auto-make collection folder for file destination
-    (Artist/Album).
-  * Added the ability to save file destinations to the same folder as the source.
-  * Added the ability to remove source files after successful file writing.
-  * Improved options dialog.
-  * Improved log file.
-  * Improved portable app output dir for file destination (see setting_manager)
-  * Auto-exit/auto-restart application if required.
-  * Fix problem with opening the same dialog multiple times.
-  * Fix button spaces as like confirmation buttons.
+    i.e. Author/Album .
+  * Added the ability to save file destinations to the same folder as the
+    source CUE file.
+  * Added the ability to remove source files (audio file + CUE file) after
+    successful file writing.
+  * Improved GUI layout and functionalities on Preferences dialog.
+  * Improved creation messages on the log file.
+  * Improved restoring destination directory on both normal and portable app.
+  * Added feature to auto-exit/auto-restart the application when required.
+  * Fixed problem with opening the same dialog windows multiple times.
+  * Fixed button spaces as like confirmation buttons.
   * Added some languages to translation catalog.
-  * Added requests dependency for all OS.
-  * Ability to build a standalone executable (OS dependent) using py_installer.py
-    script.
+  * Added Python «requests» package as required dependency for all OS.
+  * Added a semi-auto «py_installer.py» script to build a standalone executable
+    (OS dependent of course).
+  * Added the ability to choose whether to apply tags only to the selected
+    track or to all audio tracks.
+  * Artist, album, and track title tags are now sanitized and applied in target
+    filenames.
+  * Removed option to show or hide text on toolbar icons.
+  * Improved handling of destination file overwriting.
+  * Fixed scrolling up in "Log», «CD info» dialogs.
   * Revert to stable release.
 
 +------------------------------------+

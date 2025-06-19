@@ -27,6 +27,7 @@ This file is part of FFaudiocue.
 """
 # import webbrowser
 import wx
+from ffcuesplitter.utils import sanitize
 
 
 class TrackInfo(wx.Dialog):
@@ -35,32 +36,36 @@ class TrackInfo(wx.Dialog):
         if wx.ID_OK:
             Returns: self.metadata list, none otherwise.
     """
-    def __init__(self, parent, metadata, trackindex):
+    def __init__(self, parent, *args):
         """
         self.metadata list is an object of type audio metadata CD.
         """
         get = wx.GetApp()
         self.appdata = get.appset
-        self.metadata = metadata
-        self.trackindex = trackindex
-        title = _("Track ({}) Audio Tag").format(self.trackindex + 1)
+        self.author = args[0]
+        self.album = args[1]
+        self.metadata = args[2]
+        self.trackindex = args[3]
+        title = _("Edit tag on track {}").format(self.trackindex + 1)
 
         wx.Dialog.__init__(self, parent, -1, title,
                            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
 
         size_base = wx.BoxSizer(wx.VERTICAL)
+
         #  Artist
         size_line0 = wx.BoxSizer(wx.HORIZONTAL)
         size_base.Add(size_line0, 0, wx.ALL | wx.EXPAND, 0)
         box_artist = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY,
-                                                    _("Artist")),
+                                                    _("Author")),
                                        wx.VERTICAL)
         size_line0.Add(box_artist, 1, wx.ALL | wx.EXPAND, 5)
         self.txt_artist = wx.TextCtrl(self, wx.ID_ANY, "")
         box_artist.Add(self.txt_artist, 0, wx.ALL | wx.EXPAND, 5)
+        self.txt_artist.Disable()
         #  Album
         box_album = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY,
-                                                   _("Album")),
+                                                   _("Album Name")),
                                       wx.VERTICAL
                                       )
         size_line0.Add(box_album, 1, wx.ALL | wx.EXPAND, 5)
@@ -77,6 +82,7 @@ class TrackInfo(wx.Dialog):
 
         self.txt_title = wx.TextCtrl(self, wx.ID_ANY, "")
         box_title.Add(self.txt_title, 0, wx.ALL | wx.EXPAND, 5)
+        self.txt_album.Disable()
         #  Genre
         box_genre = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY,
                                                    _("Genre")),
@@ -114,6 +120,11 @@ class TrackInfo(wx.Dialog):
                                        style=wx.TE_MULTILINE
                                        )
         box_comment.Add(self.txt_comment, 1, wx.ALL | wx.EXPAND, 5)
+        size_base.Add((0, 10))
+        msg = _('Apply tags globally to the entire album')
+        self.ckbx_glob = wx.CheckBox(self, wx.ID_ANY, msg)
+        size_base.Add(self.ckbx_glob, 0, wx.ALL, 5)
+        size_base.Add((0, 10))
 
         # ----- confirm buttons section
         grdbtn = wx.GridSizer(1, 2, 0, 0)
@@ -131,7 +142,7 @@ class TrackInfo(wx.Dialog):
         size_base.Add(grdbtn, 0, wx.EXPAND)
 
         # ------ set sizer
-        self.SetMinSize((500, 450))
+        self.SetMinSize((750, 550))
         self.SetSizer(size_base)
         self.Fit()
         self.Layout()
@@ -155,19 +166,38 @@ class TrackInfo(wx.Dialog):
         self.Bind(wx.EVT_TEXT, self.on_text_event, self.txt_genre)
         self.Bind(wx.EVT_TEXT, self.on_text_event, self.txt_date)
         self.Bind(wx.EVT_TEXT, self.on_text_event, self.txt_discid)
-
+        self.Bind(wx.EVT_CHECKBOX, self.on_write, self.ckbx_glob)
         self.Bind(wx.EVT_BUTTON, self.on_cancel, btn_cancel)
         self.Bind(wx.EVT_BUTTON, self.on_help, btn_help)
         self.Bind(wx.EVT_BUTTON, self.on_ok, self.btn_save)
 
     # ---------------------Callback (event handler)----------------------#
 
+    def on_write(self, event):
+        """
+        Enables to Apply modified tags to output file names.
+        This is for Author, Album and Title only.
+        """
+        if self.ckbx_glob.IsChecked():
+            self.txt_artist.Enable()
+            self.txt_album.Enable()
+        else:
+            self.txt_artist.Clear()
+            self.txt_album.Clear()
+            idx = self.metadata[self.trackindex]
+            self.txt_artist.AppendText(idx.get('PERFORMER', ''))
+            self.txt_album.AppendText(idx.get('ALBUM', ''))
+            self.txt_artist.Disable()
+            self.txt_album.Disable()
+
+    # ------------------------------------------------------------------#
+
     def on_text_event(self, event):
         """Set date text box"""
         if self.btn_save.IsEnabled() is False:
             self.btn_save.Enable()
-            track = _("Track ({}) Audio Tag (EDITED)*"
-                      ).format(self.trackindex)
+            track = _("Edit tag on track {} (EDITED)*"
+                      ).format(self.trackindex + 1)
             self.SetTitle(track)
     # ------------------------------------------------------------------#
 
@@ -176,7 +206,7 @@ class TrackInfo(wx.Dialog):
         Open default web browser via Python Web-browser controller.
         see <https://docs.python.org/3.8/library/webbrowser.html>
         """
-        wx.MessageBox(_("Not yet implemented"), _('Settings'),
+        wx.MessageBox(_("Not yet implemented"), _('Help'),
                       wx.ICON_INFORMATION, self)
     # ------------------------------------------------------------------#
 
@@ -195,12 +225,12 @@ class TrackInfo(wx.Dialog):
         event.Skip()
     # ------------------------------------------------------------------#
 
-    def getvalue(self):
+    def apply_per_track(self):
         """
-        Return self.metadata value
+        Apply changes only for selected track
         """
-        if wx.MessageBox(_('Do you want to apply the new tag '
-                           'properties to the selected track?\n\n'),
+        if wx.MessageBox(_('Do you really want to retag the '
+                           'selected audio track?\n\n'),
                          _('Please confirm'),
                          wx.ICON_QUESTION | wx.YES_NO, self) == wx.YES:
 
@@ -213,6 +243,51 @@ class TrackInfo(wx.Dialog):
             idx['DATE'] = self.txt_date.GetValue()
             idx['DISCID'] = self.txt_discid.GetValue()
 
-            return self.metadata
+            track = ' '.join(self.txt_title.GetValue().split())
+            if track == '':
+                idx['FILE_TITLE'] = 'Unknown track'
+            else:
+                idx['FILE_TITLE'] = sanitize(track)
 
+            return self.author, self.album, self.metadata
         return None
+    # ------------------------------------------------------------------#
+
+    def apply_goblal(self):
+        """
+        Apply changes for whole audio tracks
+        """
+        if wx.MessageBox(_('Do you really want to retag the entire album?'),
+                         _('Please confirm'),
+                         wx.ICON_QUESTION | wx.YES_NO, self) == wx.YES:
+
+            for tlist in self.metadata:
+                tlist['PERFORMER'] = self.txt_artist.GetValue()
+                tlist['ALBUM'] = self.txt_album.GetValue()
+                tlist['COMMENT'] = self.txt_comment.GetValue()
+                tlist['GENRE'] = self.txt_genre.GetValue()
+                tlist['DATE'] = self.txt_date.GetValue()
+                tlist['DISCID'] = self.txt_discid.GetValue()
+
+            idx = self.metadata[self.trackindex]
+            idx['TITLE'] = self.txt_title.GetValue()
+
+            track = ' '.join(self.txt_title.GetValue().split())
+            auth = ' '.join(self.txt_artist.GetValue().split())
+            alb = ' '.join(self.txt_album.GetValue().split())
+
+            idx['FILE_TITLE'] = 'Untitled' if track == '' else sanitize(track)
+            self.author = 'Unknown Author' if auth == '' else sanitize(auth)
+            self.album = 'Unknown Album' if alb == '' else sanitize(alb)
+
+            return self.author, self.album, self.metadata
+        return None
+    # ------------------------------------------------------------------#
+
+    def getvalue(self):
+        """
+        Return self.metadata value
+        """
+        if self.ckbx_glob.IsChecked():
+            return self.apply_goblal()
+        return self.apply_per_track()

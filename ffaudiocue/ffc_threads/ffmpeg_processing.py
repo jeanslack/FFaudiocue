@@ -67,8 +67,11 @@ class Processing(Thread):
         self.stop_work_thread = False  # if True the process terminates
         self.args = args  # list of commands/aguments
         self.logname = logname  # path name of file log
+        subline = '-----------------------------'
+        slog = (f'\nFFaudiocue: Creating log file\nDate: {time.strftime("%c")}'
+                f'\n{subline}\n\n')
         with open(self.logname, "w", encoding='utf-8') as log:
-            log.write('\nFFaudiocue: Log file creation\n\n')
+            log.write(slog)
         self.count = 0  # count for loop
         self.countmax = len(args['recipes'])  # length list
 
@@ -90,13 +93,13 @@ class Processing(Thread):
                          msg='',
                          end='',
                          )
-            if platform.system() == 'Windows':
-                cmdargs = recipes[0]
-            else:
+
+            cmdargs = recipes[0]
+            if not platform.system() == 'Windows':
                 cmdargs = shlex.split(recipes[0])
 
             with open(self.logname, "a", encoding='utf-8') as log:
-                log.write(f'\nCOMMAND: {cmdargs}')
+                log.write(f"\n[INFO: COMMAND]: {recipes[0]}\n{'=' * 94}\n\n")
 
                 try:
                     with Popen(cmdargs,

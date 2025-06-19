@@ -206,9 +206,6 @@ class SetUp(wx.Dialog):
             self.cmbx_icon_size.Disable()
             lab1_appearance.Disable()
 
-        self.ckbx_tb_showtxt = wx.CheckBox(tab_four, wx.ID_ANY,
-                                           (_("Show text on toolbar buttons")))
-        sizer_appearance.Add(self.ckbx_tb_showtxt, 0, wx.ALL, 5)
         sizer_appearance.Add((0, 10))
         msg = _('Application Language (requires application restart)')
         lablang = wx.StaticText(tab_four, wx.ID_ANY, msg)
@@ -307,7 +304,7 @@ class SetUp(wx.Dialog):
         self.Layout()
 
         # ----------------------Properties----------------------#
-        self.SetTitle(_("Settings"))
+        self.SetTitle(_("Preferences"))
         # set font
         if self.appdata['ostype'] == 'Darwin':
             labexitopt.SetFont(wx.Font(13, wx.DEFAULT, wx.NORMAL, wx.BOLD))
@@ -343,8 +340,6 @@ class SetUp(wx.Dialog):
         self.Bind(wx.EVT_COMBOBOX, self.on_iconthemes, self.cmbx_icons)
         self.Bind(wx.EVT_RADIOBOX, self.on_toolbar_pos, self.rdbx_tb_pos)
         self.Bind(wx.EVT_COMBOBOX, self.on_toolbar_size, self.cmbx_icon_size)
-        self.Bind(wx.EVT_CHECKBOX, self.on_toolbar_txt, self.ckbx_tb_showtxt)
-
         self.Bind(wx.EVT_RADIOBOX, self.logging_ffmpeg, self.rdbx_log_ffmpeg)
 
         self.Bind(wx.EVT_BUTTON, self.on_help, btn_help)
@@ -391,7 +386,6 @@ class SetUp(wx.Dialog):
             self.txtctrl_ffprobe.AppendText(self.appdata['ffprobe_cmd'])
             self.ckbx_exe_ffprobe.SetValue(True)
 
-        self.ckbx_tb_showtxt.SetValue(self.appdata['toolbartext'])
         self.ckbx_logclear.SetValue(self.appdata['clearlogfiles'])
         self.ckbx_exit.SetValue(self.appdata['warnexiting'])
         # self.ckbx_mnhiden.SetValue(self.appdata['showhidenmenu'])
@@ -531,16 +525,6 @@ class SetUp(wx.Dialog):
         self.settings['toolbarpos'] = self.rdbx_tb_pos.GetSelection()
     # --------------------------------------------------------------------#
 
-    def on_toolbar_txt(self, event):
-        """
-        Show or hide text along toolbar buttons
-        """
-        if self.ckbx_tb_showtxt.IsChecked():
-            self.settings['toolbartext'] = True
-        else:
-            self.settings['toolbartext'] = False
-    # --------------------------------------------------------------------#
-
     def on_set_lang(self, event):
         """set application language"""
         lang = 'Default'
@@ -604,8 +588,7 @@ class SetUp(wx.Dialog):
             self.settings['locale_name'] == self.appdata['locale_name'],
             self.settings['icontheme'] == self.appdata['icontheme'],
             self.settings['toolbarsize'] == self.appdata['toolbarsize'],
-            self.settings['toolbarpos'] == self.appdata['toolbarpos'],
-            self.settings['toolbartext'] == self.appdata['toolbartext'],)
+            self.settings['toolbarpos'] == self.appdata['toolbarpos'],)
 
         self.confmanager.write_options(**self.settings)
         self.appdata.update(self.settings)

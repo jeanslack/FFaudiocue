@@ -225,7 +225,7 @@ class MainFrame(wx.Frame):
 
         # ----------------------- file menu
         file_button = wx.Menu()
-        dscrp = (_("Open CUE sheet...\tCtrl+C"),
+        dscrp = (_("Open CUE sheet...\tCtrl+O"),
                  _("Open a new CUE sheet file"))
         fold_cue = file_button.Append(wx.ID_FILE, dscrp[0], dscrp[1])
 
@@ -248,6 +248,21 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.reminder, notepad)
         self.Bind(wx.EVT_MENU, self.on_close, exititem)
 
+        # ------------------ Edit menu
+        editButton = wx.Menu()
+        dscrp = (_("Reload cue files"),
+                 _("Restore data to original settings"))
+        self.restoretag = editButton.Append(wx.ID_REFRESH, dscrp[0], dscrp[1])
+        self.restoretag.Enable(False)
+        editButton.AppendSeparator()
+        self.setupItem = editButton.Append(wx.ID_PREFERENCES,
+                                           _("Preferences\tCtrl+P"),
+                                           _("Application preferences"))
+        self.menu_bar.Append(editButton, _("Edit"))
+
+        self.Bind(wx.EVT_MENU, self.restore_cuefile, self.restoretag)
+        self.Bind(wx.EVT_MENU, self.on_setup, self.setupItem)
+
         # ------------------ help menu
         help_button = wx.Menu()
         helpitem = help_button.Append(wx.ID_HELP, _("User Guide"), "")
@@ -264,7 +279,7 @@ class MainFrame(wx.Frame):
         checkitem = help_button.Append(wx.ID_ANY, dscrp[0], dscrp[1])
         help_button.AppendSeparator()
         spons = help_button.Append(wx.ID_ANY, _("Sponsor this project"), "")
-        donat = help_button.Append(wx.ID_ANY, _("Donate to the developer"), "")
+        donat = help_button.Append(wx.ID_ANY, _("Donate"), "")
         help_button.AppendSeparator()
         infoitem = help_button.Append(wx.ID_ABOUT,
                                       _("About FFaudiocue"), "")
@@ -372,10 +387,9 @@ class MainFrame(wx.Frame):
                                                         VERSION)
                 dlg.ShowModal()
                 return
-            else:
-                wx.MessageBox(f"{vers[0]} {vers[1]}", f"{vers[0]}",
-                              wx.ICON_ERROR, self)
-                return
+            wx.MessageBox(f"{vers[0]} {vers[1]}", f"{vers[0]}",
+                          wx.ICON_ERROR, self)
+            return
 
         vers = vers[0].split('v')[1]
         newmajor, newminor, newmicro = vers.split('.')
@@ -422,24 +436,16 @@ class MainFrame(wx.Frame):
         the user preferences.
         """
         if self.appdata['toolbarpos'] == 0:  # on top
-            if self.appdata['toolbartext'] is True:  # show text
-                return wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_HORIZONTAL
-            return wx.TB_DEFAULT_STYLE
+            return wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_HORIZONTAL
 
         if self.appdata['toolbarpos'] == 1:  # on bottom
-            if self.appdata['toolbartext'] is True:  # show text
-                return wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_BOTTOM
-            return wx.TB_DEFAULT_STYLE | wx.TB_BOTTOM
+            return wx.TB_TEXT | wx.TB_HORZ_LAYOUT | wx.TB_BOTTOM
 
         if self.appdata['toolbarpos'] == 2:  # on right
-            if self.appdata['toolbartext'] is True:  # show text
-                return wx.TB_TEXT | wx.TB_RIGHT
-            return wx.TB_DEFAULT_STYLE | wx.TB_RIGHT
+            return wx.TB_TEXT | wx.TB_RIGHT
 
         if self.appdata['toolbarpos'] == 3:
-            if self.appdata['toolbartext'] is True:  # show text
-                return wx.TB_TEXT | wx.TB_LEFT
-            return wx.TB_DEFAULT_STYLE | wx.TB_LEFT
+            return wx.TB_TEXT | wx.TB_LEFT
 
         return None
     # ------------------------------------------------------------------#
@@ -512,7 +518,7 @@ class MainFrame(wx.Frame):
                                                    )
         self.toolbar.AddSeparator()
         tip = _("Program setup")
-        btn_setup = self.toolbar.AddTool(5, _('Settings'),
+        btn_setup = self.toolbar.AddTool(5, _('Preferences'),
                                          bmpsetup,
                                          tip, wx.ITEM_NORMAL
                                          )
@@ -582,6 +588,8 @@ class MainFrame(wx.Frame):
         """
         index = self.gui_panel.tracklist.GetFocusedItem()
         with TrackInfo(self,
+                       self.gui_panel.author,
+                       self.gui_panel.album,
                        self.gui_panel.data.audiotracks,
                        index
                        ) as trackinfo:
@@ -589,8 +597,17 @@ class MainFrame(wx.Frame):
             if trackinfo.ShowModal() == wx.ID_OK:
                 data = trackinfo.getvalue()
                 if data:
-                    self.gui_panel.data.audiotracks = data
+                    self.gui_panel.author = data[0]
+                    self.gui_panel.album = data[1]
+                    self.gui_panel.data.audiotracks = data[2]
                     self.gui_panel.set_data_list_ctrl()
+    # -------------------------------------------------------------------#
+
+    def restore_cuefile(self, event):
+        """
+        Reload cue file resetting all data to default
+        """
+        self.gui_panel.on_import_cuefile(self, loadlast=True)
     # -------------------------------------------------------------------#
 
     def on_setup(self, event):

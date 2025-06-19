@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 # Porpose: Contains test cases for the FFaudiocue object.
-# Rev: Oct.04.2020 *PEP8 compatible*
+# Rev: June.15.2025
 
 import sys
 import os.path

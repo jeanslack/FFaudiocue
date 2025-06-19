@@ -31,7 +31,7 @@ from hatchling.builders.hooks.plugin.interface import BuildHookInterface
 from babel.messages.frontend import compile_catalog
 
 
-class FFcuesplitterGUILanguageBuildHook(BuildHookInterface):
+class FFaudiocueLanguageBuildHook(BuildHookInterface):
     """
     Compile the translation files from their PO-format into
     their binary representating MO-format using python `babel`
