@@ -440,7 +440,6 @@ class CueGui(wx.Panel):
             if src in ('.flac', '.FLAC'):
                 wx.MessageBox(f'{msg}', "FFaudiocue- Information",
                               wx.ICON_INFORMATION, self)
-                #return True
             self.data.kwargs['ffmpeg_add_params'] = "-c copy"
         else:
             self.data.kwargs['outputformat'] = self.cmbx_formats.GetValue()
