@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: FFaudiocue 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-19 10:29+0200\n"
-"PO-Revision-Date: 2022-12-14 18:27+0100\n"
+"PO-Revision-Date: 2025-06-23 00:10+0200\n"
 "Last-Translator: Gianluca (jeanslack) Pernigotto <jeanlucperni@gmail.com>\n"
-"Language: it_IT\n"
 "Language-Team: Gianluca (jeanslack) Pernigotto <jeanlucperni@gmail.com>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: ../../gui_app.py:177
 #, python-brace-format
@@ -31,7 +32,7 @@ msgstr ""
 
 #: ../../ffc_dlg/cd_info.py:72
 msgid "Audio CD Informations"
-msgstr ""
+msgstr "Informazioni CD Audio"
 
 #: ../../ffc_dlg/check_new_version.py:63
 msgid "Get Latest Version"
@@ -74,19 +75,19 @@ msgstr ""
 
 #: ../../ffc_dlg/preferences.py:82
 msgid "Upon exiting the application"
-msgstr ""
+msgstr "All'uscita dall'applicazione"
 
 #: ../../ffc_dlg/preferences.py:87
 msgid "Always ask me to confirm"
-msgstr ""
+msgstr "Chiedimi sempre di confermare"
 
 #: ../../ffc_dlg/preferences.py:91
 msgid "Clean the log files"
-msgstr ""
+msgstr "Pulisci i file di registro"
 
 #: ../../ffc_dlg/preferences.py:94
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: ../../ffc_dlg/preferences.py:100
 msgid "Where do you prefer to save your files?"
@@ -95,7 +96,7 @@ msgstr "Dove preferisci salvare i tuoi file?"
 #: ../../ffc_dlg/preferences.py:112 ../../ffc_dlg/preferences.py:132
 #: ../../ffc_dlg/preferences.py:146
 msgid "Change"
-msgstr ""
+msgstr "Cambia"
 
 #: ../../ffc_dlg/preferences.py:119 ../../ffc_main/main_frame.py:244
 msgid "File"
@@ -103,15 +104,15 @@ msgstr "File"
 
 #: ../../ffc_dlg/preferences.py:126
 msgid "Location of executables"
-msgstr ""
+msgstr "Individuazione eseguibili"
 
 #: ../../ffc_dlg/preferences.py:130
 msgid "Enable a custom location to run FFmpeg"
-msgstr ""
+msgstr "Abilita percorso personalizzato esecuzione FFmpeg"
 
 #: ../../ffc_dlg/preferences.py:144
 msgid "Enable a custom location to run FFprobe"
-msgstr ""
+msgstr "Abilita percorso personalizzato esecuzione FFprobe"
 
 #: ../../ffc_dlg/preferences.py:157
 msgid "FFmpeg"
@@ -119,7 +120,7 @@ msgstr "FFmpeg"
 
 #: ../../ffc_dlg/preferences.py:163
 msgid "Look and Feel (requires application restart)"
-msgstr ""
+msgstr "Aspetto (richiede il riavvio dell'applicazione)"
 
 #: ../../ffc_dlg/preferences.py:168
 msgid "Icon themes"
@@ -151,11 +152,11 @@ msgstr "Dimensione dell'icona:"
 
 #: ../../ffc_dlg/preferences.py:210
 msgid "Application Language (requires application restart)"
-msgstr ""
+msgstr "Lingua applicazione (richiede il riavvio dell'applicazione)"
 
 #: ../../ffc_dlg/preferences.py:224
 msgid "Look and Language"
-msgstr ""
+msgstr "Aspetto e lingua"
 
 #: ../../ffc_dlg/preferences.py:230
 msgid ""
@@ -930,40 +931,14 @@ msgstr ""
 #~ "Vuoi applicare le nuove proprietà all'etichetta della traccia selezionata?\n"
 #~ "\n"
 
-#~ msgid "Open CUE sheet...\tCtrl+C"
-#~ msgstr ""
-
 #~ msgid "Format:"
 #~ msgstr "Formato:"
 
 #~ msgid "Compression:"
 #~ msgstr "Compressione:"
 
-#~ msgid "Output Folder:"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Create collection folders\n"
-#~ "(Artist+Album)"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Remove the original files\n"
-#~ "if successful."
-#~ msgstr ""
-
-#~ msgid "Due to a known issue in FFmpeg with cutting FLAC files by copying the format and audio codec (without re-encoding), this option has been temporarily disabled for the FLAC format until the bug is fixed."
-#~ msgstr ""
-
 #~ msgid "ERROR: Please open the Logs window to get more details."
 #~ msgstr "ERRORE: Apri la finestra dei Logs per ottenere maggiori dettagli."
-
-#~ msgid ""
-#~ "Do you really want to delete the following source files?\n"
-#~ "\n"
-#~ "«{1}»\n"
-#~ "«{2}»"
-#~ msgstr ""
 
 #~ msgid "Get your files at the destination specified"
 #~ msgstr "Ottieni i tuoi file nella destinazione specificata"
@@ -981,4 +956,3 @@ msgstr ""
 
 #~ msgid "Warning"
 #~ msgstr "Attenzione"
-

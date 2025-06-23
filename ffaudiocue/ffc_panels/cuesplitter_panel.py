@@ -313,14 +313,15 @@ class CueGui(wx.Panel):
                   'ffmpeg_cmd': self.appdata['ffmpeg_cmd'],
                   'ffmpeg_loglevel': self.appdata['ffmpegloglev'],
                   'progress_meter': 'tqdm',
-                  }  # instance
+                  }  # for instance
         try:
             self.data = FFCueSplitter(**kwargs)
-            self.author = self.data.cue.meta.data['PERFORMER']
-            self.album = self.data.cue.meta.data['ALBUM']
         except Exception as err:
             wx.MessageBox(f'{err}', "ERROR", wx.ICON_ERROR, self)
             return
+
+        self.author = self.data.cue.meta.data['PERFORMER']
+        self.album = self.data.cue.meta.data['ALBUM']
 
         self.parent.restoretag.Enable(True)
 

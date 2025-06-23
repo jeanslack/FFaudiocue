@@ -3,7 +3,7 @@
 - [DONE] check code with a linter (flake8/pylint)
 - [DONE] Make io.github.jeanslack.ffaudiocue.desktop.
 - Make ffaudiocue.icns (MacOs)
-- Make ffaudiocue.ico (Windows)
+- [DONE] Make ffaudiocue.ico (Windows)
 
 - Complete the Italian translation.
 - [DONE] Update localization guidelines

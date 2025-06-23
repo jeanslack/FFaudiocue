@@ -7,7 +7,7 @@ License: GPL3
 Change Log:
 
 +------------------------------------+
-Tue, 19 June 2025 V.1.0.10
+Tue, 22 June 2025 V.1.0.10
 
   * Replaces `setup.py` with `pyproject.toml` using `hatchling` as the default
     build backend which replaces `setuptools`.
