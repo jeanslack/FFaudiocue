@@ -33,14 +33,13 @@ COPYRIGHT = '2022-2025'
 AUTHOR = "Gianluca Pernigotto"
 MAIL = "jeanlucperni@gmail.com"
 WEBSITE = "https://github.com/jeanslack/FFaudiocue"
-SHORTDESCRIPT = ("A simple graphical user interface to extracts audio "
-                 "tracks from audio CD images supplied with a CUE sheet.")
-LONGDESCRIPT = """FFaudiocue is a cross-platform GUI written in
-wxPython Phoenix. It is based on the FFcuesplitter library, which is based on
-FFmpeg for audio track extraction and encoding processes.
-It features editable tags per track, an audio CD properties viewer, support for
-WAV, FLAC, MP3, OGG, OPUS output formats, audio compression selectors and the
-ability to copy audio codec without re-encoding.
+SHORTDESCRIPT = ("Official GUI for FFcuesplitter to extracting audio CD "
+                 "images.")
+LONGDESCRIPT = """
+FFaudiocue is a cross-platform GUI written in wxPython Phoenix and based on
+the FFcuesplitter library. It features editable tags per track, an audio CD
+properties viewer, support for WAV, FLAC, MP3, OGG, OPUS output formats, audio
+compression selectors and the ability to copy audio codec without re-encoding.
 """
 
 SHORTLICENSE = "GPL3 (Gnu Public License)"

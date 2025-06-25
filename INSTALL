@@ -1,8 +1,39 @@
-Important Notes:
-----------------
+=======================
+BINARIES AND INSTALLERS
+=======================
 
-The instructions provided on this file assume you have Python installed and
-configured on your operating system.
+Debian and derivatives:
+----------------------
+
+A precompiled binary (deb) is available for Debian 11 bullseye, Debian 12
+bookworm, Devuan Chimaera, Devuan Daedalus, but it may also be compatible with
+some Debian-based Linux distribution:
+
+    https://github.com/jeanslack/FFaudiocue/releases
+
+Before installing this precompiled binary, it is recommended to install the
+FFcuesplitter package as a dependency, which is also available in deb format:
+
+    https://github.com/jeanslack/FFcuesplitter/releases
+
+
+MS Windows installer:
+-----------------
+
+A portable application for Windows is also available:
+
+    https://github.com/jeanslack/FFaudiocue/releases
+
+Note that the package does not include ffmpeg, which must be downloaded
+separately.
+
+
+============================
+IMPORTANT NOTES Using Python
+============================
+
+The following instructions assume you have Python installed and configured on
+your operating system.
 
 A virtual python environment is recommended, for example using tools like
 `python3-venv` or `virtualenv`, which once activated, you can install Python
@@ -16,15 +47,14 @@ Documentation:
 - https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment
 - https://stackoverflow.com/questions/41573587/what-is-the-difference-between-venv-pyvenv-pyenv-virtualenv-virtualenvwrappe
 
------
-Linux/FreeBSD
------
 
-Install the essential packages using the package manager provided
-by your OS, then install wxPython version 4.0.7 or higher.
-On debian-based distributions (Ubuntu, Kubuntu, Lubuntu, Mint, MXLinux, etc)
-this package is identified as `python3-wxgtk4.0` .
-Aldo make sure you have `ffmpeg` and `ffprobe` already installed.
+Linux/FreeBSD
+-------------
+
+Install wxPython version 4.0.7 or higher using the package manager provided
+by your OS (on debian-based distributions (Ubuntu, Kubuntu, Lubuntu, Mint, 
+MXLinux, etc this package is identified as `python3-wxgtk4.0`) .
+Also make sure you have `ffmpeg` and `ffprobe` already installed.
 
 Activate your virtual Python directory:
 source 'path_to_environment_directory/bin/activate'
@@ -38,27 +68,27 @@ python3 -m pip install -r requirements.txt
 To run the program type:
 ffaudiocue
 
--------
+
 Windows
 -------
 
 Activate your virtual Python directory:
-.\path_to_environment_directory\Scripts\activate
+    .\path_to_environment_directory\Scripts\activate
 
 To install FFaudiocue type:
-python -m pip install git+https://github.com/jeanslack/FFaudiocue.git@main
+    python -m pip install git+https://github.com/jeanslack/FFaudiocue.git@main
 
-OR (alternatively), use requirements.txt file:
-python -m pip install -r requirements.txt
+OR (alternatively), use requirements.txt file inside the source code:
+    python -m pip install -r requirements.txt
 
 Make sure you have ffmpeg and ffprobe available somewhere on your system, as
 these dependencies are not provided automatically by FFaudiocue.
 
-Once you have ffmpeg and ffprobe, start FFaudiocue (just type ffaudiocue
-in your command prompt window), click the Setup button, go to the FFmpeg tab and
-provide the location on your file system.
+To start FFaudiocue just type `ffaudiocue` in the command prompt window.
+Once you have ffmpeg.exe and ffprobe.exe, click the Setup button, go to the 
+FFmpeg tab and provide the location of the binaries.
 
------
+
 MacOS
 -----
 

@@ -1,0 +1,220 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: FFaudiocue
+Upstream-Contact: Gianluca Pernigotto jeanlucperni@gmail.com
+Source: https://github.com/jeanslack/FFaudiocue
+#
+# Please double check copyright with the licensecheck(1) command.
+
+Files:     .flake8
+           .github/FUNDING.yml
+           .github/workflows/python-package.yml
+           .gitignore
+           .pylintrc
+           ffaudiocue/data/locale/ar_SA/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/cs_CZ/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/de_DE/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/en_US/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/es_CU/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/es_ES/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/es_MX/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/fr_FR/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/hu_HU/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/it_IT/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/nl_NL/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/pt_BR/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/ru_RU/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/data/locale/zh_CN/LC_MESSAGES/ffaudiocue.mo
+           ffaudiocue/ffc_dlg/__init__.py
+           ffaudiocue/ffc_dlg/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/cd_info.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/check_new_version.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/infoprg.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/list_warning.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/preferences.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/showlogs.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/track_info.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/widget_utils.cpython-311.pyc
+           ffaudiocue/ffc_dlg/__pycache__/wizard_dlg.cpython-311.pyc
+           ffaudiocue/ffc_inout/__init__.py
+           ffaudiocue/ffc_inout/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/ffc_inout/__pycache__/io_tools.cpython-311.pyc
+           ffaudiocue/ffc_main/__init__.py
+           ffaudiocue/ffc_main/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/ffc_main/__pycache__/main_frame.cpython-311.pyc
+           ffaudiocue/ffc_panels/__init__.py
+           ffaudiocue/ffc_panels/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/ffc_panels/__pycache__/cuesplitter_panel.cpython-311.pyc
+           ffaudiocue/ffc_sys/__init__.py
+           ffaudiocue/ffc_sys/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/ffc_sys/__pycache__/about_app.cpython-311.pyc
+           ffaudiocue/ffc_sys/__pycache__/app_const.cpython-311.pyc
+           ffaudiocue/ffc_sys/__pycache__/argparser.cpython-311.pyc
+           ffaudiocue/ffc_sys/__pycache__/settings_manager.cpython-311.pyc
+           ffaudiocue/ffc_threads/__init__.py
+           ffaudiocue/ffc_threads/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/ffc_threads/__pycache__/ffmpeg_processing.cpython-311.pyc
+           ffaudiocue/ffc_utils/__init__.py
+           ffaudiocue/ffc_utils/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/ffc_utils/__pycache__/get_bmpfromsvg.cpython-311.pyc
+           ffaudiocue/ffc_utils/__pycache__/utils.cpython-311.pyc
+           xdg/io.github.jeanslack.ffaudiocue.desktop
+           ffaudiocue/data/icons/ffaudiocue.ico
+           
+Copyright: __NO_COPYRIGHT_NOR_LICENSE__
+License:   __NO_COPYRIGHT_NOR_LICENSE__
+
+Files:     pyproject.toml
+           requirements.txt
+           tests/test_display_GUI.py
+           tests/test_utils.py
+           develop/Standalone App/pyinstaller_setup.py
+           ffaudiocue/ffc_dlg/cd_info.py
+           ffaudiocue/ffc_dlg/check_new_version.py
+           ffaudiocue/ffc_dlg/infoprg.py
+           ffaudiocue/ffc_dlg/list_warning.py
+           ffaudiocue/ffc_dlg/preferences.py
+           ffaudiocue/ffc_dlg/showlogs.py
+           ffaudiocue/ffc_dlg/track_info.py
+           ffaudiocue/ffc_dlg/widget_utils.py
+           ffaudiocue/ffc_dlg/wizard_dlg.py
+           ffaudiocue/ffc_inout/io_tools.py
+           ffaudiocue/ffc_main/main_frame.py
+           ffaudiocue/ffc_panels/cuesplitter_panel.py
+           ffaudiocue/ffc_sys/about_app.py
+           ffaudiocue/ffc_sys/app_const.py
+           ffaudiocue/ffc_sys/argparser.py
+           ffaudiocue/ffc_sys/settings_manager.py
+           ffaudiocue/ffc_threads/ffmpeg_processing.py
+           ffaudiocue/ffc_utils/get_bmpfromsvg.py
+           ffaudiocue/ffc_utils/utils.py
+           ffaudiocue/gui_app.py
+           hatch_build.py
+           launcher
+           AUTHORS
+           BUGS
+           INSTALL
+           README.md
+           TODO
+           CHANGELOG
+           docs/Localization_Guidelines.md
+           docs/Screenshot.png
+           docs/man/man1/ffaudiocue.1.gz
+           ffaudiocue/__init__.py
+           ffaudiocue/__pycache__/__init__.cpython-311.pyc
+           ffaudiocue/__pycache__/gui_app.cpython-311.pyc
+           ffaudiocue/data/FFMPEG/README
+           ffaudiocue/data/hicolor/256x256/apps/ffaudiocue.png
+           ffaudiocue/data/hicolor/48x48/apps/ffaudiocue.png
+           ffaudiocue/data/icons/Colored/24x24/CDinfo.png
+           ffaudiocue/data/icons/Colored/24x24/log.png
+           ffaudiocue/data/icons/Colored/24x24/setup.png
+           ffaudiocue/data/icons/Colored/24x24/startsplit.png
+           ffaudiocue/data/icons/Colored/24x24/stop.png
+           ffaudiocue/data/icons/Colored/24x24/trackinfo.png
+           ffaudiocue/data/icons/Dark/24x24/CDinfo.png
+           ffaudiocue/data/icons/Dark/24x24/log.png
+           ffaudiocue/data/icons/Dark/24x24/setup.png
+           ffaudiocue/data/icons/Dark/24x24/startsplit.png
+           ffaudiocue/data/icons/Dark/24x24/stop.png
+           ffaudiocue/data/icons/Dark/24x24/trackinfo.png
+           ffaudiocue/data/icons/Light/24x24/CDinfo.png
+           ffaudiocue/data/icons/Light/24x24/log.png
+           ffaudiocue/data/icons/Light/24x24/setup.png
+           ffaudiocue/data/icons/Light/24x24/startsplit.png
+           ffaudiocue/data/icons/Light/24x24/stop.png
+           ffaudiocue/data/icons/Light/24x24/trackinfo.png
+           ffaudiocue/data/icons/ffaudiocue.png
+           ffaudiocue/data/hicolor/scalable/apps/ffaudiocue.svg
+           ffaudiocue/data/icons/Colored/24x24/CDinfo.svg
+           ffaudiocue/data/icons/Colored/24x24/log.svg
+           ffaudiocue/data/icons/Colored/24x24/setup.svg
+           ffaudiocue/data/icons/Colored/24x24/startsplit.svg
+           ffaudiocue/data/icons/Colored/24x24/stop.svg
+           ffaudiocue/data/icons/Colored/24x24/trackinfo.svg
+           ffaudiocue/data/icons/Dark/24x24/CDinfo.svg
+           ffaudiocue/data/icons/Dark/24x24/log.svg
+           ffaudiocue/data/icons/Dark/24x24/setup.svg
+           ffaudiocue/data/icons/Dark/24x24/startsplit.svg
+           ffaudiocue/data/icons/Dark/24x24/stop.svg
+           ffaudiocue/data/icons/Dark/24x24/trackinfo.svg
+           ffaudiocue/data/icons/Light/24x24/CDinfo.svg
+           ffaudiocue/data/icons/Light/24x24/log.svg
+           ffaudiocue/data/icons/Light/24x24/setup.svg
+           ffaudiocue/data/icons/Light/24x24/startsplit.svg
+           ffaudiocue/data/icons/Light/24x24/stop.svg
+           ffaudiocue/data/icons/Light/24x24/trackinfo.svg
+           ffaudiocue/data/locale/README
+           develop/Standalone App/pyinstaller_setup.py
+           develop/gettext_utils/babelutils.py
+           hatch_build.py
+           ffaudiocue/data/locale/ar_SA/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/cs_CZ/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/de_DE/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/en_US/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/es_CU/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/es_ES/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/es_MX/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/ffaudiocue.pot
+           ffaudiocue/data/locale/fr_FR/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/hu_HU/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/nl_NL/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/pt_BR/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/zh_CN/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/it_IT/LC_MESSAGES/ffaudiocue.po
+           ffaudiocue/data/locale/ru_RU/LC_MESSAGES/ffaudiocue.po
+Copyright: 2025 Gianluca Pernigotto
+License:   GPL-3.0+
+
+ This file is part of FFaudiocue.
+ .
+ FFaudiocue is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ FFaudiocue is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with FFaudiocue.  If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ Version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+Files:     ffaudiocue/data/icons/Colored/COPYING-ICONS.txt
+           ffaudiocue/data/icons/Dark/COPYING-ICONS.txt
+           ffaudiocue/data/icons/Light/COPYING-ICONS.txt
+           ffaudiocue/data/hicolor/COPYING-ICONS.txt
+Copyright: 2025 <jeanlucperni@gmail.com>
+License:   GPL-3.0+
+ All icons included in this folder are part of FFaudiocue.
+ .
+ FFaudiocue is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ FFaudiocue is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with FFaudiocue.  If not, please read the license terms below
+ or see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ Version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+#----------------------------------------------------------------------------
+# xml and html files (skipped):
+#        
+#         xdg/io.github.jeanslack.ffaudiocue.appdata.xml
+
+#----------------------------------------------------------------------------
+# Files marked as NO_LICENSE_TEXT_FOUND may be covered by the following
+# license/copyright files.
+
+#----------------------------------------------------------------------------

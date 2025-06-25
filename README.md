@@ -3,19 +3,15 @@
 [![Image](https://img.shields.io/badge/license-GPLv3-orange)](https://github.com/jeanslack/FFaudiocue/blob/main/LICENSE)
 [![Python package](https://github.com/jeanslack/FFaudiocue/actions/workflows/python-package.yml/badge.svg)](https://github.com/jeanslack/FFaudiocue/actions/workflows/python-package.yml)
 
-A simple graphical user interface to extracts audio tracks from audio CD images
-supplied with a CUE sheet.
+Official GUI for [FFcuesplitter](https://github.com/jeanslack/FFcuesplitter) to extracting audio CD images.
 
 ![preview](./docs/Screenshot.png)
 
 ## Description
-
-FFaudiocue is a cross-platform GUI written in wxPython Phoenix. It is
-based on the [FFcuesplitter](https://github.com/jeanslack/FFcuesplitter) library,
-which is based on FFmpeg for audio track extraction and encoding processes.
-It features editable tags per track, an audio CD properties viewer, support for
-WAV, FLAC, MP3, OGG, OPUS output formats, audio compression selectors and the
-ability to copy audio codec without re-encoding.
+FFaudiocue is a cross-platform GUI written in wxPython Phoenix.
+It features editable tags per track, an audio CD properties viewer, support
+for WAV, FLAC, MP3, OGG, OPUS output formats, audio compression
+selectors and the ability to copy audio codec without re-encoding.
 
 ## Requirements
 - **[Python >= 3.9](https://www.python.org/)**
@@ -26,32 +22,8 @@ ability to copy audio codec without re-encoding.
 - **[ffmpeg >=4.3](https://ffmpeg.org/)**
 - **[ffprobe >=4.3](https://ffmpeg.org/ffprobe.html)**
 
-## Running from source code (Unix/macOS)
-
-```
-git clone https://github.com/jeanslack/FFaudiocue.git
-cd FFaudiocue
-python3 -m venv My_env
-source My_env/bin/activate
-python3 -m pip install -r requirements.txt
-python3 launcher
-```
-
-## Running from source code (Windows)
-
-```
-git clone https://github.com/jeanslack/FFaudiocue.git
-cd FFaudiocue
-python -m venv My_env
-.\My_env\Scripts\activate
-python -m pip install -r requirements.txt
-python launcher
-```
-
 ## Installation
-
-Please, read the instructions provided with the [INSTALL](https://github.com/jeanslack/FFaudiocue/blob/main/INSTALL) file
-
+Please read the instructions provided with the [INSTALL](https://github.com/jeanslack/FFaudiocue/blob/main/INSTALL) file.
 
 ## Authors
 See [AUTHORS](AUTHORS) file
