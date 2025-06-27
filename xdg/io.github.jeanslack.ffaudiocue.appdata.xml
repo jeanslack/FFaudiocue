@@ -4,8 +4,7 @@
 
   <name>FFaudiocue</name>
   <summary>
-  A simple graphical user interface to extracts audio tracks from audio CD
-  images supplied with a CUE sheet.
+  Official GUI to FFcuesplitter for audio CDs images extracting.
   </summary>
 
   <metadata_license>FSFAP</metadata_license>
@@ -13,9 +12,12 @@
 
   <description>
     <p>
-      FFaudiocue is a cross-platform GUI written in wxPython Phoenix.
-      It is based on the FFcuesplitter library, which is based on FFmpeg for
-      audio track extraction and encoding processes.
+      FFaudiocue is a cross-platform GUI written in wxPython Phoenix based on 
+      FFcuesplitter library (an FFmpeg-based audio splitter for CDDA images 
+      associated with *.cue files.) also designed by the same author/developer 
+      of FFaudiocue. As an interface, FFaudiocue has been designed with 
+      simplicity in mind, allowing most of the operations included in 
+      FFcuesplitter to be performed efficiently with just a few mouse clicks.
     </p>
     <p>
       It features editable tags per track, an audio CD properties viewer,

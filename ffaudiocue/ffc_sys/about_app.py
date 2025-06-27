@@ -27,16 +27,16 @@ This file is part of FFaudiocue.
 """
 RELNAME = "FFaudiocue"
 PRGNAME = "ffaudiocue"
-VERSION = "1.0.10"
+VERSION = "1.0.15"
 RELSTATE = 'not released'
 COPYRIGHT = '2022-2025'
 AUTHOR = "Gianluca Pernigotto"
 MAIL = "jeanlucperni@gmail.com"
 WEBSITE = "https://github.com/jeanslack/FFaudiocue"
-SHORTDESCRIPT = ("Official GUI for FFcuesplitter to extracting audio CD "
-                 "images.")
+SHORTDESCRIPT = ("Official GUI to FFcuesplitter for audio CDs "
+                 "images extracting.")
 LONGDESCRIPT = """
-FFaudiocue is a cross-platform GUI written in wxPython Phoenix and based on
+FFaudiocue is a cross-platform GUI written in wxPython Phoenix based on
 the FFcuesplitter library. It features editable tags per track, an audio CD
 properties viewer, support for WAV, FLAC, MP3, OGG, OPUS output formats, audio
 compression selectors and the ability to copy audio codec without re-encoding.

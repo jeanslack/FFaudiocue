@@ -3,11 +3,11 @@ ffaudiocue for Debian
 Please edit this to provide information specific to
 this ffaudiocue Debian package.
 
-    FFaudiocue is the official GUI for the Python library FFcuesplitter 
+    FFaudiocue is the official GUI for the FFcuesplitter Python library 
     (https://github.com/jeanslack/FFcuesplitter) also designed by the same 
     author/developer of FFaudiocue, an FFmpeg-based audio splitter for CDDA 
     images associated with *.cue files. As an interface, FFaudiocue has been 
     designed with simplicity in mind, allowing most of the operations included 
     in FFcuesplitter to be performed efficiently with just a few mouse clicks.
     
- -- Gianluca Pernigotto <jeanlucperni@gmail.com>  Mon, 23 Jun 2025 18:34:08 +0200
+ -- Gianluca Pernigotto <jeanlucperni@gmail.com>  Fri, 27 Jun 2025 10:09:00 +0200

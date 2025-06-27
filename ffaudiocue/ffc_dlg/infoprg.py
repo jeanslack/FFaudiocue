@@ -46,8 +46,8 @@ def info_gui(parent, prg_icon):
     infoprg.SetIcon(wx.Icon(prg_icon, type=wx.BITMAP_TYPE_PNG))
     infoprg.SetName(RELNAME)
     infoprg.SetVersion(f'{VERSION}')
-    infoprg.SetDescription(_("Extracts audio tracks from an audio CD image\n"
-                             "supplied with the CUE sheet, using FFmpeg."))
+    infoprg.SetDescription(_("Official GUI to FFcuesplitter for audio CDs "
+                             "images extracting."))
     infoprg.SetCopyright(f'Copyleft {COPYRIGHT} {AUTHOR}')
     infoprg.SetWebSite(WEBSITE)
     infoprg.SetLicence(LICENSE)

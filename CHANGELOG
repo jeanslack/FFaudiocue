@@ -3,8 +3,17 @@ FFaudiocue
 Author: Gianluca (jeanslack) Pernigotto
 Copyright: (c) Gianluca Pernigotto 2022
 License: GPL3
-
 Change Log:
+
+ffaudiocue (1.0.10-1) UNRELEASED; urgency=low
+
+  * Added ability to set characters encoding manually.
+  * Fixed issues on menu bar items and accelerators.
+  * Update documentation.
+  * Update toml file.
+  * This version require ffcuesplitter v1.0.31 to up.
+
+ -- Gianluca Pernigotto <jeanlucperni@gmail.com>  Fri, 27 Jun 2025 00:00:00 +0200
 
 +------------------------------------+
 Tue, 22 June 2025 V.1.0.10

@@ -168,10 +168,8 @@ class CueGui(wx.Panel):
         self.cmbx_quality.SetSelection(6)
         # grid_v.Add((20, 20), 0,)
         fgs1.Add(self.cmbx_quality, 0, wx.ALL | wx.EXPAND, 5)
-        self.ckbx_codec_copy = wx.CheckBox(panelscroll, wx.ID_ANY,
-                                           (_('Copy codec and format'
-                                              '\n(very fast)'))
-                                           )
+        msg = _('Copy codec and format\n(very fast)')
+        self.ckbx_codec_copy = wx.CheckBox(panelscroll, wx.ID_ANY, msg)
         fgs1.Add(self.ckbx_codec_copy, 0, wx.ALL, 5)
         line1 = wx.StaticLine(panelscroll, wx.ID_ANY, pos=wx.DefaultPosition,
                               size=wx.DefaultSize, style=wx.LI_HORIZONTAL,
@@ -183,8 +181,8 @@ class CueGui(wx.Panel):
                                    label=_("Audio track destination:")
                                    )
         fgs1.Add(lbl_outdir, 0, wx.ALL | wx.EXPAND, 5)
-        self.ckbx_samedest = wx.CheckBox(panelscroll, wx.ID_ANY,
-                                         (_('Same as input file')))
+        msg = _('Same as input file')
+        self.ckbx_samedest = wx.CheckBox(panelscroll, wx.ID_ANY, msg)
         fgs1.Add(self.ckbx_samedest, 0, wx.ALL, 5)
         sizer_outdir = wx.BoxSizer(wx.HORIZONTAL)
         fgs1.Add(sizer_outdir, 0, wx.EXPAND | wx.ALL, 5)
@@ -200,9 +198,8 @@ class CueGui(wx.Panel):
                          | wx.ALIGN_CENTER_HORIZONTAL
                          | wx.ALIGN_CENTER_VERTICAL, 2
                          )
-        self.ckbx_collection = wx.CheckBox(panelscroll, wx.ID_ANY,
-                                           (_('Create collection folders\n'
-                                              '(Author/Album)')))
+        msg = _('Create collection folders\n(Author/Album)')
+        self.ckbx_collection = wx.CheckBox(panelscroll, wx.ID_ANY, msg)
         fgs1.Add(self.ckbx_collection, 0, wx.ALL, 5)
         line2 = wx.StaticLine(panelscroll, wx.ID_ANY, pos=wx.DefaultPosition,
                               size=wx.DefaultSize, style=wx.LI_HORIZONTAL,
@@ -213,9 +210,8 @@ class CueGui(wx.Panel):
                                  label=_("Miscellaneous:")
                                  )
         fgs1.Add(lbl_misc, 0, wx.ALL | wx.EXPAND, 5)
-        self.ckbx_removesrc = wx.CheckBox(panelscroll, wx.ID_ANY,
-                                          (_('Remove original files at '
-                                              'the end\n(after successful)')))
+        msg = _('Remove original files at the end\n(after successful)')
+        self.ckbx_removesrc = wx.CheckBox(panelscroll, wx.ID_ANY, msg)
         fgs1.Add(self.ckbx_removesrc, 0, wx.ALL, 5)
         boxoptions.Add(panelscroll, 0, wx.ALL | wx.CENTRE, 0)
 
@@ -246,6 +242,22 @@ class CueGui(wx.Panel):
                           | wx.ALIGN_CENTER_HORIZONTAL
                           | wx.ALIGN_CENTER_VERTICAL, 2
                           )
+        sizer_cenc = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_base.Add(sizer_cenc, 0, wx.ALL, 5)
+        msg = _('Enter custom character encoding')
+        self.ckbx_charsenc = wx.CheckBox(self, wx.ID_ANY, msg)
+        sizer_cenc.Add(self.ckbx_charsenc, 0, wx.LEFT | wx.CENTRE, 2)
+        self.ckbx_charsenc.Disable()
+
+        self.txt_charsenc = wx.TextCtrl(self, wx.ID_ANY, "auto",
+                                        style=wx.TE_PROCESS_ENTER,
+                                        size=(170, -1))
+        self.txt_charsenc.Disable()
+        sizer_cenc.Add(self.txt_charsenc, 0, wx.LEFT | wx.CENTRE, 2)
+
+        self.btn_confirm = wx.Button(self, wx.ID_ANY, "Apply")
+        self.btn_confirm.Disable()
+        sizer_cenc.Add(self.btn_confirm, 0, wx.LEFT | wx.CENTRE, 10)
         self.barprog = wx.Gauge(self, wx.ID_ANY, range=0)
         sizer_base.Add(self.barprog, 0, wx.EXPAND | wx.ALL, 5)
         sizer_base.Add((0, 10))
@@ -263,6 +275,9 @@ class CueGui(wx.Panel):
         self.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.on_deselect,
                   self.tracklist)
         self.Bind(wx.EVT_CHECKBOX, self.on_same_dest, self.ckbx_samedest)
+        self.Bind(wx.EVT_CHECKBOX, self.on_charset_enc, self.ckbx_charsenc)
+        self.Bind(wx.EVT_TEXT, self.on_charset_enter, self.txt_charsenc)
+        self.Bind(wx.EVT_BUTTON, self.on_charset_confirm, self.btn_confirm)
         # -----------------------------------------------------------------#
         pub.subscribe(self.update_progress_bar, "UPDATE_EVT")
         pub.subscribe(self.update_count_items, "COUNT_EVT")
@@ -307,12 +322,14 @@ class CueGui(wx.Panel):
         Load the imported CUE file using FFCueSplitter package
         """
         self.txt_path_cue.SetValue(newincoming)
+        newenc = " ".join(self.txt_charsenc.GetValue().split())
 
         kwargs = {'filename': newincoming,
                   'ffprobe_cmd': self.appdata['ffprobe_cmd'],
                   'ffmpeg_cmd': self.appdata['ffmpeg_cmd'],
                   'ffmpeg_loglevel': self.appdata['ffmpegloglev'],
                   'progress_meter': 'tqdm',
+                  'characters_encoding': newenc,
                   }  # for instance
         try:
             self.data = FFCueSplitter(**kwargs)
@@ -320,10 +337,11 @@ class CueGui(wx.Panel):
             wx.MessageBox(f'{err}', "ERROR", wx.ICON_ERROR, self)
             return
 
+        self.txt_charsenc.ChangeValue(self.data.chars_enc['encoding'])
         self.author = self.data.cue.meta.data['PERFORMER']
         self.album = self.data.cue.meta.data['ALBUM']
-
-        self.parent.restoretag.Enable(True)
+        self.parent.restoretag.Enable(True)  # enables Reload on menu bar
+        self.ckbx_charsenc.Enable()
 
         self.set_data_list_ctrl()
     # -----------------------------------------------------------------#
@@ -424,6 +442,38 @@ class CueGui(wx.Panel):
         button on toolbar.
         """
         self.parent.toolbar.EnableTool(14, False)
+    # ----------------------------------------------------------------------
+
+    def on_charset_enc(self, event):
+        """
+        Check box event to Enable or Disable text field to
+        enter custon characters encoding.
+        """
+        if self.ckbx_charsenc.IsChecked():
+            self.txt_charsenc.Enable()
+        else:
+            self.txt_charsenc.Disable()
+            self.txt_charsenc.ChangeValue('auto')
+            self.btn_confirm.Disable()
+            self.on_import_cuefile(self, loadlast=True)
+    # ----------------------------------------------------------------------
+
+    def on_charset_enter(self, event):
+        """
+        Text control event for type custon characters encoding.
+        This event enables the confirm button.
+        """
+        if self.btn_confirm.IsEnabled() is False:
+            self.btn_confirm.Enable()
+    # ----------------------------------------------------------------------
+
+    def on_charset_confirm(self, event):
+        """
+        Button event to applying custon characters encoding.
+        This event reload the previous cue file.
+        """
+        self.on_import_cuefile(self, loadlast=True)
+        self.btn_confirm.Disable()
     # ----------------------------------------------------------------------
 
     def update_attributes_of_ffcuesplitter_api(self):
