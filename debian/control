@@ -19,9 +19,9 @@ Rules-Requires-Root: no
 Package: ffaudiocue
 Architecture: all
 Multi-Arch: foreign
-Depends: python3-pubsub,
+Depends: python3-ffcuesplitter (>= 1.0-31),
+         python3-pubsub,
          python3-requests,
-         python3-ffcuesplitter (>= 1.0-31),
          python3-wxgtk4.0,
          ${misc:Depends},
          ${python3:Depends}

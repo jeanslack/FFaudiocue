@@ -59,7 +59,7 @@ Files:     .flake8
            ffaudiocue/ffc_utils/__pycache__/utils.cpython-311.pyc
            xdg/io.github.jeanslack.ffaudiocue.desktop
            ffaudiocue/data/icons/ffaudiocue.ico
-           
+
 Copyright: __NO_COPYRIGHT_NOR_LICENSE__
 License:   __NO_COPYRIGHT_NOR_LICENSE__
 
@@ -210,7 +210,7 @@ License:   GPL-3.0+
 
 #----------------------------------------------------------------------------
 # xml and html files (skipped):
-#        
+#
 #         xdg/io.github.jeanslack.ffaudiocue.appdata.xml
 
 #----------------------------------------------------------------------------
