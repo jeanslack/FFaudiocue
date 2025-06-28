@@ -261,8 +261,7 @@ class CueGui(wx.Panel):
         self.barprog = wx.Gauge(self, wx.ID_ANY, range=0)
         sizer_base.Add(self.barprog, 0, wx.EXPAND | wx.ALL, 5)
         sizer_base.Add((0, 10))
-        self.SetMinSize(tuple(self.appdata['main_window_size']))
-        self.SetSizer(sizer_base)
+        self.SetSizerAndFit(sizer_base)
         self.Layout()
 
         # ----------------------Binder (EVT)----------------------#

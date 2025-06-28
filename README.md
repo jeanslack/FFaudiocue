@@ -8,7 +8,7 @@ Official GUI to [FFcuesplitter](https://github.com/jeanslack/FFcuesplitter) for 
 ![preview](./docs/Screenshot.png)
 
 ## Description
-FFaudiocue is a cross-platform GUI written in wxPython Phoenix based on 
+FFaudiocue is a cross-platform GUI written in wxPython Phoenix based on
 [FFcuesplitter](https://github.com/jeanslack/FFcuesplitter).
 It features editable tags per track, an audio CD properties viewer, support
 for WAV, FLAC, MP3, OGG, OPUS output formats, audio compression

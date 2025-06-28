@@ -70,10 +70,10 @@ class CdInfo(wx.Dialog):
         gridbtn.Add(self.button_close, 1, wx.ALL, 5)
         # ------ set sizer
         self.SetTitle(_('Audio CD Informations'))
-        self.SetMinSize((600, 400))
         icon = wx.Icon()
         icon.CopyFromBitmap(wx.Bitmap(vidicon, wx.BITMAP_TYPE_ANY))
         self.SetIcon(icon)
+        self.SetMinSize((700, 500))
         self.SetSizer(size_base)
         self.Fit()
         self.Layout()
@@ -98,8 +98,8 @@ class CdInfo(wx.Dialog):
                 f'--------\n'
                 f"CUE FILE\n"
                 f'--------\n'
-                f"File name:  '{os.path.basename(filecue)}'\n"
-                f"Position:  '{os.path.dirname(filecue)}'\n"
+                f'File name:  "{os.path.basename(filecue)}"\n'
+                f'Position:  "{os.path.dirname(filecue)}"\n'
                 f"Encoding:  {cue_enc['encoding']}\n"
                 f"Confidence:  {cue_enc['confidence']}\n"
                 f"Language:  {cue_enc['language']}\n\n"
@@ -109,10 +109,13 @@ class CdInfo(wx.Dialog):
         index = 0
         for data in probedata:
             index += 1
+            fname = os.path.basename(data['format']['filename'])
+            fpath = os.path.dirname(data['format']['filename'])
             text = (f'---------------\n'
                     f"AUDIO FILE ({index})\n"
                     f'---------------\n'
-                    f"Name:  {data['format']['filename']}\n")
+                    f'File Name:  "{fname}"\n'
+                    f'Position:  "{fpath}"\n')
             self.tinfo.AppendText(text)
             for stream in data['streams']:
                 if stream['codec_type'] == 'audio':
