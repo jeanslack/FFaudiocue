@@ -73,7 +73,7 @@ class MainFrame(wx.Frame):
         icon.CopyFromBitmap(wx.Bitmap(self.icons['ffaudiocue'],
                                       wx.BITMAP_TYPE_ANY))
         self.SetIcon(icon)
-        self.SetMinSize((500, 400))
+        self.SetMinSize((550, 450))
         # self.CentreOnScreen()  # se lo usi, usa CentreOnScreen anziche Centre
         self.SetSizer(self.main_sizer)
         self.Fit()
@@ -224,43 +224,43 @@ class MainFrame(wx.Frame):
         self.menu_bar = wx.MenuBar()
 
         # ----------------------- file menu
-        file_button = wx.Menu()
-        dscrp = (_("Open CUE sheet...\tCtrl+O"),
-                 _("Open a new CUE sheet file"))
-        fold_cue = file_button.Append(wx.ID_FILE, dscrp[0], dscrp[1])
+        fileButton = wx.Menu()
+        dscrp = (_("Open...\tCtrl+O"),
+                 _("Open an existing CUE file"))
+        fold_cue = fileButton.Append(wx.ID_FILE, dscrp[0], dscrp[1])
+        dscrp = (_("Reload\tF5"),
+                 _("Reload current CUE file from disk"))
+        self.restoretag = fileButton.Append(wx.ID_REFRESH, dscrp[0], dscrp[1])
+        self.restoretag.Enable(False)
 
+        fileButton.AppendSeparator()
         dscrp = (_("Open output folder\tCtrl+A"),
                  _("Open the current audio folder"))
-        fold_convers = file_button.Append(wx.ID_OPEN, dscrp[0], dscrp[1])
+        fold_convers = fileButton.Append(wx.ID_OPEN, dscrp[0], dscrp[1])
 
-        file_button.AppendSeparator()
+        fileButton.AppendSeparator()
         dscrp = (_("Work Notes\tCtrl+N"),
                  _("Read or write your reminders."))
-        notepad = file_button.Append(wx.ID_ANY, dscrp[0], dscrp[1])
+        notepad = fileButton.Append(wx.ID_ANY, dscrp[0], dscrp[1])
 
-        file_button.AppendSeparator()
-        exititem = file_button.Append(wx.ID_EXIT, _("Exit\tCtrl+Q"),
-                                      _("Quit application"))
-        self.menu_bar.Append(file_button, _("File"))
+        fileButton.AppendSeparator()
+        exititem = fileButton.Append(wx.ID_EXIT, _("Exit\tCtrl+Q"),
+                                     _("Quit application"))
+        self.menu_bar.Append(fileButton, _("File"))
 
         self.Bind(wx.EVT_MENU, self.opencue, fold_cue)
+        self.Bind(wx.EVT_MENU, self.restore_cuefile, self.restoretag)
         self.Bind(wx.EVT_MENU, self.open_myfiles, fold_convers)
         self.Bind(wx.EVT_MENU, self.reminder, notepad)
         self.Bind(wx.EVT_MENU, self.on_close, exititem)
 
         # ------------------ Edit menu
         editButton = wx.Menu()
-        dscrp = (_("Reload cue files"),
-                 _("Restore data to original settings"))
-        self.restoretag = editButton.Append(wx.ID_REFRESH, dscrp[0], dscrp[1])
-        self.restoretag.Enable(False)
-        editButton.AppendSeparator()
         self.setupItem = editButton.Append(wx.ID_PREFERENCES,
                                            _("Preferences\tCtrl+P"),
                                            _("Application preferences"))
         self.menu_bar.Append(editButton, _("Edit"))
 
-        self.Bind(wx.EVT_MENU, self.restore_cuefile, self.restoretag)
         self.Bind(wx.EVT_MENU, self.on_setup, self.setupItem)
 
         # ------------------ help menu
@@ -577,7 +577,7 @@ class MainFrame(wx.Frame):
                              self.gui_panel.data.cue.meta.data,
                              self.gui_panel.data.probedata,
                              self.gui_panel.txt_path_cue.GetValue(),
-                             self.gui_panel.data.cue_encoding
+                             self.gui_panel.data.chars_enc
                              )
         self.cdinfo.Show()
     # ------------------------------------------------------------------#

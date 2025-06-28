@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-19 10:29+0200\n"
+"POT-Creation-Date: 2025-06-28 12:27+0200\n"
 "PO-Revision-Date: 2025-06-15 22:39+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de_DE\n"
@@ -55,9 +55,7 @@ msgid ""
 msgstr ""
 
 #: ../../ffc_dlg/infoprg.py:49
-msgid ""
-"Extracts audio tracks from an audio CD image\n"
-"supplied with the CUE sheet, using FFmpeg."
+msgid "Official GUI to FFcuesplitter for audio CDs images extracting."
 msgstr ""
 
 #: ../../ffc_dlg/preferences.py:82
@@ -85,7 +83,7 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: ../../ffc_dlg/preferences.py:119 ../../ffc_main/main_frame.py:244
+#: ../../ffc_dlg/preferences.py:119 ../../ffc_main/main_frame.py:249
 msgid "File"
 msgstr ""
 
@@ -227,7 +225,7 @@ msgstr ""
 msgid "Edit tag on track {}"
 msgstr ""
 
-#: ../../ffc_dlg/track_info.py:60 ../../ffc_panels/cuesplitter_panel.py:232
+#: ../../ffc_dlg/track_info.py:60 ../../ffc_panels/cuesplitter_panel.py:228
 msgid "Author"
 msgstr ""
 
@@ -235,7 +233,7 @@ msgstr ""
 msgid "Album Name"
 msgstr ""
 
-#: ../../ffc_dlg/track_info.py:78 ../../ffc_panels/cuesplitter_panel.py:233
+#: ../../ffc_dlg/track_info.py:78 ../../ffc_panels/cuesplitter_panel.py:229
 msgid "Title"
 msgstr ""
 
@@ -399,7 +397,7 @@ msgstr ""
 msgid "FFaudiocue - Error!"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:89 ../../ffc_panels/cuesplitter_panel.py:370
+#: ../../ffc_main/main_frame.py:89 ../../ffc_panels/cuesplitter_panel.py:388
 msgid "Ready"
 msgstr ""
 
@@ -420,54 +418,54 @@ msgid "Exit"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:228
-msgid "Open CUE sheet...\tCtrl+O"
+msgid "Open...\tCtrl+O"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:229
-msgid "Open a new CUE sheet file"
+msgid "Open an existing CUE file"
+msgstr ""
+
+#: ../../ffc_main/main_frame.py:231
+msgid "Reload\tF5"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:232
-msgid "Open output folder\tCtrl+A"
-msgstr ""
-
-#: ../../ffc_main/main_frame.py:233
-msgid "Open the current audio folder"
+msgid "Reload current CUE file from disk"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:237
-msgid "Work Notes\tCtrl+N"
+msgid "Open output folder\tCtrl+A"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:238
-msgid "Read or write your reminders."
+msgid "Open the current audio folder"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:242
-msgid "Exit\tCtrl+Q"
+msgid "Work Notes\tCtrl+N"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:243
+msgid "Read or write your reminders."
+msgstr ""
+
+#: ../../ffc_main/main_frame.py:247
+msgid "Exit\tCtrl+Q"
+msgstr ""
+
+#: ../../ffc_main/main_frame.py:248
 msgid "Quit application"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:253
-msgid "Reload cue files"
-msgstr ""
-
-#: ../../ffc_main/main_frame.py:254
-msgid "Restore data to original settings"
-msgstr ""
-
-#: ../../ffc_main/main_frame.py:259
+#: ../../ffc_main/main_frame.py:260
 msgid "Preferences\tCtrl+P"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:260
+#: ../../ffc_main/main_frame.py:261
 msgid "Application preferences"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:261
+#: ../../ffc_main/main_frame.py:262
 msgid "Edit"
 msgstr ""
 
@@ -606,104 +604,106 @@ msgstr ""
 msgid "Quality/Bitrate:"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:172
+#: ../../ffc_panels/cuesplitter_panel.py:171
 msgid ""
 "Copy codec and format\n"
 "(very fast)"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:183
+#: ../../ffc_panels/cuesplitter_panel.py:181
 msgid "Audio track destination:"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:187
+#: ../../ffc_panels/cuesplitter_panel.py:184
 msgid "Same as input file"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:204
+#: ../../ffc_panels/cuesplitter_panel.py:201
 msgid ""
 "Create collection folders\n"
 "(Author/Album)"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:213
+#: ../../ffc_panels/cuesplitter_panel.py:210
 msgid "Miscellaneous:"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:217
+#: ../../ffc_panels/cuesplitter_panel.py:213
 msgid ""
 "Remove original files at the end\n"
 "(after successful)"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:231
+#: ../../ffc_panels/cuesplitter_panel.py:227
 msgid "Track"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:234
+#: ../../ffc_panels/cuesplitter_panel.py:230
 msgid "Length"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:235
+#: ../../ffc_panels/cuesplitter_panel.py:231
 msgid "Album"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:283
+#: ../../ffc_panels/cuesplitter_panel.py:247
+msgid "Enter custom character encoding"
+msgstr ""
+
+#: ../../ffc_panels/cuesplitter_panel.py:297
 msgid "Set a destination folder"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:341
+#: ../../ffc_panels/cuesplitter_panel.py:359
 msgid "Open a CUE sheet"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:435
+#: ../../ffc_panels/cuesplitter_panel.py:485
 msgid ""
-"Due to a known issue in FFmpeg with cutting FLAC files, the «Copy codec and format» option is temporarily disabled until the issue is fixed.\n"
-"This seems to only affect the FLAC format.\n"
-"\n"
-"Please uncheck this option to proceed."
+"Due to a known issue in FFmpeg with cutting FLAC files, Copy Codec and Format may lead to unexpected results.\n"
+"This issue appears to only affect the FLAC format."
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:508
+#: ../../ffc_panels/cuesplitter_panel.py:555
 msgid "Please wait..."
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:528
+#: ../../ffc_panels/cuesplitter_panel.py:575
 #, python-brace-format
 msgid "Processing... File number: {} | Status Progress: {}%"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:555
+#: ../../ffc_panels/cuesplitter_panel.py:602
 msgid "...Interrupted"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:558
+#: ../../ffc_panels/cuesplitter_panel.py:605
 msgid "ERROR: See Logs for details"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:560
+#: ../../ffc_panels/cuesplitter_panel.py:607
 msgid "ERROR!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:560
+#: ../../ffc_panels/cuesplitter_panel.py:607
 msgid ""
 "An error has occurred.\n"
 "See Logs for details."
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:568
+#: ../../ffc_panels/cuesplitter_panel.py:615
 msgid "FAILED: Operation cancelled"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:570
+#: ../../ffc_panels/cuesplitter_panel.py:617
 msgid "FAILED!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:571
+#: ../../ffc_panels/cuesplitter_panel.py:618
 msgid "Operation canceled by user"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:589
+#: ../../ffc_panels/cuesplitter_panel.py:636
 #, python-brace-format
 msgid ""
 "Do you really want to delete the following source files?\n"
@@ -712,23 +712,23 @@ msgid ""
 "«{1}»"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:592
+#: ../../ffc_panels/cuesplitter_panel.py:639
 msgid "'FFcuespitter-GUI - Warning"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:599
+#: ../../ffc_panels/cuesplitter_panel.py:646
 msgid "File deletion failed: Files are missing"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:603
+#: ../../ffc_panels/cuesplitter_panel.py:650
 msgid "...Finished!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:605
+#: ../../ffc_panels/cuesplitter_panel.py:652
 msgid "Success!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:605
+#: ../../ffc_panels/cuesplitter_panel.py:652
 msgid "Get your files at the destination you specified"
 msgstr ""
 
@@ -799,5 +799,29 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Warning"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Extracts audio tracks from an audio CD image\n"
+#~ "supplied with the CUE sheet, using FFmpeg."
+#~ msgstr ""
+
+#~ msgid "Open CUE sheet...\tCtrl+O"
+#~ msgstr ""
+
+#~ msgid "Open a new CUE sheet file"
+#~ msgstr ""
+
+#~ msgid "Reload cue files"
+#~ msgstr ""
+
+#~ msgid "Restore data to original settings"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Due to a known issue in FFmpeg with cutting FLAC files, the «Copy codec and format» option is temporarily disabled until the issue is fixed.\n"
+#~ "This seems to only affect the FLAC format.\n"
+#~ "\n"
+#~ "Please uncheck this option to proceed."
 #~ msgstr ""
 

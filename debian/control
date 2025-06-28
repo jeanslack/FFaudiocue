@@ -19,15 +19,15 @@ Rules-Requires-Root: no
 Package: ffaudiocue
 Architecture: all
 Multi-Arch: foreign
-Depends: python3-pubsub,
+Depends: python3-ffcuesplitter (>= 1.0-31),
+         python3-pubsub,
          python3-requests,
-         python3-ffcuesplitter,
          python3-wxgtk4.0,
          ${misc:Depends},
          ${python3:Depends}
 Recommends:
-Description: Official GUI for FFcuesplitter to extracting audio CD images.
- FFaudiocue is a cross-platform GUI written in wxPython Phoenix.
- It features editable tags per track, an audio CD properties viewer, support
- for WAV, FLAC, MP3, OGG, OPUS output formats, audio compression
- selectors and the ability to copy audio codec without re-encoding.
+Description: Official GUI to FFcuesplitter for audio CDs images extracting.
+ FFaudiocue is a cross-platform GUI written in wxPython Phoenix based on
+ FFcuesplitter. It features editable tags per track, an audio CD properties
+ viewer, support for WAV, FLAC, MP3, OGG, OPUS output formats, audio
+ compression selectors and the ability to copy audio codec without re-encoding.

@@ -66,7 +66,7 @@ class ConfigManager:
                        "toolbarsize": 32,
                        "toolbarpos": 2,
                        "showhidenmenu": False,
-                       "main_window_size": [890, 670],
+                       "main_window_size": [900, 700],
                        "main_window_pos": [0, 0],
                        }
 
