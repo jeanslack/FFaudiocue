@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-28 12:27+0200\n"
+"POT-Creation-Date: 2025-06-28 21:58+0200\n"
 "PO-Revision-Date: 2025-06-15 22:40+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es_ES\n"
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: ../../ffc_dlg/preferences.py:119 ../../ffc_main/main_frame.py:249
+#: ../../ffc_dlg/preferences.py:119 ../../ffc_main/main_frame.py:250
 msgid "File"
 msgstr ""
 
@@ -170,7 +170,7 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: ../../ffc_dlg/preferences.py:307 ../../ffc_main/main_frame.py:521
+#: ../../ffc_dlg/preferences.py:307 ../../ffc_main/main_frame.py:522
 msgid "Preferences"
 msgstr ""
 
@@ -188,8 +188,8 @@ msgstr ""
 msgid "Not yet implemented"
 msgstr ""
 
-#: ../../ffc_dlg/preferences.py:563
-msgid "Settings"
+#: ../../ffc_dlg/preferences.py:563 ../../ffc_dlg/track_info.py:209
+msgid "FFaudiocue - Information"
 msgstr ""
 
 #: ../../ffc_dlg/showlogs.py:70
@@ -257,17 +257,13 @@ msgstr ""
 msgid "Apply tags globally to the entire album"
 msgstr ""
 
-#: ../../ffc_dlg/track_info.py:138
+#: ../../ffc_dlg/track_info.py:138 ../../ffc_panels/cuesplitter_panel.py:258
 msgid "Apply"
 msgstr ""
 
 #: ../../ffc_dlg/track_info.py:199
 #, python-brace-format
 msgid "Edit tag on track {} (EDITED)*"
-msgstr ""
-
-#: ../../ffc_dlg/track_info.py:209 ../../ffc_main/main_frame.py:286
-msgid "Help"
 msgstr ""
 
 #: ../../ffc_dlg/track_info.py:232
@@ -277,8 +273,9 @@ msgid ""
 msgstr ""
 
 #: ../../ffc_dlg/track_info.py:234 ../../ffc_dlg/track_info.py:261
-#: ../../ffc_panels/cuesplitter_panel.py:63
-msgid "Please confirm"
+#: ../../ffc_dlg/wizard_dlg.py:237 ../../ffc_main/main_frame.py:203
+#: ../../ffc_main/main_frame.py:628
+msgid "FFaudiocue - Confirm"
 msgstr ""
 
 #: ../../ffc_dlg/track_info.py:260
@@ -342,10 +339,6 @@ msgid ""
 "Do you want to use that?"
 msgstr ""
 
-#: ../../ffc_dlg/wizard_dlg.py:237
-msgid "Please Confirm"
-msgstr ""
-
 #: ../../ffc_dlg/wizard_dlg.py:260
 msgid "Locating FFmpeg executables\n"
 msgstr ""
@@ -376,7 +369,7 @@ msgstr ""
 msgid "< Previous"
 msgstr ""
 
-#: ../../ffc_dlg/wizard_dlg.py:461 ../../ffc_dlg/wizard_dlg.py:547
+#: ../../ffc_dlg/wizard_dlg.py:461 ../../ffc_dlg/wizard_dlg.py:548
 msgid "Next >"
 msgstr ""
 
@@ -394,10 +387,10 @@ msgid "Some text boxes are still incomplete"
 msgstr ""
 
 #: ../../ffc_inout/io_tools.py:38
-msgid "FFaudiocue - Error!"
+msgid "FFaudiocue - Error"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:89 ../../ffc_panels/cuesplitter_panel.py:388
+#: ../../ffc_main/main_frame.py:89 ../../ffc_panels/cuesplitter_panel.py:394
 msgid "Ready"
 msgstr ""
 
@@ -406,106 +399,107 @@ msgid "There are still active windows with running processes, make sure you fini
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:181 ../../ffc_main/main_frame.py:197
-msgid "FFaudiocue - Warning!"
+#: ../../ffc_panels/cuesplitter_panel.py:653
+msgid "FFaudiocue - Warning"
 msgstr ""
 
 #: ../../ffc_main/main_frame.py:201
 msgid "Are you sure you want to exit the application?"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:203
-msgid "Exit"
-msgstr ""
-
-#: ../../ffc_main/main_frame.py:228
+#: ../../ffc_main/main_frame.py:229
 msgid "Open...\tCtrl+O"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:229
+#: ../../ffc_main/main_frame.py:230
 msgid "Open an existing CUE file"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:231
+#: ../../ffc_main/main_frame.py:232
 msgid "Reload\tF5"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:232
+#: ../../ffc_main/main_frame.py:233
 msgid "Reload current CUE file from disk"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:237
+#: ../../ffc_main/main_frame.py:238
 msgid "Open output folder\tCtrl+A"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:238
+#: ../../ffc_main/main_frame.py:239
 msgid "Open the current audio folder"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:242
+#: ../../ffc_main/main_frame.py:243
 msgid "Work Notes\tCtrl+N"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:243
+#: ../../ffc_main/main_frame.py:244
 msgid "Read or write your reminders."
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:247
+#: ../../ffc_main/main_frame.py:248
 msgid "Exit\tCtrl+Q"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:248
+#: ../../ffc_main/main_frame.py:249
 msgid "Quit application"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:260
+#: ../../ffc_main/main_frame.py:261
 msgid "Preferences\tCtrl+P"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:261
+#: ../../ffc_main/main_frame.py:262
 msgid "Application preferences"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:262
+#: ../../ffc_main/main_frame.py:263
 msgid "Edit"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:268
+#: ../../ffc_main/main_frame.py:269
 msgid "User Guide"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:269
+#: ../../ffc_main/main_frame.py:270
 msgid "Wiki"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:271
+#: ../../ffc_main/main_frame.py:272
 msgid "Issue tracker"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:274
+#: ../../ffc_main/main_frame.py:275
 msgid "FFmpeg documentation"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:276
+#: ../../ffc_main/main_frame.py:277
 msgid "Check for newer version"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:277
+#: ../../ffc_main/main_frame.py:278
 msgid "Checks for the latest FFaudiocue version at <https://github.com/jeanslack/FFaudiocue>"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:281
+#: ../../ffc_main/main_frame.py:282
 msgid "Sponsor this project"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:282
+#: ../../ffc_main/main_frame.py:283
 msgid "Donate"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:285
+#: ../../ffc_main/main_frame.py:286
 msgid "About FFaudiocue"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:336
+#: ../../ffc_main/main_frame.py:287
+msgid "Help"
+msgstr ""
+
+#: ../../ffc_main/main_frame.py:337
 #, python-brace-format
 msgid ""
 "Unexpected error while creating file:\n"
@@ -513,74 +507,74 @@ msgid ""
 "{0}"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:385
+#: ../../ffc_main/main_frame.py:386
 msgid ""
 "No publications found!\n"
 "ERROR: tag_name"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:401
+#: ../../ffc_main/main_frame.py:402
 #, python-brace-format
 msgid "A new release is available - v.{0}\n"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:404
+#: ../../ffc_main/main_frame.py:405
 msgid "You are using a development version that has not yet been released!\n"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:407
+#: ../../ffc_main/main_frame.py:408
 msgid "Congratulation! You are already using the latest version.\n"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:496
+#: ../../ffc_main/main_frame.py:497
 msgid "View or Edit selected track tag"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:497
+#: ../../ffc_main/main_frame.py:498
 msgid "Tag"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:502
+#: ../../ffc_main/main_frame.py:503
 msgid "Audio CD informations and file properties"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:503
+#: ../../ffc_main/main_frame.py:504
 msgid "Properties"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:509
+#: ../../ffc_main/main_frame.py:510
 msgid "Start extracting audio tracks"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:510
+#: ../../ffc_main/main_frame.py:511
 msgid "Start"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:514
+#: ../../ffc_main/main_frame.py:515
 msgid "Stop all operations"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:515
+#: ../../ffc_main/main_frame.py:516
 msgid "Abort"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:520
+#: ../../ffc_main/main_frame.py:521
 msgid "Program setup"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:525
+#: ../../ffc_main/main_frame.py:526
 msgid "View logs"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:526
+#: ../../ffc_main/main_frame.py:527
 msgid "Logs"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:619
+#: ../../ffc_main/main_frame.py:620
 msgid "Some changes require restarting the application."
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:625
+#: ../../ffc_main/main_frame.py:626
 #, python-brace-format
 msgid ""
 "{0}\n"
@@ -588,12 +582,12 @@ msgid ""
 "Do you want to restart the application now?"
 msgstr ""
 
-#: ../../ffc_main/main_frame.py:627
-msgid "Restart FFaudiocue?"
-msgstr ""
-
 #: ../../ffc_panels/cuesplitter_panel.py:60
 msgid "Files already exist, do you want to overwrite them?"
+msgstr ""
+
+#: ../../ffc_panels/cuesplitter_panel.py:63
+msgid "Please confirm"
 msgstr ""
 
 #: ../../ffc_panels/cuesplitter_panel.py:145
@@ -650,60 +644,74 @@ msgstr ""
 msgid "Enter custom character encoding"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:297
+#: ../../ffc_panels/cuesplitter_panel.py:267
+msgid ""
+"If invalid, type in this text field the correct encoding of the corresponding CUE file, for example some valid character encoding names are:\n"
+"utf-8\n"
+"ascii\n"
+"iso-8859-15\n"
+"cp1257\n"
+"etc."
+msgstr ""
+
+#: ../../ffc_panels/cuesplitter_panel.py:303
 msgid "Set a destination folder"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:359
+#: ../../ffc_panels/cuesplitter_panel.py:365
 msgid "Open a CUE sheet"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:485
+#: ../../ffc_panels/cuesplitter_panel.py:491
 msgid ""
 "Due to a known issue in FFmpeg with cutting FLAC files, Copy Codec and Format may lead to unexpected results.\n"
 "This issue appears to only affect the FLAC format."
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:555
+#: ../../ffc_panels/cuesplitter_panel.py:533
+msgid "The character encoding of the CUE file has not been applied yet. Please click the Appy button before proceeding."
+msgstr ""
+
+#: ../../ffc_panels/cuesplitter_panel.py:569
 msgid "Please wait..."
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:575
+#: ../../ffc_panels/cuesplitter_panel.py:589
 #, python-brace-format
 msgid "Processing... File number: {} | Status Progress: {}%"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:602
+#: ../../ffc_panels/cuesplitter_panel.py:616
 msgid "...Interrupted"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:605
+#: ../../ffc_panels/cuesplitter_panel.py:619
 msgid "ERROR: See Logs for details"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:607
+#: ../../ffc_panels/cuesplitter_panel.py:621
 msgid "ERROR!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:607
+#: ../../ffc_panels/cuesplitter_panel.py:621
 msgid ""
 "An error has occurred.\n"
 "See Logs for details."
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:615
+#: ../../ffc_panels/cuesplitter_panel.py:629
 msgid "FAILED: Operation cancelled"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:617
+#: ../../ffc_panels/cuesplitter_panel.py:631
 msgid "FAILED!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:618
+#: ../../ffc_panels/cuesplitter_panel.py:632
 msgid "Operation canceled by user"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:636
+#: ../../ffc_panels/cuesplitter_panel.py:650
 #, python-brace-format
 msgid ""
 "Do you really want to delete the following source files?\n"
@@ -712,23 +720,19 @@ msgid ""
 "«{1}»"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:639
-msgid "'FFcuespitter-GUI - Warning"
-msgstr ""
-
-#: ../../ffc_panels/cuesplitter_panel.py:646
+#: ../../ffc_panels/cuesplitter_panel.py:660
 msgid "File deletion failed: Files are missing"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:650
+#: ../../ffc_panels/cuesplitter_panel.py:664
 msgid "...Finished!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:652
+#: ../../ffc_panels/cuesplitter_panel.py:666
 msgid "Success!"
 msgstr ""
 
-#: ../../ffc_panels/cuesplitter_panel.py:652
+#: ../../ffc_panels/cuesplitter_panel.py:666
 msgid "Get your files at the destination you specified"
 msgstr ""
 
@@ -823,5 +827,26 @@ msgstr ""
 #~ "This seems to only affect the FLAC format.\n"
 #~ "\n"
 #~ "Please uncheck this option to proceed."
+#~ msgstr ""
+
+#~ msgid "Settings"
+#~ msgstr ""
+
+#~ msgid "Please Confirm"
+#~ msgstr ""
+
+#~ msgid "FFaudiocue - Error!"
+#~ msgstr ""
+
+#~ msgid "FFaudiocue - Warning!"
+#~ msgstr ""
+
+#~ msgid "Exit"
+#~ msgstr ""
+
+#~ msgid "Restart FFaudiocue?"
+#~ msgstr ""
+
+#~ msgid "'FFcuespitter-GUI - Warning"
 #~ msgstr ""
 

@@ -255,7 +255,7 @@ class CueGui(wx.Panel):
         self.txt_charsenc.Disable()
         sizer_cenc.Add(self.txt_charsenc, 0, wx.LEFT | wx.CENTRE, 2)
 
-        self.btn_confirm = wx.Button(self, wx.ID_ANY, "Apply")
+        self.btn_confirm = wx.Button(self, wx.ID_ANY, _("Apply"))
         self.btn_confirm.Disable()
         sizer_cenc.Add(self.btn_confirm, 0, wx.LEFT | wx.CENTRE, 10)
         self.barprog = wx.Gauge(self, wx.ID_ANY, range=0)
@@ -263,6 +263,12 @@ class CueGui(wx.Panel):
         sizer_base.Add((0, 10))
         self.SetSizerAndFit(sizer_base)
         self.Layout()
+
+        tip = (_('If invalid, type in this text field the correct encoding of '
+                 'the corresponding CUE file, for example some valid '
+                 'character encoding names are:'
+                 '\nutf-8\nascii\niso-8859-15\ncp1257\netc.'))
+        self.txt_charsenc.SetToolTip(tip)
 
         # ----------------------Binder (EVT)----------------------#
         self.Bind(wx.EVT_BUTTON, self.on_import_cuefile, self.btn_import)
@@ -333,7 +339,7 @@ class CueGui(wx.Panel):
         try:
             self.data = FFCueSplitter(**kwargs)
         except Exception as err:
-            wx.MessageBox(f'{err}', "ERROR", wx.ICON_ERROR, self)
+            wx.MessageBox(f'{err}', "FFaudiocue - Error", wx.ICON_ERROR, self)
             return
 
         self.txt_charsenc.ChangeValue(self.data.chars_enc['encoding'])
@@ -523,6 +529,13 @@ class CueGui(wx.Panel):
         Prepares and updates the required operations
         for thread instance
         """
+        if self.btn_confirm.IsEnabled() is True:
+            msg = (_('The character encoding of the CUE file has not been '
+                     'applied yet. Please click the Appy button before '
+                     'proceeding.'))
+            wx.MessageBox(msg, "FFaudiocue - Information",
+                          wx.ICON_INFORMATION, self)
+            return
         ret = self.update_attributes_of_ffcuesplitter_api()
         if ret:
             return
@@ -534,7 +547,8 @@ class CueGui(wx.Panel):
         try:
             args = self.data.commandargs(self.data.audiotracks)
         except Exception as err:
-            wx.MessageBox(f'{err}', "ERROR", wx.ICON_ERROR, self)
+            wx.MessageBox(f'{err}', "FFaudiocue - Error",
+                          wx.ICON_ERROR, self)
             return
 
         self.parent.toolbar.EnableTool(13, True)  # stop
@@ -588,7 +602,7 @@ class CueGui(wx.Panel):
         """
         if end == 'error':
             self.error = True
-            wx.MessageBox(f'{msg}', "FFaudiocue", wx.ICON_ERROR, self)
+            wx.MessageBox(f'{msg}', "FFaudiocue - Error", wx.ICON_ERROR, self)
         else:
             self.barprog.SetRange(100)  # set overall percentage range
             self.barprog.SetValue(0)  # reset bar progress to 0
@@ -636,7 +650,7 @@ class CueGui(wx.Panel):
                 msg = (_('Do you really want to delete the following '
                          'source files?\n\n«{0}»\n«{1}»').format(cuef, audf))
                 dlg = wx.MessageDialog(self, msg,
-                                       _("'FFcuespitter-GUI - Warning"),
+                                       _("FFaudiocue - Warning"),
                                        wx.ICON_WARNING
                                        | wx.YES_NO
                                        | wx.CANCEL).ShowModal()

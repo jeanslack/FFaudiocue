@@ -206,7 +206,7 @@ class TrackInfo(wx.Dialog):
         Open default web browser via Python Web-browser controller.
         see <https://docs.python.org/3.8/library/webbrowser.html>
         """
-        wx.MessageBox(_("Not yet implemented"), _('Help'),
+        wx.MessageBox(_("Not yet implemented"), _('FFaudiocue - Information'),
                       wx.ICON_INFORMATION, self)
     # ------------------------------------------------------------------#
 
@@ -231,7 +231,7 @@ class TrackInfo(wx.Dialog):
         """
         if wx.MessageBox(_('Do you really want to retag the '
                            'selected audio track?\n\n'),
-                         _('Please confirm'),
+                         _('FFaudiocue - Confirm'),
                          wx.ICON_QUESTION | wx.YES_NO, self) == wx.YES:
 
             idx = self.metadata[self.trackindex]
@@ -258,7 +258,7 @@ class TrackInfo(wx.Dialog):
         Apply changes for whole audio tracks
         """
         if wx.MessageBox(_('Do you really want to retag the entire album?'),
-                         _('Please confirm'),
+                         _('FFaudiocue - Confirm'),
                          wx.ICON_QUESTION | wx.YES_NO, self) == wx.YES:
 
             for tlist in self.metadata:

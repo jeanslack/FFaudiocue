@@ -177,7 +177,7 @@ class CuesplitterGUI(wx.App):
                             wx.MessageBox(_("Unexpected error while "
                                             "deleting file contents:\n\n"
                                             "{0}").format(err),
-                                          'FFaudiocue', wx.ICON_STOP)
+                                          'FFaudiocue - ERROR', wx.ICON_STOP)
                             return False
 
         if self.appset['auto-restart-app']:

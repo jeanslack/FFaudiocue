@@ -221,7 +221,7 @@ class PageTwo(wx.Panel):
                 wx.MessageBox(_("'{}' is not installed on your computer. "
                                 "Install it or indicate another location by "
                                 "clicking the 'Locate' button.").format(exe),
-                              'Warning', wx.ICON_EXCLAMATION, self)
+                              'FFaudiocue - Warning', wx.ICON_EXCLAMATION, self)
                 return
 
             if status[0] == 'provided':
@@ -234,7 +234,7 @@ class PageTwo(wx.Panel):
         if exiting == 'provided':
             if wx.MessageBox(_("FFaudiocue already seems to include "
                                "FFmpeg.\n\nDo you want to use that?"),
-                             _('Please Confirm'), wx.ICON_QUESTION
+                             _('FFaudiocue - Confirm'), wx.ICON_QUESTION
                              | wx.YES_NO, self) == wx.NO:
                 return
 
@@ -522,7 +522,8 @@ class Wizard(wx.Dialog):
                 self.btn_next.SetLabel(_('Finish'))
             else:
                 wx.MessageBox(_("Some text boxes are still incomplete"),
-                              ("FFaudiocue"), wx.ICON_INFORMATION, self)
+                              ("FFaudiocue - Information"),
+                              wx.ICON_INFORMATION, self)
 
         self.Layout()
     # -------------------------------------------------------------------#

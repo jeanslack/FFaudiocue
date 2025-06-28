@@ -178,7 +178,7 @@ class MainFrame(wx.Frame):
             wx.MessageBox(_("There are still active windows with running "
                             "processes, make sure you finish your work "
                             "before exit."),
-                          _('FFaudiocue - Warning!'), wx.ICON_WARNING, self)
+                          _('FFaudiocue - Warning'), wx.ICON_WARNING, self)
             self.appdata['auto-restart-app'] = False
             return
 
@@ -194,13 +194,14 @@ class MainFrame(wx.Frame):
             wx.MessageBox(_("There are still active windows with running "
                             "processes, make sure you finish your work "
                             "before exit."),
-                          _('FFaudiocue - Warning!'), wx.ICON_WARNING, self)
+                          _('FFaudiocue - Warning'), wx.ICON_WARNING, self)
             return
 
         if self.appdata['warnexiting']:
             if wx.MessageBox(_('Are you sure you want to exit '
                                'the application?'),
-                             _('Exit'), wx.ICON_QUESTION | wx.CANCEL
+                             _('FFaudiocue - Confirm'), wx.ICON_QUESTION
+                             | wx.CANCEL
                              | wx.YES_NO, self) != wx.YES:
                 return
 
@@ -335,7 +336,7 @@ class MainFrame(wx.Frame):
             except Exception as err:
                 wx.MessageBox(_("Unexpected error while creating file:\n\n"
                                 "{0}").format(err),
-                              'FFaudiocue', wx.ICON_ERROR, self)
+                              'FFaudiocue - Error', wx.ICON_ERROR, self)
             else:
                 io_tools.openpath(fname)
     # ------------------------------------------------------------------#
@@ -624,7 +625,7 @@ class MainFrame(wx.Frame):
                 if [x for x in changes if x is False]:
                     if wx.MessageBox(_("{0}\n\nDo you want to restart "
                                        "the application now?").format(msg),
-                                     _('Restart FFaudiocue?'),
+                                     _('FFaudiocue - Confirm'),
                                      wx.ICON_QUESTION
                                      | wx.CANCEL
                                      | wx.YES_NO, self) == wx.YES:

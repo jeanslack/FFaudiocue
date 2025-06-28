@@ -560,7 +560,7 @@ class SetUp(wx.Dialog):
         Open default web browser via Python Web-browser controller.
         see <https://docs.python.org/3.8/library/webbrowser.html>
         """
-        wx.MessageBox(_("Not yet implemented"), _('Settings'),
+        wx.MessageBox(_("Not yet implemented"), _('FFaudiocue - Information'),
                       wx.ICON_INFORMATION, self)
     # --------------------------------------------------------------------#
 

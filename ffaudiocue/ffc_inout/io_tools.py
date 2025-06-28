@@ -35,7 +35,7 @@ def openpath(where):
     """
     ret = open_default_application(where)
     if ret:
-        wx.MessageBox(ret, _('FFaudiocue - Error!'),
+        wx.MessageBox(ret, _('FFaudiocue - Error'),
                       wx.ICON_ERROR, None)
 # -------------------------------------------------------------------------#
 

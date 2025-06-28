@@ -132,14 +132,14 @@ class ShowLogs(wx.Dialog):
         """
         if not self.selected:
             wx.MessageBox(_('Select a log file'),
-                          'FFaudiocue', wx.ICON_INFORMATION)
+                          'FFaudiocue - Information', wx.ICON_INFORMATION)
             return
 
         index = self.log_select.GetFocusedItem()
         name = self.log_select.GetItemText(index, 0)
 
         if wx.MessageBox(_('Are you sure you want to clear the selected '
-                           'log file?'), "FFaudiocue",
+                           'log file?'), "FFaudiocue - Confirm",
                          wx.ICON_QUESTION
                          | wx.YES_NO, self) == wx.NO:
             return
