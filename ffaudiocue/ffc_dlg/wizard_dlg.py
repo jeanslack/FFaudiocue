@@ -221,7 +221,8 @@ class PageTwo(wx.Panel):
                 wx.MessageBox(_("'{}' is not installed on your computer. "
                                 "Install it or indicate another location by "
                                 "clicking the 'Locate' button.").format(exe),
-                              'FFaudiocue - Warning', wx.ICON_EXCLAMATION, self)
+                              'FFaudiocue - Warning',
+                              wx.ICON_EXCLAMATION, self)
                 return
 
             if status[0] == 'provided':
